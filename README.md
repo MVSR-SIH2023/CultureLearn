@@ -1,5 +1,6 @@
 # CultureLearn
  `README.md`: This file typically contains documentation or information about your project.
+ 
  `requirements.txt`: This file lists the dependencies (Python packages) required for your project, making it easier to install them.
   please install "GitLens — Git supercharged" extention in your vscode.
 ## Guidelines for commiting to the `master` branch:
@@ -24,11 +25,13 @@ git add <location-of-your-file-to-add>
 3. Commiting your changes
 ```bash
 git commit -m "Your commit message here"
-# We can even write multi-line commit names
-#Example:
-git commit -m "Fix unable to login: fixed an issue unable to login
-* There seems to be an issue with login.py, The variable was not declared." 
 ```
+ We can even write multi-line commit names
+ #Example:
+ ```bash
+ git commit -m "Fix unable to login: fixed an issue unable to login
+ * There seems to be an issue with login.py, The variable was not declared." 
+ ```
 
 4. Pushing your changes to the GitHub:
 ```bash

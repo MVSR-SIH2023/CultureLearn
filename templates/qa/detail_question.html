@@ -1,0 +1,508 @@
+
+{% extends 'head-foot/header.html' %}
+{% load filter %}
+{% block content %}
+<style>
+  .navColor {
+    color: #dc3545;
+  }
+  .ms-auto {
+    display: flex;
+    justify-content: end;
+  }
+  
+  .btn1 {
+    border-radius: 50px;
+    height: 30px;
+    padding-bottom: 30px;
+  }
+  .content-container {
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+  /* .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  } */
+  .imgHeigth {
+    height: 100px;
+  }
+  input {
+    border: 3px solid #dc3545;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    height: 30px;
+  }
+</style>
+  <div class="container mt-5 pt-5">
+    <div class="card shadow-lg mt-3 p-3">
+      <div class="p-3">
+        {% if request.user.is_authenticated and question.user == request.user %}
+        <div class="ms-auto">
+          <a type="button" href="" class="btn btn-light btn_rad" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></a>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Question</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <label>Question:</label>
+                <input type="text" class="question" name="title" value="{{question.title}}"/><br>
+                <label>Tags:</label>
+                {% if question.tags%}
+                  <input type="text" class="tags" name="tags" value="{% for tag in question.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+                {% else %}
+                  <input type ="text" class="tags" name="tags" placeholder="Tags must be comma seprated"/>
+                  {% endif %}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" data-question-id = "{{question.id}}" class="btn btn-danger submit-question">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endif %}
+        <div class="mb-5 question-info">
+          <span class="pull-right">Posted by {{ question.user.username }}, {{ question.pub_date }}</span>
+              <h3>Q:{{ question.title }}</h3>    
+        </div>
+      </div>
+      {% if request.user.is_authenticated %}
+        <div>
+          <label>Answer:</label>
+          <textarea rows="2" name="body" style="width: 100%; border-color: #dc3545; border-radius: 5px;"></textarea>
+        </div>
+        
+        <div class="d-flex">
+          <button class="btn btn-danger btn1 submit-answer" style="width:100px;" data-question-id="{{question.id}}">Submit</button>
+        </div>
+        {% else %}
+        <div>
+        <a type="button" href="{% url 'accounts:login' %}" class="btn btn-danger">Login to Answer</a>
+        </div>
+        {% endif %}
+    </div>
+    <br>
+    <div class="d-flex">
+      <h3 class="mt-3 ">Answers:</h3>
+      <div class="ms-auto">
+        <div class="dropdown me-2">
+          <button class="btn btn_rad btn-danger" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-funnel"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+              <li><a class="dropdown-item latest"  data-filter="latest">Latest</a></li>
+              <li><a class="dropdown-item top" data-filter="top">Top Voted</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="answer-section">
+        {% if answers %}
+          {% for answer in answers %}
+            {% with answer_detail=answer_details|get_val:answer.id %}
+              <div  class="card shadow p-3 mb-5 answer-card">
+                <div class="d-flex">
+                  {% if answer_details.avatar %}
+                    <img  style="height: 20px;border-radius: 50%;" src="{{ answer_details.avatar }}">
+                  {% else %}
+                    <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg" style="height: 55px;border-radius: 50%;"/>
+                  {% endif %}
+                  <span class="mt-3">{{ answer_detail.username }}</span><span>({{ answer_detail.contributions }})</span>
+                  <div id="answer-{{answer.id}}" class="ms-auto mt-3">
+                    {% if user.is_authenticated and answer_detail.username != user.username %}
+
+                      <div class="d-flex">
+                        <a data-value="upvote" data-answer-id="{{ answer.id}}" class="text-center me-2 answer-vote" style="text-decoration: none">
+                          {% if answer_detail.upvoted %} <i class="bi bi-arrow-up-circle-fill me-2 imgHeigth"></i>{% else %} <i class="bi bi-arrow-up-circle me-2"></i>{% endif %}
+                        </a>
+                        <p>{{answer_detail.upvote_count}} <span>Upvote</span></p>
+                      </div>
+                      <br/>
+                      <div class="d-flex ms-2">
+                        <a data-value="downvote" data-answer-id="{{ answer.id}}" class="text-center me-2 answer-vote">
+                          {% if answer_detail.downvoted %}<i class="bi bi-arrow-down-circle-fill"></i>{% else %} <i class="bi bi-arrow-down-circle me-2"></i>{% endif %} 
+                        </a>
+                        <p>{{answer_detail.downvote_count}} <span>Downvote</span></p>
+                      </div>
+                      
+                    
+                    {% endif %}
+                  </div>
+                  {% if request.user.is_authenticated and request.user == answer.user%}
+                  <div class="dropdown ms-2">
+                    <button class="btn btn_rad btn-light" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                        <li ><a class="dropdown-item Edit" data-answer-id = {{answer.id}} >Edit</a></li>
+                        <li><a class="dropdown-item delete-ans" data-answer-id = {{answer.id}}>Delete</a></li>
+                    </ul>
+                   
+                  </div>
+                  {% endif %}
+                </div>
+                <div class="ps-5 Edit1" data-answer-id="{{ answer.id }}">
+                  <p>{{ answer.answer_text }}</p>
+                </div>
+                <div style="display: none" class="ps-5 Edit2" data-answer-id="{{ answer.id }}">
+                  <textarea name="edit" style="width: 100%; border-color: #dc3545; border-radius: 5px;">{{ answer.answer_text }}</textarea>
+                  <button type="submit" class="btn btn-primary edit-answer" data-answer-id="{{answer.id}}">Submit</button>
+                </div>
+                <hr>
+              </div> 
+            {% endwith %}
+          {% empty %}
+          No Answers Yet! Be the first to Answer this Question!<br><br>
+          {% endfor %}
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function () {
+			// AJAX for submitting a comment
+			$('.submit-answer').click(function (e) {
+				e.preventDefault();
+        var questionId = $(this).data('question-id');
+        var answerBody = $('textarea[name="body"]').val();
+        if (questionId) {
+          $.ajax({
+            type: 'POST',
+            url: '/answersent/' + questionId + '/',
+            data: {
+              'body': answerBody,
+              csrfmiddlewaretoken: '{{ csrf_token }}', 
+            },
+            success: function (response) {
+              const answer = response.answer[0];
+              console.log(response);
+
+              const cardContainer = $('.answer-section');
+          
+              const avatarSrc = answer.avatar ? answer.avatar : 'https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg';
+              
+          
+              const cardHtml = `
+                  <div class="card shadow p-3 mb-5">
+                      <div class="d-flex">
+                          <img class="pull-right" src="${avatarSrc}" style="height: 55px;border-radius: 50%;" />
+                          <span class="mt-3">${answer.user.username}</span><span>(${answer.contributions})</span>
+                          <div class="ms-auto mt-3">
+                            
+                          </div>
+                      </div>
+                      <div id="Edit1" class="ps-5">
+                        <p>${answer.answer}</p>
+                      </div>
+                      <hr>
+                  </div>`;
+          
+              cardContainer.prepend(cardHtml);
+      
+              $('textarea[name="body"]').val('');
+            },
+            error: function (xhr, errmsg, err) {
+              console.log(errmsg); 
+            },
+
+
+          });
+
+        }
+
+      });
+    });
+
+    $(document).ready(function () {
+			// AJAX for liking a post
+			$('.answer-vote').click(function (e) {
+				e.preventDefault();
+
+				var clickedButton = $(this); // Store the clicked button element
+				var answerId = clickedButton.data('answer-id');
+        var voteValue = clickedButton.data('value');
+				if (answerId) {
+          $.ajax({
+						type: 'POST',
+						url: '/vote/answer/' + answerId + '/',
+						data: {
+              value: voteValue,
+							csrfmiddlewaretoken: '{{ csrf_token }}', // Add CSRF token for Django protection
+						},
+            dataType: 'json',
+         
+            success: function (response) {
+              console.log(response);
+             
+                  // Update the upvote count
+                  $('#answer-' + response.answer + ' .d-flex:first-of-type p').html(response.upvote_count + ' <span>Upvote</span>');
+
+                  // Update the downvote count
+                  $('#answer-' + response.answer + ' .d-flex:last-of-type p').html(response.downvote_count + ' <span>Downvote</span>');
+
+                  // Update the upvote icon
+                  if (response.upvoted) {
+                    $('#answer-' + response.answer + ' [data-value="upvote"] i').removeClass('bi-arrow-up-circle').addClass('bi-arrow-up-circle-fill');
+                  } else {
+                    $('#answer-' + response.answer + ' [data-value="upvote"] i').removeClass('bi-arrow-up-circle-fill').addClass('bi-arrow-up-circle');
+                  }
+
+                  // Update the downvote icon
+                  if (response.downvoted) {
+                    $('#answer-' + response.answer + ' [data-value="downvote"] i').removeClass('bi-arrow-down-circle').addClass('bi-arrow-down-circle-fill');
+                  } else {
+                    $('#answer-' + response.answer + ' [data-value="downvote"] i').removeClass('bi-arrow-down-circle-fill').addClass('bi-arrow-down-circle');
+                  }
+      
+            },
+            error: function (xhr, errmsg, err) {
+							console.log(errmsg); // Log any errors to the console
+						},
+          });
+				} else {
+					console.log('Post ID is empty or invalid.');
+				}
+			});
+		});
+
+    $('.edit-answer').click(function (e) {
+      e.preventDefault();
+      var answerId = $(this).data('answer-id');
+      var answerBody = $('textarea[name="edit"]').val();
+      if (answerId) {
+        $.ajax({
+          type: 'POST',
+          url: '/answer/edit/' + answerId + '/',
+          data: {
+            answer_text : answerBody,
+            csrfmiddlewaretoken: '{{ csrf_token }}', 
+          },
+          success: function (response) {
+            const answer = response.answer[0];
+            console.log(response);
+
+            const cardContainer = $('.answer-section');
+          
+        
+            const avatarSrc = answer.avatar ? answer.avatar : 'https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg';
+            
+        
+            const cardHtml = `
+                <div class="card shadow p-3 mb-5">
+                    <div class="d-flex">
+                        <img class="pull-right" src="${avatarSrc}" style="height: 55px;border-radius: 50%;" />
+                        <span class="mt-3">${answer.user.username}</span><span>(${answer.contributions})</span>
+                        <div class="ms-auto mt-3">
+                          
+                        </div>
+                    </div>
+                    <div class="ps-5 Edit1">
+                      <p>${answer.answer}</p>
+                    </div>
+                    <hr>
+                </div>`;
+        
+            cardContainer.html(cardHtml);
+          },
+          error: function (xhr, errmsg, err) {
+            console.log(errmsg); 
+          },
+
+
+        });
+
+      }
+
+    });
+
+    $('.delete-ans').on('click', function(e) {
+      e.preventDefault();
+      // Retrieve the value from the button
+     
+      var answerId = $(this).data('answer-id');
+      var answerCard = $(this).closest('.answer-card'); 
+      console.log(answerId);
+      // Check if the value is not empty
+      if (answerId) {
+          $.ajax({
+              type: 'POST',
+              url: '/answer/delete/' + answerId + '/', // Use the retrieved ID in the URL
+              data: {
+                  csrfmiddlewaretoken: '{{ csrf_token }}', // Add CSRF token for Django protection
+              },
+              success: function(response) {
+                  // Handle the success response here
+                  console.log(response);
+                  answerCard.remove();
+                  
+              },
+              error: function(xhr, errmsg, err) {
+                  // Handle the error here
+                  console.log(xhr.status + ": " + xhr.responseText);
+              }
+          });
+      } else {
+          console.log("Podcast ID is empty or invalid.");
+      }
+  });
+    
+    //EDIT BUTTON TOGGLE 
+
+    $(document).ready(function() {
+      // Bind click event to all 'Edit' buttons
+      $('.Edit').on('click', function() {
+          // Get the answer ID from the clicked 'Edit' button
+          const answerId = $(this).data('answer-id');
+          
+          // Hide all Edit1 and Edit2 sections except for the clicked answer
+         
+          $(`.Edit1[data-answer-id="${answerId}"]`).hide();
+          $(`.Edit2[data-answer-id="${answerId}"]`).show();
+      });
+  });
+
+
+  $(document).ready(function () {
+        
+    var postContainer = $('.answer-section');
+    
+  
+    $('.dropdown-item').on('click', function () {
+      var filterValue = $(this).data('filter');
+
+      $.ajax({
+        type: 'POST',
+        url: 'filter/',
+        data: {
+            'filter_value': filterValue,
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        dataType: 'json',
+     
+        success: function (response) {
+          console.log(response);
+          const answerSection = $('.answer-section');
+          answerSection.empty();
+
+          response.answer_data.forEach(function(answer) {
+            const answerHtml = `
+                <div class="card shadow p-3 mb-5 answer-card">
+                    <div class="d-flex">
+                        ${answer.avatar ?
+                            `<img style="height: 20px;border-radius: 50%;" src="${answer.avatar}">` :
+                            `<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg" style="height: 55px;border-radius: 50%;"/>`
+                        }
+                        <span class="mt-3">${answer.username}</span>
+                        <span>(${answer.contributions})</span>
+                        <div id="answer-${answer.id}" class="ms-auto mt-3">
+                            ${answer.ruser.is_authenticated && answer.ruser.username !== answer.user.username ?
+                                `<div class="d-flex">
+                                    <a data-value="upvote" data-answer-id="${answer.id}" class="text-center me-2 answer-vote" style="text-decoration: none">
+                                        ${answer.upvoted ? '<i class="bi bi-arrow-up-circle-fill me-2 imgHeigth"></i>' : '<i class="bi bi-arrow-up-circle me-2"></i>'}
+                                    </a>
+                                    <p>${answer.upvote_count} <span>Upvote</span></p>
+                                </div>
+                                <br/>
+                                <div class="d-flex ms-2">
+                                    <a data-value="downvote" data-answer-id="${answer.id}" class="text-center me-2 answer-vote">
+                                        ${answer.downvoted ? '<i class="bi bi-arrow-down-circle-fill"></i>' : '<i class="bi bi-arrow-down-circle me-2"></i>'}
+                                    </a>
+                                    <p>${answer.downvote_count} <span>Downvote</span></p>
+                                </div>` :
+                                ''
+                            }
+                        </div>
+                        ${answer.ruser.is_authenticated && answer.ruser.username == answer.user.username ?
+                            `<div class="dropdown ms-2">
+                                <button class="btn btn_rad btn-light" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                                    <li><a class="dropdown-item Edit" data-answer-id="${answer.id}">Edit</a></li>
+                                    <li><a class="dropdown-item delete-ans" data-answer-id="${answer.id}">Delete</a></li>
+                                </ul>
+                            </div>` :
+                            ''
+                        }
+                    </div>
+                    <div class="ps-5 Edit1" data-answer-id="${answer.id}">
+                        <p>${answer.answer_text}</p>
+                    </div>
+                    <div style="display: none" class="ps-5 Edit2" data-answer-id="${answer.id}">
+                        <textarea name="edit" style="width: 100%; border-color: #dc3545; border-radius: 5px;">${answer.answer_text}</textarea>
+                        <button type="submit" class="btn btn-primary edit-answer" data-answer-id="${answer.id}">Submit</button>
+                    </div>
+                    <hr>
+                </div>
+            `;
+            answerSection.append(answerHtml);
+        });
+          
+          
+  
+        },
+        error: function (xhr, errmsg, err) {
+          console.log(errmsg);
+        },
+      });
+    });
+  
+
+  $('.submit-question').on('click', function () {
+    var questionId = $(this).data('question-id');
+    var questionTitle = $('input[name="title"]').val();
+    var questionTags = $('input[name="tags"]').val();
+      if (questionId) {
+        $.ajax({
+          type: 'POST',
+          url: '/editquestion/' + questionId + '/',
+          data: {
+            title : questionTitle,
+            tags : questionTags,
+            csrfmiddlewaretoken: '{{ csrf_token }}', 
+          },
+          success: function (response) {
+
+            cardContainer = $('.question-info')
+            console.log(response);
+
+            const questionHtml =`<div class="mb-5">
+              <span class="pull-right">Posted by ${ response.question.user }, ${ response.question.pub_date}</span>
+                  <h3>Q: ${ response.question.title }</h3>    
+            </div>`
+
+            cardContainer.html(questionHtml);
+            $('input[name="title"]').val('');
+            $('input[name="tags"]').val('');
+          },
+          error: function (xhr, errmsg, err) {
+            console.log(errmsg);
+          },
+
+  });
+
+  }
+  });
+
+});
+
+
+  </script>
+  
+
+
+
+
+{% endblock %}

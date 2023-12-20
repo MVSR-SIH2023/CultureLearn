@@ -1,0 +1,166 @@
+{% load google_translate %}
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Bundle with Popper -->
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia&display=swap">
+
+
+
+<style>
+  a {
+    text-decoration: none;
+    color: #dc3545;
+}
+.btn_rad {
+    border-radius: 50%;
+}
+input {
+    border-radius: 50px;
+    border: 1px solid #dc3545;
+}
+.menu {
+    padding: 5px;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.search-input {
+    flex: 1;
+    padding: 10px 40px 10px 10px; /* Adjust padding for icon */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-image: url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/icons/search.svg'); /* Search icon URL */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Adjust position */
+    background-size: 20px 20px; /* Adjust size */
+    border-radius: 40px;
+    height: 28px;
+    margin-bottom: 12px;
+}
+.search-input:focus {
+    outline: none;
+}
+.search-btn {
+    display: none;
+}
+.navbar {
+    background-color: #dc3545!important; /* Background color for the navbar */
+}
+.navbar-toggler-icon {
+    color: #dc3545; /* Change the color of the toggler icon */
+}
+.btn {
+    border-radius: 25px;
+}
+body {
+   
+    font-family: 'Georgia', serif;
+    
+    top: 0px !important;
+}
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+    display: none !important;
+}
+.goog-te-combo {
+  height:28px !important;
+  margin-top: 8px!important; 
+  border-color: #dc3545;
+  border-radius: 5px;
+
+}
+
+#google_translate_element { 
+    height: 34px !important; 
+    overflow: hidden !important;
+    color:transparent !important;
+}
+
+#google_translate_element a {
+    display: none !important;
+  }
+.goog-logo-link {
+    display:none !important;
+} 
+    
+.goog-te-gadget{
+    color: transparent !important;
+}
+.align_1 {
+    display: flex;
+}
+a {
+  text-decoration: none !important;
+  color: #dc3545  !important;
+}
+</style>
+<nav class="navbar navbar-expand-lg  fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'main:home' %}" style="color: #fff !important;font-weight: bold;">CultureLearn</a>
+    <div class="" id="navbarSupportedContent">
+      <div class="navbar-nav ms-auto mb-2 mb-lg-0 align_1 d-flex flex-row justify-content-end">
+          
+          <div class="me-3">
+              {% google_translate %}
+          </div>
+          <div class="me-3">
+              <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                  <span class="navbar-toggler-icon"></span>
+              </a>
+          </div>
+          
+          {% if user.is_authenticated %}
+          <div class="dropdown me-3">
+                  {% if user.profile.avatar %}
+                      <img style="height: 40px; width: 40px; border-radius: 50%;" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" src="{{ user.profile.avatar }}" alt="{{ user.profile.name }}">
+                  {% else %}
+                      <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="height: 45px;border-radius: 50%;"/>
+                  {% endif %}
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
+                      <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'accounts:profile-edit' %}">Edit Profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'accounts:show_users' %}">Show Users</a></li>
+                      <li><a class="dropdown-item" href="{% url 'accounts:show_experts' %}">Show Experts</a></li>
+                      <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Log out</a></li>
+                  </ul>
+              
+          </div>
+          {% else %}
+              <a type="button" href="{% url 'accounts:login' %}" class="btn btn-light me-2">Login</a>
+              <a type="button" href="{% url 'accounts:signup' %}" class="btn btn-light">Signup</a>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!--Left Canvas-->
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel" style="color: #dc3545;">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      <ul style="list-style-type: none;">
+          <li class="menu"><a href="{% url 'main:home' %}">Home</a></li><hr>
+          <li class="menu"><a href="{% url 'qa_index' %}">Q&A</a></li><hr>
+          <li class="menu"><a href="{% url 'accounts:show_quiz' %}">Quiz</a></li><hr>
+          <li class="menu"><a href="{% url 'articles:all-posts' %}">Articles</a></li><hr>
+          <li class="menu"><a href="{% url 'accounts:show_workshops' %}">Workshops</a></li><hr>
+          <li class="menu"><a href="{% url 'articles:all-podcasts'%}">Podcasts</a></li><hr>
+          <li class="menu"><a href="{% url 'accounts:notifications'%}">Notifications</a></li><hr>
+      </ul>
+  </div>
+</div>
+{% include "floating.html" %}

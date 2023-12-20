@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Traditions</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<style>
+		body {
+			margin: 0;
+		}
+		.navColor {
+        color: #dc3545;
+    }
+
+		h1 {
+			color: #dc3545;
+			font-weight: 700;
+			margin-top: 125px;
+			text-align: center;
+			text-transform: uppercase;
+			letter-spacing: 4px;
+			line-height: 23px;
+		}
+		h6,h5,h3{
+			color:#dc3435;
+		}
+
+		/* --- Start progress bar --- */
+
+		.process-wrapper {
+			margin: auto;
+			max-width: 1280px;
+		}
+
+		#progress-bar-container {
+			position: relative;
+			width: 90%;
+			margin: auto;
+			height: 100px;
+			margin-top: 65px;
+		}
+
+		#progress-bar-container ul {
+			padding: 0;
+			margin: 0;
+			padding-top: 15px;
+			z-index: 9999;
+			position: absolute;
+			width: 100%;
+			margin-top: -40px
+		}
+
+		#progress-bar-container li:before {
+			content: " ";
+			display: block;
+			margin: auto;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			border: solid 2px #aaa;
+			transition: all ease 0.3s;
+
+		}
+
+		#progress-bar-container li.active:before,
+		#progress-bar-container li:hover:before {
+			border: solid 2px #fff;
+
+			background: linear-gradient(to right, #fff 0%, #dc3545 100%);
+		}
+
+		#progress-bar-container li {
+			list-style: none;
+			float: left;
+			width: 20%;
+			text-align: center;
+			color: #aaa;
+			text-transform: uppercase;
+			font-size: 11px;
+			cursor: pointer;
+			font-weight: 700;
+			transition: all ease 0.2s;
+			vertical-align: bottom;
+			height: 60px;
+			position: relative;
+		}
+
+		#progress-bar-container li .step-inner {
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+			font-size: 14px;
+		}
+
+		#progress-bar-container li.active,
+		#progress-bar-container li:hover {
+			color: #444;
+		}
+
+		#progress-bar-container li:after {
+			content: " ";
+			display: block;
+			width: 6px;
+			height: 6px;
+			background: #777;
+			margin: auto;
+			border: solid 7px #fff;
+			border-radius: 50%;
+			margin-top: 40px;
+			box-shadow: 0 2px 13px -1px rgba(0, 0, 0, 0.3);
+			transition: all ease 0.2s;
+		}
+
+		#progress-bar-container li:hover:after {
+			background: #555;
+		}
+
+		#progress-bar-container li.active:after {
+			background: #dc3545;
+		}
+
+		#progress-bar-container #line {
+			width: 80%;
+			margin: auto;
+			background: #eee;
+			height: 6px;
+			position: absolute;
+			left: 10%;
+			top: 50px;
+			z-index: 1;
+			border-radius: 50px;
+			transition: all ease 0.9s;
+		}
+
+		#progress-bar-container #line-progress {
+			content: " ";
+			width: 3%;
+			height: 100%;
+			background: #dc3545;
+			background: linear-gradient(to right, #dc3545 0%, #dc3435 100%);
+			position: absolute;
+			z-index: 2;
+			border-radius: 50px;
+			transition: all ease 0.9s;
+		}
+
+		#progress-content-section {
+			margin: auto;
+			background: #f3f3f3;
+			border-radius: 4px;
+		}
+
+		#progress-content-section .section-content {
+			padding: 30px 40px;
+		}
+
+		#progress-content-section .section-content h2 {
+			font-size: 17px;
+			text-transform: uppercase;
+			color: #333;
+			letter-spacing: 1px;
+		}
+
+		#progress-content-section .section-content p {
+			font-size: 16px;
+			line-height: 1.8em;
+			color: #777;
+		}
+
+		#progress-content-section .section-content {
+			display: none;
+			animation: FadeInUp 700ms ease 1;
+			animation-fill-mode: forwards;
+			transform: translateY(15px);
+			opacity: 0;
+		}
+
+		#progress-content-section .section-content.active {
+			display: block;
+		}
+
+		@keyframes FadeInUp {
+			0% {
+				transform: translateY(15px);
+				opacity: 0;
+			}
+
+			100% {
+				transform: translateY(0px);
+				opacity: 1;
+			}
+		}
+
+		a {
+			text-decoration: none;
+			color: #dc3545;
+		}
+
+		.img {
+			width: 100%;
+			height: 100%;
+		}
+
+		.content-container {
+			height: 100vh;
+			overflow-y: auto;
+			box-sizing: border-box;
+		}
+		.btn_rad {
+			border-radius: 50%;
+		}
+	</style>
+</head>
+
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+	<div class="content-container">
+		<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand navColor" href="#" style="font-weight: bold;">
+                    <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702280805/logo_ms8pwt.jpg" alt="Logo"
+                        width="30" height="24" class="d-inline-block align-text-top">
+                    CultureLearn
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link navColor" aria-current="page" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navColor" href="Q&A.html">Q&A</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navColor" href="Articles.html">Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navColor" href="workshop.html">Workshops</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navColor" href="PodCast.html">Podcast</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navColor" href="Notifications.html">Notifications</a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown">
+                        <button class="btn btn_rad btn-danger" type="button" id="filterDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+		<div class="container mt-5">
+			
+			<h1>Traditions</h1>
+			<br>
+			
+			<div class="process-wrapper card mb-3">
+				<div id="progress-bar-container" class="custom-progress-bar-container">
+					<ul>
+						<li class="step step01 active">
+							<div class="step-inner">Religions</div>
+						</li>
+						<li class="step step02">
+							<div class="step-inner">Family Structure</div>
+						</li>
+						<li class="step step03">
+							<div class="step-inner">Food</div>
+						</li>
+						<li class="step step04">
+							<div class="step-inner">Greeting</div>
+						</li>
+						<li class="step step05">
+							<div class="step-inner">Clothig</div>
+						</li>
+					</ul>
+					<div id="line">
+						<div id="line-progress" class="custom-line-progress"></div>
+					</div>
+				</div>
+			</div>
+			<div id="progress-content-section" class="shadow-lg mb-5">
+				<div class="section-content discovery active">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Religions</h2>
+					<div class="row row-cols-1 row-cols-md-2 g-4">
+						<div class="card col shadow-lg">
+							<h2 class="text-center mt-4">Content</h2>
+							<ul style="color: #dc3545;">
+								<li><a href="#Hinduism">Hinduism</a></li>
+								<li><a href="#Islam">Islam</a></li>
+								<li><a href="#Sikkism">Sikkism</a></li>
+								<li><a href="#Christianity">Christianity</a></li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="text-center mt-5" >
+								<i style="color: #dc3545;">EKAM SAT VIPRA BAHUDHA VADHANTI</i><br>
+								<i>-There is only one truth (or true being) and learned persons call it by many names</i>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702642584/hinduism1_adriio.jpg"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="ms-3">
+								<h3 id="Hinduism" style="color: #dc3435;">Hinduism</h3>
+								<hr>
+							</div>
+							<div class="">
+								<p>Hinduism is one of the world's oldest religions, with a rich history that spans
+									thousands of years. It is a diverse and complex religion with a multitude of
+									beliefs, practices, and traditions. Here is a brief overview of some key aspects of
+									Hinduism</p>
+								<h6>Concept of God </h6>
+								<p>Hinduism is not a monolithic faith with a single, universally accepted doctrine. It
+									accommodates a wide range of beliefs about God. Some Hindus believe in a single,
+									supreme force known as Brahman, while others worship multiple deities, each
+									representing different aspects of the divine. Major deities include Brahma (the
+									creator), Vishnu (the preserver), Shiva (the destroyer), Lakshmi (goddess of
+									wealth), Saraswati (goddess of knowledge), and many others.
+								</p>
+								<h6>Sacred Texts </h6>
+								<p>Hinduism has a vast body of sacred texts, divided into two main categories: Shruti
+									(heard or revealed) and Smriti (remembered). The Vedas, Upanishads, Bhagavad Gita,
+									Ramayana, and Mahabharata are among the most important texts. These scriptures cover
+									various aspects of life, philosophy, rituals, and mythology.</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702642591/hinduism2_av8gdp.jpg"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="">
+								<h6>Cycles of Time </h6>
+								<p>Hinduism views time as cyclical, with the universe undergoing repeated cycles of
+									creation, preservation, and destruction. This cyclical nature is symbolized by the
+									concept of "samsara," the cycle of birth, death, and rebirth.
+								</p>
+								<h6>Karma and Dharma </h6>
+								<p>
+								<p>Hinduism teaches the concept of karma, which is the law of cause and effect. It
+									asserts that one's actions in this life will determine their fate in future lives.
+									Dharma, on the other hand, refers to one's duty or righteous conduct based on their
+									position in society.</p>
+								<h6>Temples and Rituals</h6>
+								<p>Hindu worship often takes place in temples, where rituals and ceremonies are
+									conducted by priests. Pilgrimage to sacred sites is also an integral part of Hindu
+									religious practice. Rituals and festivals play a significant role in expressing
+									devotion and celebrating religious and cultural events.
+								</p>
+								<p>It's important to note that Hinduism is a highly diverse and inclusive religion,
+									accommodating a wide range of beliefs and practices. This brief overview only
+									scratches the surface of the rich tapestry that is Hinduism.</p>
+							</div>
+							<a href="">Know More</a>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<h3 id="Islam" style="color: #dc3435;">Islam</h3>
+								<hr>
+							<p>Islam is one of the world's major monotheistic Abrahamic religions, founded in the 7th century CE in
+								the Arabian Peninsula. Here is a brief overview of key aspects of Islam:
+							</p>
+							<ol>
+								<li>
+									<h6>Founding and Prophet</h6>
+									<p>Islam was founded by the Prophet Muhammad, who Muslims believe received revelations from the
+										angel Gabriel, which were later compiled into the Quran, the holy book of Islam. Muhammad is
+										considered the last and final prophet in a line of prophets that includes figures like
+										Abraham, Moses, and Jesus.
+									</p>
+								</li>
+								<li>
+									<h6>The Quran</h6>
+								</li>
+								<p>The Quran is the central religious text of Islam, believed by Muslims to be the literal word of
+									God as revealed to Muhammad. It provides guidance on all aspects of life, including theology,
+									law, morality, and social issues.
+								</p>
+								<li>
+									<h6>The Five Pillars of Islam</h6>
+									<ul>
+										<li>
+											<h6>Shahada (Declaration of Faith) - </h6>
+										</li>
+										<p>The basic creed of Islam, declaring the oneness of God and the prophethood of Muhammad.
+										</p>
+										<li>
+											<h6>Salah (Prayer) - </h6>
+										</li>
+										<p>Muslims are required to pray five times a day facing the Kaaba in Mecca. These prayers
+											are known as Salah and are a direct communication with God.</p>
+										<li>
+											<h6>Zakat (Charity) - </h6>
+										</li>
+										<p>Muslims are obligated to give a portion of their wealth to those in need, typically 2.5%
+											of their savings annually.</p>
+										<li>
+											<h6>Sawm (Fasting during Ramadan) - </h6>
+										</li>
+										<p>Muslims fast from dawn to sunset during the holy month of Ramadan as an act of
+											self-discipline and empathy for those less fortunate.</p>
+										<li>
+											<h6>Hajj (Pilgrimage to Mecca) - </h6>
+										</li>
+										<p>Muslims who are physically and financially able are required to undertake a pilgrimage to
+											Mecca at least once in their lifetime.</p>
+									</ul>
+								</li>
+								<li>
+									<h6>Monotheism</h6>
+								</li>
+								<p>Islam emphasizes the absolute oneness of God (Allah in Arabic) and rejects the concept of the
+									Trinity. Muslims believe in the uniqueness and indivisibility of God's nature.
+								</p>
+								<li>
+									<h6>Sunni and Shia</h6>
+									<p>Islam has two main branches, Sunni and Shia, which differ in their understanding of the
+										leadership and succession after Prophet Muhammad. The majority of Muslims (around 85-90%)
+										are Sunni, while Shia Muslims make up the minority.
+									</p>
+								</li>
+								<li>
+									<h6>Life After Death</h6>
+									<p>Muslims believe in the Day of Judgment, where individuals will be judged based on their
+										deeds, and rewarded with either paradise or punished with hell.
+									</p>
+								</li>
+							</ol>
+							<p>It's important to note that Islam, like any major religion, is diverse, and interpretations and
+								practices can vary among different communities and traditions within the Islamic faith.
+							</p>
+						</div>
+						<!-- <div class="col">
+							<div class="mt-5">
+								<h3 id="Islam">Islam</h3>
+								<hr>
+								Islam, the second-largest religion in India, arrived in the 7th century with the
+								expansion of the Islamic Caliphate. Indian Islam is characterized by its diverse
+								cultural influences, with contributions from Persian, Central Asian, and indigenous
+								traditions. The followers of Islam, known as Muslims, adhere to the Five Pillars of
+								Islam, which include the declaration of faith, daily prayers, fasting during Ramadan,
+								almsgiving, and pilgrimage to Mecca. India has produced influential Islamic scholars,
+								poets, and architects, contributing to the development of a unique Indo-Islamic culture.
+								The Mughal Empire, known for its architectural marvels like the Taj Mahal and the Red
+								Fort, played a crucial role in shaping India's Islamic heritage.
+							</div>
+							<a href="">Know More</a>
+						</div> -->
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702656014/islam_rrbghs.png"
+								style="height: 500px;width: 100%;margin-bottom:5px;">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702642568/islam1_resx8i.jpg"
+							style="height: 500px;width: 100%;" />
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702455128/muslims-prayer-in-mosque_mxizzp.webp"
+								style="height: 300px;width: 100%;">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702499045/Guru_Nanakhistory_bkadho.avif"
+								style="height: 500px;width: 100%;">
+								<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702654133/sikkism_vdlyfp.webp"
+								style="height: 500px;width: 100%;margin-top:5px;">
+								<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702455282/Panj-Pyare-Sahiban-Leading-the-Nagar-Kirtan-during-a-Gurpurab-Celebration_mkqy7p.webp"
+								style="height: 400px;width: 100%;margin-top: 5px;">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Sikkism" style="color: #dc3435;">Sikkism</h3>
+								<hr>
+								<p>Sikhism is a monotheistic religion founded in the late 15th century in the Indian subcontinent by
+									Guru Nanak and developed further by a line of successive leaders known as Gurus. Here is a brief
+									overview of key aspects of Sikhism:</p>
+									<ol>
+										<li>
+											<h6>Founding Guru</h6>
+											<p>Sikhism was founded by Guru Nanak in the late 15th century in the region that is now part of
+												Pakistan and India. Guru Nanak's teachings emphasized the oneness of God, equality of all
+												people, and the rejection of ritualism and caste distinctions.
+											</p>
+										</li>
+										<li>
+											<h6>Beleif in one God</h6>
+										</li>
+										<p>Sikhism is a monotheistic religion that emphasizes the belief in one formless, transcendent God.
+											This concept is known as Ik Onkar.
+										</p>
+										<li>
+											<h6>Guru Granth Sahib</h6>
+										</li>
+										<p>The holy scripture of Sikhism is the Guru Granth Sahib, a compilation of hymns and writings by
+											Sikh Gurus and other spiritual leaders. It is considered the eternal Guru by Sikhs and is
+											accorded great reverence.</p>
+										<li>
+											<h6>Guru Lineage</h6>
+										</li>
+										<p>Sikhism had a line of ten successive Gurus, from Guru Nanak to Guru Gobind Singh. Guru Gobind
+											Singh declared the Guru Granth Sahib as the eternal Guru, ending the line of human Gurus.
+										</p>
+										<li>
+											<h6>Five K's</h6>
+											<p>Sikhs who have undergone the Amrit initiation ceremony are expected to adhere to the "Five
+												Ks," which are articles of faith that symbolize the Sikh identity. These are Kesh (uncut
+												hair), Kara (steel bracelet), Kanga (wooden comb), Kachera (cotton undergarments), and
+												Kirpan (ceremonial sword).
+											</p>
+										</li>
+										<li>
+											<h6>Gurudwara</h6>
+										</li>
+										<p>Sikh worship takes place in a Gurdwara, which is a Sikh temple. The central focus of a Gurdwara
+											is the Guru Granth Sahib, and congregational prayers, known as Kirtan, are an essential part of
+											Sikh worship.
+										</p>
+										<li>
+											<h6>Three Pillars of Sikhism</h6>
+										</li>
+										<p>Three Pillars of Sikhism: Sikhs are encouraged to follow the three pillars of Sikhism, known as
+											Naam Japna (meditating on God's name), Kirat Karni (earning an honest living), and Vand Chakna
+											(sharing with others, especially through charitable acts).</p>
+										<li>
+											<h6>Miri and Piri</h6>
+											<p>Sikhism integrates the spiritual and temporal aspects of life. Miri refers to political and
+												temporal authority, while Piri represents spiritual authority. The concept emphasizes the
+												need for Sikhs to be engaged in the world while maintaining a strong spiritual connection.
+											</p>
+										</li>
+									</ol>
+									<p>Sikhism is a distinct and progressive faith that emphasizes devotion to God, equality, and service to
+										humanity. It has a strong presence, particularly in the Indian state of Punjab and among Sikh
+										communities worldwide.
+									</p>
+							</div>
+							<a href="">Know More</a>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Christianity" style="color: #dc3435;">Christianity</h3>
+								<hr>
+								<p>Christianity is a major monotheistic Abrahamic religion centered around the life, teachings, death,
+									and resurrection of Jesus Christ. Here is a brief overview of key aspects of Christianity:</p>
+								<ol>
+									<li>
+										<h6>Jesus Christ</h6>
+										<p>Christianity is a major monotheistic Abrahamic religion centered around the life, teachings,
+											death, and resurrection of Jesus Christ. Here is a brief overview of key aspects of
+											Christianity:
+										</p>
+									</li>
+									<li>
+										<h6>The Bible</h6>
+									</li>
+									<p>The Christian holy scripture is the Bible, which consists of the Old Testament (shared with
+										Judaism) and the New Testament. The New Testament contains the Gospels (narratives of Jesus'
+										life and teachings), the Acts of the Apostles, letters (Epistles) written by early Christian
+										leaders, and the Book of Revelation.</p>
+									<li>
+										<h6>Trinity</h6>
+									</li>
+									<p>Christianity teaches the doctrine of the Trinity, which asserts the existence of one God in three
+										persons: the Father, the Son (Jesus Christ), and the Holy Spirit. This concept is foundational
+										to understanding the nature of God.
+									</p>
+									<li>
+										<h6>Salvation and Atonement</h6>
+									</li>
+									<p>Christians believe in the concept of salvation, which is achieved through faith in Jesus Christ
+										as the Son of God and the acceptance of his atoning sacrifice on the cross. The crucifixion is
+										seen as the means by which humanity's sins are forgiven, allowing believers to be reconciled
+										with God.
+									</p>
+									<li>
+										<h6>Church and Worship</h6>
+									</li>
+									<p>Christian worship takes place in churches, and there are various denominations within
+										Christianity, such as Catholicism, Protestantism, and Eastern Orthodoxy, each with its own
+										traditions and beliefs. Christian worship often includes sacraments, such as baptism and
+										communion, which hold spiritual significance.</p>
+									<li>
+										<h6>Ressurection and Afterlife</h6>
+									</li>
+									<p>Christians believe in the resurrection of Jesus Christ, signaling victory over death. This belief
+										is linked to the hope of eternal life for believers. The afterlife, heaven, and hell are
+										fundamental concepts in Christian theology.</p>
+								</ol>
+								<p>It's important to note that Christianity encompasses a wide range of beliefs and practices across
+									denominations, and interpretations of its teachings may vary among different Christian communities.
+								</p>
+							</div>
+							<a href="">Know More</a>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702653738/christ_xzxj5d.jpg"
+								style="height: 500px;width: 100%;margin-top: 50px;">
+								<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702653748/christianity_r7bvfn.webp"
+								style="height: 500px;width: 100%;margin-top: 50px;">
+						</div>
+					</div>
+					<!-- <div class="text-center mt-5" >
+						<i class="text-center">EKAM SAT VIPRA BAHUDHA VADHANTI</i><br>
+						<i>-There is only one truth (or true being) and learned persons call it by many names</i>
+					</div> -->
+				</div>
+				
+				<div class="section-content strategy">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Family Structure
+					</h2>
+					<h3 style="color: #dc3545;">Introduction</h3>
+					<hr>
+					<p>Family structure in India is often considered a significant aspect of Indian tradition. The
+						family system in India has been influenced by cultural, social, and religious traditions that
+						have evolved over centuries. While it's important to note that there is considerable diversity
+						in family structures across the country due to urbanization, globalization, and individual
+						choices, certain traditional elements are often associated with Indian families</p>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<h5>Joint Family System:</h5>
+							<ul>
+								<li>Living Arrangements: In joint families, multiple generations often live together in
+									a common household. This includes grandparents, parents, uncles, aunts, and
+									children.</li>
+								<li>Economic Cooperation: The joint family system facilitates economic cooperation, as
+									family members pool resources and contribute collectively to meet the financial
+									needs of the household.</li>
+								<li>Shared Responsibilities: Responsibilities, including childcare, household chores,
+									and financial management, are distributed among family members, fostering a sense of
+									mutual support.</li>
+								<li>Communication: Joint families encourage open communication among family members.
+									Discussions and decision-making often involve multiple perspectives, fostering a
+									sense of inclusivity.</li>
+								<li>Interdependence: Interdependence is a key characteristic of joint families, where
+									family members rely on each other for emotional, financial, and practical support.
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702633404/jointfamily_m4uwon.avif"
+								alt="" class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702633474/touching-feet-of-elders_bvtwte.jpg"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<h5>Respect for Elders:</h5>
+							<ul>
+								<li>Hierarchical Structure: Traditional Indian families often have a hierarchical
+									structure, with elders holding a position of authority and respect. Decisions may be
+									guided by the wisdom and experience of the older generation.</li>
+								<li>Inter-Generational Bonding: Respect for elders goes beyond mere obedience; it
+									involves deep reverence and care for the well-being of older family members.</li>
+								<li>Guidance and Mentorship: Elders are not only respected for their age but also valued
+									for their wisdom. Younger family members often seek guidance and mentorship from
+									elders in matters of life, career, and relationships.
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="mt-3">
+						<h5>Familial Responsibilities:</h5>
+						<ul>
+							<li>Financial Contributions: Family members often contribute to the family's financial
+								well-being, with the earning members supporting those who are dependent, such as
+								students or retirees.</li>
+							<li>Household Chores: Division of labor extends to household chores, with responsibilities
+								shared among family members based on age, gender, and individual capabilities.</li>
+							<li>Educational Support: Families prioritize education, and members often contribute to the
+								education of younger members. Elders may play a role in providing guidance on career
+								choices.</li>
+							<li>Healthcare: Family members take care of each other's health, with elders being looked
+								after in times of illness. Healthcare decisions are often collective and involve the
+								opinions of elders.</li>
+						</ul>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702633602/ceremony_cjpfgv.jpg"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<h5>Ceremonies and Celebrations:</h5>
+							<ul>
+								<li>Family Gatherings: Festivals and ceremonies are occasions for family members to come
+									together. These events reinforce familial bonds and provide opportunities for
+									collective celebration and religious observances.</li>
+								<li>Weddings: Weddings are significant family events, involving elaborate rituals and
+									celebrations that bring extended families together. Arranged marriages often involve
+									the participation of the entire family.</li>
+								<li>Cultural Exchange: During celebrations, there is an exchange of cultural practices,
+									including traditional music, dance, and rituals. These events become platforms for
+									cultural preservation and transmission.</li>
+								<li>Strengthening Bonds: Ceremonies not only mark specific occasions but also serve as
+									opportunities to strengthen familial bonds. Rituals are seen as expressions of
+									continuity and shared identity.</li>
+							</ul>
+						</div>
+					</div>
+					<div class="mt-3">
+						<h5>Extended Families:</h5>
+						<ul>
+							<li>Social Support: Extended families, which may include cousins, uncles, and aunts, provide
+								social support and a sense of belonging. Relationships with extended family members are
+								often nurtured through regular interactions and shared experiences.</li>
+							<li>Emotional Connections: Celebrations, festivals, and life events strengthen emotional
+								connections with extended family members, creating a network of support.</li>
+							<li>Family Reunions: Extended families often come together during family reunions, which may
+								be planned around special occasions or holidays. These reunions provide opportunities
+								for bonding and shared experiences.</li>
+							<li>Financial Assistance: Extended family members may provide financial assistance or
+								support during challenging times, contributing to a sense of security.</li>
+						</ul>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702633720/culture_gqfh5h.jpg"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<div class="mt-3">
+								<h5>Cultural and Religious Practices:</h5>
+								<ul>
+									<li>Rituals and Traditions: Families in India actively engage in cultural and
+										religious practices. This includes daily rituals, prayers, and participation in
+										festivals that are often passed down from one generation to the next.</li>
+									<li>Cultural Continuity: Cultural practices within families contribute to the
+										continuity of traditions, reinforcing a shared sense of identity and heritage.
+									</li>
+									<li>Adaptation and Modernization: While families uphold cultural and religious
+										practices, there is often an adaptive approach. Families may modernize certain
+										rituals while preserving the essence of tradition.</li>
+									<li>Transmission of Values: Cultural and religious practices become vehicles for
+										transmitting values, morals, and ethical principles from one generation to the
+										next.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<h3>Indian Marraiges</h3>
+							<hr>
+							<p>In the rich tapestry of Indian society, marriages hold profound significance, weaving
+								together cultural, social, and personal threads. Culturally, weddings are steeped in
+								tradition, serving as the guardians of age-old customs and rituals that vary across
+								diverse communities. The union of two individuals is not merely a personal affair; it is
+								the coming together of two families, reinforcing familial bonds and fostering a shared
+								sense of identity. The institution of marriage provides social acceptance, marking an
+								individual's entry into a recognized societal role and offering a sense of belonging.
+							</p>
+							<p>Marriage in India goes beyond the union of hearts; it is intricately tied to the
+								continuity of lineage. The expectation of procreation and building a family reflects the
+								belief in the perpetuation of family names, traditions, and values. Additionally,
+								marriage is a spiritual sacrament in many religious traditions, signifying commitment,
+								duty, and the shared pursuit of spiritual growth. </p>
+							<p>Economically, marriages often involve a partnership between families, contributing to
+								financial stability through shared responsibilities and resources. Socially, alliances
+								formed through marriages between families of similar backgrounds contribute to stability
+								and harmony within communities. At a personal level, marriage offers companionship,
+								emotional support, and serves as a catalyst for personal growth, marking a significant
+								milestone in an individual's life.</p>
+							<p>In essence, Indian marriages are woven into the very fabric of society, embodying
+								cultural heritage, familial bonds, societal expectations, and personal aspirations. They
+								are ceremonies of not just union but also continuity, growth, and shared destinies.</p>
+							<a href="">Explore through the book</a>
+						</div>
+						<div class="col">
+							<a href="https://publuu.com/flip-book/328752/757228/page/1?cover" class="show-publuu-viewer"
+								style="width: 100%; height: 100%; position: relative; display: inline-block;">
+								<img src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/757228"
+									style="height: 100%;width: 100%;">
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="section-content creative">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Food</h2>
+					<!-- <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Regional Cuisine">Regional Cuisine</h3>
+								<hr>
+								India's culinary landscape is incredibly diverse, with each region boasting its own
+								unique flavors and specialties. North Indian cuisine is known for its rich and creamy
+								gravies, tandoori dishes, and popular bread varieties like naan and paratha. South
+								Indian cuisine features a variety of dosas, idlis, and rice-based dishes, often
+								accompanied by coconut-based chutneys and sambars. Western India, including states like
+								Gujarat and Maharashtra, is known for dhokla, pav bhaji, and a wide range of vegetarian
+								and non-vegetarian curries. Eastern India offers dishes like fish curry, roshogolla, and
+								sweets made from chhena (a form of cottage cheese).
+							</div>
+							<a href="">Know More</a>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702532601/South_Indian_food_cuisine_xw3d6u.webp"
+								alt="" class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702532991/indian_spices-1_fznnlb.webp"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Spices and Flavors">Spices and Flavors</h3>
+								<hr>
+								Spices are the heart of Indian cooking, creating the distinctive and aromatic profiles
+								of various dishes. Commonly used spices include cumin, coriander, turmeric, cardamom,
+								cloves, cinnamon, and fenugreek. These spices are used in different combinations to
+								create a spectrum of flavors, from mildly spiced to fiery hot.
+							</div>
+							<a href="">Know More</a>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Vegetarian and Non-Vegetarian Cuisine">Vegetarian and Non-Vegetarian Cuisine
+								</h3>
+								<hr>
+								India has a significant vegetarian population, and vegetarian dishes are an integral
+								part of the country's culinary traditions. Staples like dal (lentils), sabzi (vegetable
+								dishes), and paneer (cottage cheese) are widely enjoyed. Non-vegetarian cuisine includes
+								a variety of meat, poultry, and seafood dishes prepared in a myriad of styles, such as
+								tandoori, curry, and kebabs.
+							</div>
+							<a href="">Know More</a>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702533125/360_F_435316847_BCNNt3Wpgf1wJv7wOj4BfpP8JadLPe6Q_pva99h.webp"
+								alt="" class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702533338/25-Indian-Sweet-Recipes.-Desserts-Piping-Pot-Curry-720x720_t0sxne.webp"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Sweets and Desserts">Sweets and Desserts</h3>
+								<hr>
+								Indian sweets, or mithai, are an essential part of celebrations and festivals. Gulab
+								jamun, jalebi, rasgulla, and barfi are some of the many varieties available. These
+								sweets often feature ingredients like ghee (clarified butter), sugar, and condensed
+								milk.
+							</div>
+							<a href="">Know More</a>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Traditional Cooking Methods">Traditional Cooking Methods</h3>
+								<hr>
+								Traditional Indian cooking methods include tandoor (clay oven), tawa (griddle), and
+								handi (traditional cooking pot). These methods contribute to the unique flavors and
+								textures of Indian dishes.<br>
+								<a href="https://indianambrosia.com/5-indian-cooking-techniques/">Traditional way of
+									cooking food in India</a>
+							</div>
+							<a href="">Know More</a>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702533494/Earthen-Cooking-Pot_c88efg.webp"
+								alt="" class="img">
+						</div>
+					</div> -->
+					<div  class="mt-3">
+						<p>Indian food is renowned for its rich flavors, aromatic spices, and diverse range of dishes. The cuisine varies significantly across regions, offering a wide array of vegetarian and non-vegetarian options. Here are some key components and popular dishes in Indian cuisine:</p>
+						<h6 style="color: #dc3545;">Spices</h6>
+						<hr>
+						<p>Indian cuisine is known for its use of a variety of spices, including cumin, coriander, turmeric, cardamom, cloves, cinnamon, and more. The combination of these spices contributes to the unique and vibrant flavors in Indian dishes.</p>
+						<p><span style="color: #dc3545;">Significance:</span>Spices are the heart and soul of Indian cuisine. They not only add flavor but are believed to have health benefits. Many spices, such as turmeric and cumin, are known for their medicinal properties. The use of a variety of spices reflects India's historical spice trade and diverse agricultural practices.</p>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702669366/spices_s8bph3.jpg"class="img"/>
+					</div>
+					<div class="mt-5">
+						<h6 style="color: #dc3545;">Rice and Bread</h6>
+						<hr>
+						<p>Rice and various types of bread, such as roti, naan, paratha, and puri, are staples in Indian meals. They often accompany curries and other main dishes.</p>
+						<p><span style="color: #dc3545;">Significance:</span>Rice is a staple in many Indian states, and its cultivation has shaped agricultural practices for centuries. Different regions have their own varieties of rice, each contributing to unique dishes. Various types of bread, including unleavened and leavened, showcase the diversity of Indian culinary techniques.
+
+
+						</p>
+						
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702671172/rice_adfbff.jpg" class="img" />
+					</div>
+					<div  class="mt-5">
+						
+						<h6 style="color: #dc3545;">Curries</h6>
+						<hr>
+						<p> Indian curries are flavorful and diverse, ranging from mildly spiced to fiery hot. They can be made with vegetables, lentils, chickpeas, or meat, cooked in a variety of gravies such as tomato-based, creamy, or coconut-based.
+
+						</p>
+						<p><span style="color: #dc3545;">Significance:</span>Curries are the epitome of Indian flavors and versatility. The term "curry" is a Western catch-all for a variety of saucy dishes. In Indian culture, curries are not only a delicious way to prepare food but also an art form, with each region having its own interpretation and specialties.
+
+						</p>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702671288/curry_oc0dzi.jpg" class="img"/>
+					</div>
+					<div class="mt-5">
+						
+						<h6 style="color: #dc3545;">Dals (Lentils)</h6>
+						<hr>
+						<p>Lentils are a significant source of protein in Indian vegetarian cuisine. Dals are prepared in various ways, including simple lentil soups or more complex dishes with spices and vegetables.</p>
+						<p><span style="color: #dc3545;">Significance:</span>Lentils are a vital source of protein for vegetarians in India. Dals are a comfort food and hold cultural significance. They are often associated with home-cooked meals and are an integral part of the daily diet, reflecting simplicity and nutrition.
+						</p>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702671161/dal_fzkhlp.webp" class="img"/>
+					</div>
+					<div class="mt-5">
+						
+						<h6 style="color: #dc3545;">Tandoori Dishes</h6>
+						<hr>
+						<p>Tandoori cooking involves marinating meat, fish, or paneer in a blend of yogurt and spices before cooking it in a tandoor (clay oven). Tandoori dishes include favorites like Chicken Tikka and Tandoori Roti.
+						</p>
+						
+						<p><span style="color: #dc3545;">Significance:</span>Tandoori cooking is a traditional method that imparts a smoky flavor to dishes. It originated in the North Indian region of Punjab. Tandoori dishes represent the celebratory aspect of Indian cuisine and are often associated with special occasions and festivities.
+						</p>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702671156/tandoori_xzn5vx.jpg" class="img"/>
+					</div>
+					
+					<div class="mt-5">
+						
+						<h6 style="color: #dc3545;">Street Food</h6>
+						<hr>
+						<p>Indian street food is diverse and offers a range of flavors. Popular street food items include chaat (spicy snacks), panipuri (hollow crispy shells filled with flavored water and other ingredients), and vada pav (a spiced potato patty in a bun).</p>
+						<p><span style="color: #dc3545;">Significance:</span>Street food is a vibrant part of Indian culture, reflecting the country's love for snacking. It's accessible, affordable, and offers a variety of flavors. Street food vendors are integral to the local community, and their dishes often become iconic representations of specific cities.</p>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702670978/paani_hwv3v6.jpg" class="img"/>
+					</div>
+					<div class="mt-5">
+						
+						<h6 style="color: #dc3545;">Biryani and Pulao</h6>
+						<hr>
+						<p>Biryani is a fragrant and flavorful rice dish cooked with aromatic spices and meat (or vegetables). Pulao is a simpler rice dish with spices and vegetables or meat.</p>
+						<p><span style="color: #dc3545;">Significance:</span> Biryani and Pulao are celebratory dishes, often associated with feasts, weddings, and special occasions. Biryani, in particular, showcases the influence of Mughlai cuisine, with fragrant rice and richly spiced meat or vegetables.</p>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702671234/biryani_copy_cueasv.png"class="img"/>
+					</div>
+					<div class="mt-5">
+						
+						<h6 style="color: #dc3545;">Sweets and Desserts</h6>
+						<hr>
+						<p>Indian sweets, known as mithai, are a highlight of Indian cuisine. They include Gulab Jamun, Jalebi, Rasgulla, and a wide variety of regional specialties. Desserts often feature ingredients like milk, ghee, sugar, and nuts.
+						</p>
+						<p><span style="color: #dc3545;">Significance:</span>Sweets hold deep cultural importance in India. They are offered during religious ceremonies, celebrations, and festivals. The intricate art of making Indian sweets reflects the country's culinary craftsmanship and the emphasis on hospitality.
+						</p>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702671152/gulab_rwidq3.jpg" class="img"/>
+					</div>
+					<div class="mt-5">
+						
+						<h6 style="color: #dc3545;">Tea(Chai)</h6>
+						<hr>
+						<p>Chai, or spiced tea, is a popular beverage in India. It is made by brewing black tea with aromatic spices like cardamom, cinnamon, ginger, and cloves, then adding milk and sugar.
+
+
+						</p>
+						<p><span style="color: #dc3545;">Significance:</span>Chai is not just a beverage; it's a cultural ritual. Masala chai, with its blend of spices, represents the warmth of Indian hospitality. Chai breaks are a common social activity, bringing people together to share stories and connect.
+
+						</p>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702711590/chaitea_p5scj0.jpg" class="img"/>
+					</div>
+					<br>
+					<p>Indian cuisine is incredibly diverse, with each region contributing its own specialties and culinary traditions. Whether you're savoring the fiery curries of the south, the rich gravies of the north, or the flavorful vegetarian dishes, Indian food offers a culinary adventure for the taste buds.</p>
+
+						<p>Each component of Indian cuisine reflects the country's history, diversity, and cultural traditions. The significance goes beyond mere sustenance, intertwining with daily life, celebrations, and the warmth of hospitality that is characteristic of Indian culture.
+						</p>
+				</div>
+
+				<div class="section-content production">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Common Greetings</h2>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<h3 id="Regional Cuisine" style="color: #dc3545;">Namaste</h3>
+							<hr>
+							<ul>
+								<li><span style="color: #dc3545;">Gesture: </span>Joining the palms together in a prayer
+									position and slightly bowing the head.</li><br>
+								<span style="color: #dc3545;"></span>Namaste is a traditional Indian greeting that holds deep cultural and spiritual significance. The word "Namaste" is derived from Sanskrit and can be translated as "I bow to you" or "The divine in me bows to the divine in you." When people greet each other with Namaste, they press their palms together in front of the chest and bow slightly. This gesture is not only a sign of respect but also acknowledges the shared divine essence or spirit within each individual. Namaste is widely used across India and has gained recognition worldwide as a symbol of mutual respect, humility, and the acknowledgment of the intrinsic connection between people.
+
+
+
+
+								
+								<a href="https://en.wikipedia.org/wiki/Namaste" class="mt-4">Know More</a>
+							</ul>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702534435/360_F_640561257_LfnQbwQjeyu2tshEXCdthdKMuMxsXKst_bpv7el.webp"
+								alt="" class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702535977/feet2_assu1i.jpg"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<h3 id="Spices and Flavors" style="color: #dc3435;" >Touching Feet</h3>
+							<hr>
+							<li><span style="color: #dc3545;">Gesture: </span>Touching the feet of elders as a sign of
+								respect.</li><br>
+							<span style="color: #dc3545;"></span>Touching elders' feet is a traditional and culturally significant gesture in India, known as "Pranam" or "Pranipat." This act is a mark of deep respect and reverence, particularly towards elders and individuals of authority. When someone touches the feet of an elder, they often bow down, and with humility, touch the elder's feet with their hands. This gesture is a symbolic acknowledgment of the elder's wisdom, experience, and blessings.
+
+								The elder, in turn, may offer their blessings by placing their hand on the person's head or by giving a verbal expression of goodwill. This practice is deeply ingrained in Indian culture, reflecting values of humility, gratitude, and the importance of familial and societal bonds. Touching elders' feet is commonly observed in various cultural and religious contexts across the country and serves as a profound way of showing respect and seeking guidance from those who are considered wiser and more experienced.
+							
+							<a href="https://en.wikipedia.org/wiki/Pran%C4%81ma" class="mt-4">Know More</a>
+						</div>
+					</div>
+					
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+
+						<div class="col">
+							<h3 id="Salam" style="color: #dc3545;">Salam</h3>
+							<hr>
+							<li><span style="color: #dc3545;">Gesture:</span> A slight bow with the right hand placed on
+								the forehead.</li><br>
+							<span style="color: #dc3545;"></span>"Salaam" is an Arabic term that means "peace" and is commonly used as a traditional greeting in many cultures, including various regions of India. When people say "Salaam," they often accompany the greeting with a gesture of respect, such as placing the right hand over the heart or bowing slightly. In Indian culture, Salaam is a way of expressing goodwill and peace towards others. It is particularly prevalent in areas where Urdu or Persian influence is significant. This greeting not only conveys a sense of friendliness but also reflects a desire for harmony and well-being in the exchange between individuals.
+							<a href="https://simple.wikipedia.org/wiki/Salam" class="mt-4">Know More</a>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702536452/salaam_2_i9npku.jpg"
+								alt="" class="img">
+						</div>
+					</div>
+				</div>
+
+				<div class="section-content analysis">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Clothing</h2>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Regional Cuisine">Saree</h3>
+								<hr>
+								<ul>
+									<li><h6>Origin and History</h6></li>
+									<p>The saree, with its roots deeply embedded in ancient Indian traditions, has been worn for millennia. Its name, derived from the Sanskrit word "sati," reflects its historical significance as a timeless garment.</p>
+									<li><h6>Design and Fabric</h6></li>
+									<p>Ranging from six to nine yards, the saree offers a canvas for various fabrics like silk, cotton, chiffon, and georgette. Its appeal is enhanced through intricate embroidery, embellishments, and diverse weaving techniques that showcase the skilled craftsmanship of Indian artisans.</p>
+									<li><h6>Regional Variations</h6></li>
+									<p>Different regions boast their own unique styles, such as the Banarasi saree from Varanasi, the Kanjeevaram silk saree from Tamil Nadu, and the Bandhani saree from Gujarat. Each variation reflects regional preferences and cultural diversity.</p>
+									<li><h6>Occasions and Significance</h6></li>
+									<p>Sarees are not merely garments but cultural symbols worn on diverse occasions, from everyday life to weddings and festivals. Bridal sarees, in particular, hold special importance, often featuring elaborate designs and embroidery.</p>
+									<li><h6>Cultural Symbolism</h6></li>
+									<p>Beyond its aesthetic appeal, the saree holds cultural significance, symbolizing grace, tradition, and identity. It is often associated with femininity and serves as a form of expressing cultural pride.</p>
+								</ul>
+								<p>The saree, a symbol of India's rich heritage, remains a timeless garment that continues to evolve while retaining its cultural roots. Embraced by women across the country and appreciated globally, it stands as a testament to craftsmanship, diversity, and cultural identity.
+
+
+
+
+
+								</p>
+							</div>
+							<a href="">Know More</a>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702715684/sareee_bqubec.jpg"
+								alt="" class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702715693/salwarkameez_zytd74.jpg"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Spices and Flavors">Salwar Kameez</h3>
+								<hr>
+								<ul>
+									<li><h6>Origin and Evolution</h6></li>
+									<p>The Salwar Kameez, a traditional South Asian ensemble, traces its roots to the Mughal era. Evolving over centuries, it has become a staple in the wardrobes of women in India, Pakistan, and neighboring regions. The term "Salwar" refers to the loose-fitting trousers, while "Kameez" is the long tunic.</p>
+									<li><h6>Design and Fabric</h6></li>
+									<p>The Salwar Kameez comes in various designs and fabrics, offering versatility and comfort. It ranges from casual cotton suits for everyday wear to elaborate, embroidered outfits for special occasions. The ensemble is known for its adaptability, suitable for both formal events and relaxed settings.</p>
+									<li><h6>Regional Styles </h6></li>
+									<p>Different regions contribute their unique styles to the Salwar Kameez. For example, the Anarkali suit, characterized by a flowing frock-style top, has its roots in Mughal aesthetics. The Punjabi suit features a shorter kameez paired with a Patiala salwar, known for its pleats and vibrant colors.</p>
+									<li><h6>Occasions and Significance</h6></li>
+									<p>The Salwar Kameez is worn on diverse occasions, from daily wear to weddings and celebrations. It strikes a balance between tradition and modernity, making it a popular choice for women of all ages. Bridal Salwar Kameez sets, often heavily embellished, are favored for their comfort and elegance.</p>
+									<li><h6>Cultural Symbolism</h6></li>
+									<p>The Salwar Kameez is not just an outfit; it carries cultural symbolism, representing a blend of tradition and practicality. Its popularity lies in its ability to cater to diverse tastes while maintaining a connection to cultural heritage.</p>
+									
+								</ul>
+								<p>The Salwar Kameez stands as a testament to the enduring appeal of traditional attire. With its rich history, regional variations, and adaptability, it continues to be a beloved choice for women who appreciate the perfect fusion of tradition and comfort in their wardrobe.</p>
+							</div>
+							<a href="">Know More</a>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Vegetarian and Non-Vegetarian Cuisine">Lehenga Choli</h3>
+								<hr>
+								<ul>
+									<li><h6>Origin and Heritage</h6></li>
+									<p>
+										The Lehenga Choli, an iconic Indian ensemble, traces its roots back to ancient times, with a rich history steeped in royal traditions. Originally a royal attire, it has evolved into a symbol of grace and opulence, synonymous with celebrations and special occasions.</p>
+										<li><h6>Components</h6></li>
+										<ol>
+											<li>Lehenga</li>
+											<p>The flared, full-length skirt is the focal point of the outfit, often adorned with intricate embroidery, sequins, or traditional motifs.</p>
+											<li>Choli </li>
+											<p>The form-fitting blouse or bodice complements the lehenga. It can range from simple designs for a modest look to ornate styles with heavy embellishments for grand events.</p>
+											<li>Dupatta</li>
+											<p>The ensemble is completed with a flowing scarf or dupatta, draped elegantly over the shoulders or around the arms, adding a touch of grace and sophistication.</p>
+										</ol>
+										<li><h6>Design and Embellishments</h6></li>
+										<p>Lehenga Cholis are known for their exquisite craftsmanship. Intricate embroidery, zari work, mirror work, and embellishments like beads and stones are commonly used to enhance the beauty of the ensemble. The designs often vary based on regional influences and personal preferences.</p>
+										<li><h6>Cultural Symbolism</h6></li>
+										<p>Beyond its aesthetic appeal, the Lehenga Choli represents cultural heritage and embodies the grandeur associated with Indian celebrations. The craftsmanship and symbolism behind each element contribute to its significance in cultural festivities.
+											
+											</p>
+									
+								</ul>
+								<p>The Lehenga Choli, with its regal allure and timeless charm, stands as a cultural masterpiece. From royal courts to contemporary runways, it continues to be a symbol of grace, elegance, and the rich tapestry of Indian traditions.</p>
+							</div>
+							<a href="">Know More</a>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702716638/lehenga_jcqgur.jpg"
+								alt="" class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702715682/sherwani_kuoxmc.jpg"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Sweets and Desserts">Sherwani</h3>
+								<hr>
+								<ul>
+									<li><h6>Historical Roots</h6></li>
+									<p>The Sherwani, a distinguished traditional Indian garment, boasts a history rooted in the royal courts of the Indian subcontinent. Originating during the Mughal era, it has evolved into a symbol of regality and is widely worn during formal and celebratory occasions.</p>
+									<li><h6>Occasions and Significance</h6></li>
+									<p>Sherwanis are reserved for special occasions, especially weddings, where grooms often choose this attire for its royal charm. The groom's Sherwani is often coordinated with the bridal attire, creating a harmonious and visually striking ensemble.
+
+									</p>
+									<li><h6>Embroidery and Embellishments:</h6></li>
+									<p>Elaborate embroidery, intricate patterns, and embellishments like zari work, sequins, and stones are common features, especially in wedding sherwanis. These elements showcase skilled craftsmanship and attention to detail.</p>
+									<li><h6>Regional Variations</h6></li>
+									<p>Different regions in India contribute to unique styles of Sherwanis. For instance, the Achkan-style Sherwani, popular in North India, is characterized by a shorter length and straight-cut design. Meanwhile, the Angrakha-style Sherwani, with an overlapping front, is prominent in Rajasthan and Gujarat.</p>
+									<li><h6>Cultural Symbolism</h6></li>
+									<p>The Sherwani symbolizes cultural heritage, reflecting the grandeur and elegance associated with formal occasions. It holds a special place in celebrations, serving as a cultural emblem of prestige and tradition.</p>
+
+								</ul>
+								<p>The Sherwani, with its majestic appearance and cultural significance, continues to be a timeless choice for men during significant life events. Its rich history, intricate craftsmanship, and versatility make it a revered garment that transcends generations.</p>
+							</div>
+							<a href="">Know More</a>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Traditional Cooking Methods">Dhoti</h3>
+								<hr>
+								<ul>
+									<li><h6>Historical Heritage</h6></li>
+									<p>The Dhoti, a traditional garment worn by men in India, has an ancient history deeply rooted in cultural and religious practices. Its origins can be traced back to ancient Vedic times, making it one of the oldest traditional attires still in use.</p>
+									<li><h6>Characteristics and Draping Style</h6></li>
+									<ol>
+										<li>Unstitched Cloth:</li>
+										<p>
+											The Dhoti is essentially an unstitched rectangular piece of cloth, usually white or off-white, ranging in length. It is worn around the waist and legs.</p>
+										<li>Tying Technique:</li>
+										<p>
+											The draping technique involves wrapping the cloth around the waist and then between the legs, forming a simple yet effective garment. The intricacies of tying the dhoti vary across regions.</p>
+										<li>Variations:</li>
+										<p>
+											There are different variations of the dhoti, such as the Panche in South India, the Mundu in Kerala, and the Veshti in Tamil Nadu, each with its unique draping style.</p>
+									</ol>
+									
+									<li><h6>Occasions and Cultural Significance</h6></li>
+									<p>
+
+										
+										The dhoti is commonly worn during religious ceremonies and rituals. It holds significance in Hindu traditions, where it is considered a symbol of purity and simplicity. In some regions, especially during formal or festive occasions, men may opt for the dhoti paired with a Kurta (long tunic) or a shirt for a more contemporary look.</p>
+									<li><h6>Regional Variations:</h6></li>
+									<p>
+										Different regions in India have their own variations of the dhoti, both in terms of the garment's design and the method of draping. The Bengali style, Marathi dhotar, and the South Indian veshti are examples of regional variations.
+										
+										</p>
+									<li><h6>Cultural Symbolism</h6></li>
+									<p>
+										The dhoti symbolizes simplicity, humility, and adherence to tradition. It is not merely a piece of clothing but a representation of cultural values deeply ingrained in the fabric of Indian society.
+										
+										</p>
+
+								</ul>
+								<p>The dhoti, with its timeless elegance and cultural significance, continues to be a revered garment in India. Whether worn for religious rituals, formal occasions, or festivals, the dhoti stands as a symbol of tradition and cultural heritage that has withstood the test of time.
+
+
+
+
+
+								</p>
+							</div>
+							<a href="">Know More</a>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702716018/panchaa_kc8end.jpg"
+								alt="" class="img">
+						</div>
+					</div>
+					<div>
+						<h1>Regional Variations</h1>
+						<hr>
+						<p>India, a land of diverse cultures and religious traditions, is a tapestry of sartorial
+							richness reflecting the multitude of faiths practiced across the subcontinent. The country's
+							religious diversity is mirrored in the distinctive clothing worn by its people, each garment
+							bearing the imprints of centuries-old customs, rituals, and beliefs. From the vibrant
+							turbans of Sikhism to the modest yet elegant attire of Islam, and the ornate silk saris of
+							Hinduism, religious variations in clothing serve as visual expressions of devotion, cultural
+							identity, and adherence to religious principles.</p>
+						<br>
+						<p>In India, clothing is more than a mere covering; it is a profound cultural language that
+							communicates one's religious affiliation, social standing, and sometimes even geographical
+							origin. The kaleidoscope of religious attire unveils a fascinating journey through time,
+							where each fold, stitch, and embellishment tells a story of religious heritage and
+							tradition.</p>
+						<br>
+						<p>Some of them are listed below:</p>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Sweets and Desserts">Mekhela Chador in Assam:</h3>
+								<hr>
+								<ul>
+									<li>The Mekhela Chador is a traditional attire worn by women in Assam, a state in
+										northeastern India. It is a two-piece ensemble that includes the Mekhela (a
+										draped lower garment) and the Chador (an unstitched piece of cloth worn as an
+										upper garment).</li>
+									<li>Mekhela Styles: The Mekhela is draped around the lower half of the body and is
+										pleated at the waist. It is worn with a fitted blouse. The Chador is usually
+										draped over the shoulder, covering the upper body.</li>
+									<li>Fabric and Weaving: Mekhela Chadors are often made of silk, and the designs are
+										characterized by intricate weaving and traditional Assamese motifs. Assam is
+										renowned for its Muga silk, Eri silk, and Pat silk, which are commonly used for
+										these garments.</li>
+									<li>Occasions: Mekhela Chadors are worn on various occasions, including festivals,
+										weddings, and cultural events. The choice of Mekhela Chador can vary based on
+										the formality of the event.</li>
+									<li>Symbolism: The Mekhela Chador is not just a piece of clothing; it is deeply
+										connected to Assamese culture and identity. The motifs often depict elements
+										from nature, wildlife, and Assamese traditions, reflecting the region's rich
+										heritage.</li>
+									<li>Variations Across Assam: Different communities and tribes in Assam may have
+										their variations of the Mekhela Chador, incorporating unique weaving patterns,
+										colors, and motifs specific to their cultural identity.</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702569710/muga-silk2_cnpujl.webp"
+								alt="" class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702570105/37aa255b0420a7542febf76eaa245c7c_pgtqtm.webp"
+								alt="" class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Sweets and Desserts">Mundu in Kerala</h3>
+								<hr>
+								<ul>
+									<li>The Mundu is a traditional garment worn by both men and women in Kerala, a state
+										in South India. It is a simple piece of cloth, typically white or off-white in
+										color, and is wrapped around the lower half of the body.</li>
+									<li>Mundu Styles: For men, the Mundu is usually worn with a traditional shirt (Mundu
+										Veshti), while women pair it with a blouse or a traditional Kerala-style top
+										called the Chatta. The Mundu is draped in a way that the pleats are at the back
+										for men and at the front for women.</li>
+									<li>Fabric: Mundus are often made of cotton or handwoven fabrics. The Kasavu Mundu,
+										with a golden border, is particularly popular and is often worn on special
+										occasions and festivals.</li>
+									<li>Occasions: Mundu is worn for both daily activities and special occasions. It is
+										a versatile garment suitable for the tropical climate of Kerala.</li>
+									<li>Cultural Symbolism: The Mundu is a symbol of simplicity and elegance. The Kasavu
+										Mundu, in particular, is associated with purity and is often worn during
+										religious ceremonies and festivals.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Sweets and Desserts">Phulkari in Punjab</h3>
+								<hr>
+								<ul>
+									<li>Phulkari is a traditional form of embroidery that originated in Punjab, a state
+										in northern India. It is known for its vibrant and intricate floral patterns.
+									</li>
+									<li>Usage: Phulkari embroidery is commonly done on dupattas (scarves), shawls, and
+										suits. The embroidery covers the entire fabric, creating a colorful and
+										eye-catching effect.</li>
+									<li>Color Palette: Phulkari is characterized by its bold and bright color palette.
+										The embroidery often uses vivid shades of red, orange, pink, and yellow,
+										creating a visually striking appearance.</li>
+									<li>Occasions: Phulkari-embellished garments are worn during special occasions,
+										including weddings and festivals. The embroidery adds a festive and celebratory
+										touch to the attire.</li>
+									<li>Cultural Heritage: Phulkari has a rich cultural significance in Punjab and is
+										often passed down through generations. The art of Phulkari embroidery is a
+										reflection of the region's vibrant and joyful spirit.</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702570514/817atOoIS-L_an50xa.webp"
+								alt="" class="img">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+
+		$(".step").click(function () {
+			$(this).addClass("active").prevAll().addClass("active");
+			$(this).nextAll().removeClass("active");
+		});
+
+		$(".step01").click(function () {
+			$("#line-progress").css("width", "3%");
+			$(".discovery").addClass("active").siblings().removeClass("active");
+		});
+
+		$(".step02").click(function () {
+			$("#line-progress").css("width", "25%");
+			$(".strategy").addClass("active").siblings().removeClass("active");
+		});
+
+		$(".step03").click(function () {
+			$("#line-progress").css("width", "50%");
+			$(".creative").addClass("active").siblings().removeClass("active");
+		});
+
+		$(".step04").click(function () {
+			$("#line-progress").css("width", "75%");
+			$(".production").addClass("active").siblings().removeClass("active");
+		});
+
+		$(".step05").click(function () {
+			$("#line-progress").css("width", "100%");
+			$(".analysis").addClass("active").siblings().removeClass("active");
+		});
+
+
+	</script>
+</body>
+
+</html>

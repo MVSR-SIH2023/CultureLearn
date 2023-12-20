@@ -1,0 +1,244 @@
+{% extends 'head-foot/header.html'%}
+{% block content %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+    .navColor {
+        color: #dc3545;
+    }
+    .heading {
+        font-family: "Bree-Serif";
+        font-size: 40px;
+        color: #dc3545;
+        font-weight: bold;
+    }
+    .head {
+        font-size: 30px;
+    }
+    .card1 {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .card1:hover {
+            transform: scale(1.02);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            overflow: hidden;
+            transition: height 0.3s;
+            padding-left: 5px;
+        }
+
+        .card1:hover .overlay {
+            height: 90px; /* Adjust the height as needed */
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%!important;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .scroll-height {
+            height: 20vh;
+            overflow-y: auto;
+        }
+        .messages-section::-webkit-scrollbar {
+            width: 4px;
+        }
+        .messages-section::-webkit-scrollbar-thumb {
+            background-color: #dc3545;
+            border-radius: 10px;
+        }
+        .messages-section::-webkit-scrollbar-track {
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+</style>
+    <div class="container mt-5 mb-5">
+        <div class="card card1 mt-3">
+            <img src="/media/{{ workshop.image }}" alt="Card Image" style="width: 100vw; height: 100%;">
+            <div class="overlay">
+                <h1 class="head bottom-left-text">{{ workshop.name }}<br><small style="font-size: 15px;">September 29, 2020   5 AM</small></h1>
+            </div>
+        </div>
+        <div class="card shadow-lg mt-5 p-5">
+          <div>
+            <h1 class="pb-3">Description:</h1>
+            <p>{{workshop.description}}</p>
+          </div>
+          <div>
+            <h1 class="pb-3">Workshop Highlights:</h1>
+            <div class="d-flex justify-content-center">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Organized By</th>
+                        <td>{% if workshop.organiser.profile.realname %}{{workshop.organiser.profile.realname}}{% else %}{{workshop.organiser}} {% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Mode</th>
+                        <td>{{workshop.mode}}</td>
+                    </tr>
+                    <tr>
+                        <th>Start_Date</th>
+                        <td>{{workshop.start_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>End_Date</th>
+                        <td>{{workshop.end_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Registration_Open</th>
+                        <td>{{workshop.r_opening_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Registration_Close</th>
+                        <td>{{workshop.r_closing_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Duration</th>
+                        <td>{{workshop.duration}}</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>{{workshop.Address}}</td>
+                    </tr>
+                    <tr>
+                        <th>Platform</th>
+                        <td>{{workshop.Platform}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+          <div>
+            <h1 class="pb-3">What You'll Learn:</h1>
+            <p>{{workshop.wyl}}</p>
+          </div>
+         
+          <div class="ms-auto">
+            {% if registration_status == "registered" or workshop.organiser == request.user %}
+            {% if status == "past" %}
+                <a type="button" href="/gallery/{{ workshop.id }}/"  class="btn btn-danger">Workshop Gallery</a>
+                {% endif %}
+            {% endif %}
+            {% if registration_status != "registered" and workshop.organiser != request.user %}
+            <a type="button" href="/workshop/register_workshop/{{ workshop.id }}/"  class="btn btn-danger register-button"  id ="registerbutton" data-workshop-id="{{ workshop.id }}">Register Now</a>
+            <button id="rzp-button">Pay with Razorpay</button>
+            {% endif %}
+            {% if workshop.organiser == request.user %}
+                <a type="button" href="/organiser_view/{{ workshop.id }}/"  class="btn btn-danger">Organizer View</a>
+            {% endif %}
+          </div>
+          {% if request.user.is_authenticated and messages %}
+            <h2>Organizer Messages:</h2>
+                <div class="card messages-section p-3 scrollspy-example-2 scroll-height" id="messages-section">
+            {% endif %}
+        </div>
+        </div> 
+    </div>
+    <script>
+      var workshopId ;
+      $(document).ready(function () {
+         workshopId = $('#registerbutton').data('workshop-id')
+         console.log(workshopId)
+         get_messeges()  
+      });
+      var messege_list=[]
+      function get_messeges() {
+      $.ajax({
+          type: "GET",
+          url: "/organizer_view/workshop_messages/" + workshopId + "/",
+          success: function (data) {
+              console.log(data)
+              const object = JSON.parse(data)
+              messege_list = object 
+              console.log(messege_list)
+              render_messeges()
+          },
+          error: function (error) {
+              console.log("Failed");
+              console.log("Error:", error);
+          },
+      })
+  };
+  function render_messeges(){
+          console.log("inrendertable")
+          console.log(messege_list)
+          messege_list.forEach(
+              function(messege){
+                  console.log(messege.fields)
+                  const messege_section = document.getElementById('messages-section')
+                  var content = messege.fields.content;
+                  var messageDiv = document.createElement('div');
+                  messageDiv.classList.add('alert', 'alert-danger');
+                  messageDiv.setAttribute('role', 'alert');
+                  messageDiv.classList.add('message-item');
+  
+                  var pTag = document.createElement('p');
+                  pTag.textContent = content;
+  
+                  messageDiv.appendChild(pTag);
+                  messege_section.appendChild(messageDiv);
+              }
+          )
+      }
+      $('a#registerbutton').on('click', function (e) {
+              e.preventDefault();
+              var workshopId = $(this).data('workshop-id');
+              $.ajax({
+                  type: 'POST',
+                  url: '/workshop/register_workshop/' + workshopId +"/",
+                  data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                  success: function (data) {
+                      alert(data.status);
+                  },
+                  error: function (error) {
+                      alert("Try again registration failed")
+                      console.log(error);
+                  }
+              });
+          });
+          
+          
+  </script>
+  <script>
+    var options = {
+      key: 'rzp_test_lfClRr9bCja92x',
+      amount: 50000, 
+      currency: 'INR',
+      name: 'CultureLearn',
+      description: 'Payment for your product/service',
+      //image: 'path/to/your/logo.png',
+      handler: function(response) {
+        alert('Payment successful: ' + response.razorpay_payment_id);
+      }
+    };
+  
+    var rzp = new Razorpay(options);
+  
+    document.getElementById('rzp-button').onclick = function(e){
+      rzp.open();
+      e.preventDefault();
+    }
+  </script>
+  {% endblock%}

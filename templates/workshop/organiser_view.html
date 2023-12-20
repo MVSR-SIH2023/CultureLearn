@@ -1,0 +1,173 @@
+{% extends "head-foot/header.html"%}
+{% block content %}
+<style>
+    .navColor {
+        color: #dc3545;
+    }
+    h3,label {
+        color: #dc3545;
+        font-weight: bold;
+    }
+    textarea {
+        border: 2px solid #dc3545;
+        border-radius: 10px;
+    }
+    .scroll-height1 {
+        height: 80vh; /* Set a maximum height for the comment section */
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+    .scroll-height2 {
+        height: 40vh; /* Set a maximum height for the comment section */
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+    .comment-section::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .comment-section::-webkit-scrollbar-thumb {
+            background-color: #dc3545;
+            border-radius: 10px;
+        }
+
+        .comment-section::-webkit-scrollbar-track {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        .content-container {
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+</style>
+
+    <div class="container mt-4 pt-5">
+        <div class="row">
+            <div class="col-md-6 ">
+               
+                <h3>Registers</h3>
+                <div class="card mb-3 p-3 scrollspy-example-2 scroll-height1 comment-section">
+                {% for user in users %}
+                    
+                    <div class="alert alert-danger" role="alert">
+                        <p>{{ user.username }} -> {{  user.email }}</p>
+                    </div>
+                {% endfor %}
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Organizer</h3>
+                <div class="card mb-3 p-3 scrollspy-example-2 scroll-height2 comment-section" id="messages-section">
+                    <!-- <div class="alert alert-danger" role="alert">
+                        A simple danger alert—check it out!
+                    </div>
+                    <div class="alert alert-danger" role="alert">
+                        A simple danger alert—check it out!
+                    </div> -->
+                </div>
+                <form id="messageform" >
+                    {% csrf_token %}
+                <label class="mb-2">Type a msg:</label>
+                <textarea name="content" style="width: 100%;" id="messege_content"></textarea><br>
+                <button type ="submit" class="btn btn-danger mt-2" id="messegebutton" data-workshop-id="{{ workshopid }}">Send</button><br>
+                </form>
+                <form>
+                    {% csrf_token %}
+                <label class="mb-2">Mail content:</label><br>
+                <textarea id ="mail_content" style="width: 100%;"></textarea><br>
+                <button type="submit" class="btn btn-danger mt-2" id ="send_mail" >Send Mails</button>
+                </form>
+                {% if workshop_status == "past"%}
+                <a href="/upload_gallery/{{ workshopid }}/"><button type="submit" class="btn btn-danger mt-2" id ="send_mail" >Update Gallery</button></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+<script>
+    var messege_list=[]
+    var workshopId ;
+    $(document).ready(function () {
+        workshopId = $('#messegebutton').data('workshop-id')
+        get_messeges()
+    });
+    function add_messege(e) {
+        e.preventDefault();
+        var formData = $("#messageform").serialize();
+        $.ajax({
+            type: "POST",
+            url: "/organizer_view/workshop_messages/" + $(this).data("workshop-id") +"/",
+            data: formData,
+            success: function (data) {
+                alert(data.status);
+                if(data.status != "The workshop has been completed."){
+                if (Object.keys(data).length === 1 && data.hasOwnProperty("empty string") && data["empty string"] === true) {
+                    return;
+                } 
+                var dangerAlert = document.createElement('div');
+                var content = document.getElementById('messege_content').value;
+                var container = document.getElementById('messages-section')
+                dangerAlert.className = 'alert alert-danger';
+                dangerAlert.setAttribute('role', 'alert');
+                dangerAlert.textContent = content;
+                container.appendChild(dangerAlert);
+            }
+            },
+            error: function (error) {
+                alert("Try again. Registration failed");
+                console.log(error);
+            },
+        });
+    }
+    function get_messeges() {
+    $.ajax({
+        type: "GET",
+        url: "/organizer_view/workshop_messages/" + workshopId + "/",
+        success: function (data) {
+            const object = JSON.parse(data)
+            messege_list = object 
+            render_messeges();
+
+        },
+        error: function (error) {
+            console.log("Failed");
+            console.log("Error:", error);
+        },
+    });
+    render_messeges()
+}
+function render_messeges(){
+        messege_list.forEach(
+            function(messege){
+                var content = messege.fields.content;
+                var container = document.getElementById('messages-section');
+
+                var dangerAlert = document.createElement('div');
+                dangerAlert.className = 'alert alert-danger';
+                dangerAlert.setAttribute('role', 'alert');
+                dangerAlert.textContent = content;
+                container.appendChild(dangerAlert);
+            }
+        )
+    }
+    function send_mails(e){
+        e.preventDefault();
+        var content = document.getElementById('mail_content').value;
+        $.ajax({
+            type: "POST",
+            url: "/send_mails/" + $("#messegebutton").data("workshop-id") +"/",
+            data: {'content': content,
+            'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function (data) {
+                alert("emails are being sent")
+            },
+            error: function (error) {
+                alert("Try again.");
+                console.log(error);
+            },
+        });
+    }
+    $('#messegebutton').on('click', add_messege);
+    $('#send_mail').on('click',send_mails);
+</script>
+{% endblock %}

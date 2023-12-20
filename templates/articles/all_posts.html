@@ -1,0 +1,435 @@
+{% extends 'head-foot/header.html'%}
+
+{% load static %}
+{% load google_translate %}
+{% load filter %}
+{% block content %}
+<style>
+  
+    .content-container {
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+    
+
+    .card {
+        background-color: #fff;
+        cursor: pointer;
+        opacity: 1;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .card-img-top {
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+    .custom-popover {
+        position: relative;
+    }
+
+    .custom-popover::before {
+        content: attr(p);
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        visibility: hidden;
+        opacity: 0;
+        width: 100%;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 1;
+        top: calc(100% + 10px); /* Adjust the distance between card and popover */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .custom-popover:hover::before {
+        visibility: visible;
+        opacity: 1;
+    } 
+    .card-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-control {
+          border-radius: 40px;
+          height: 35px;
+          width: 250px;
+        }
+        .align {
+          display: flex;
+          justify-content: space-between;
+        }
+        i {
+          cursor: pointer;
+        }
+        .btn_rad {
+          border-radius: 80%;
+          height: 35px;
+        }
+        .align1 {
+          display: flex;
+        }
+        .font {
+          font-size: 50px;
+        }
+        a {
+          text-decoration: none;
+          color:black;
+      }
+      .VIpgJd-ZVi9od-ORHb-OEVmcd {
+        display: none !important;
+    }
+    .goog-te-combo {
+      height:20px !important; 
+
+    }
+    .btn1 {
+      border-radius: 50px;
+      height: 30px;
+      padding-bottom: 30px;
+    }
+        
+</style>
+
+
+    <div class="bg ">
+      <div class="container pt-3">
+          <div class="mt-5">
+            <div class="align">
+              <div>
+                <h1 class="font" style="color: #dc3545">Articles</h1>
+              </div>
+              <div class="align1">
+                
+                  <input class="form-control me-2 all-post-search" type="search" name="search" placeholder="Search" aria-label="Search">
+                  <button id="searchBtn"class="btn btn-danger btn1 me-2"><i class="bi bi-search"></i></button>             
+              <div id="searchResults"></div>
+                <div class="dropdown me-2">
+                  <button class="btn btn_rad btn-danger" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-funnel"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                    <li><a type="button" class="dropdown-item latest" data-filter="latest">Latest</a></li>
+                    <li><a type="button" class="dropdown-item liked" data-filter="liked">Top Liked</a></li>
+                    <li><a type="button" class="dropdown-item az" data-filter="az">A-Z</a></li>
+                </ul>
+                </div>
+                {% if request.user.is_authenticated %}
+                <a type="button" href="{% url 'articles:post-create' %}" class="btn btn-secondary btn_rad" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Create Article">
+                  <i class="bi bi-plus-circle"></i>
+                </a>
+                {% endif %}
+              </div>
+            </div>
+              <p style="font-weight: bold;font-size: 18px">🌟 Explore, Share, Enlighten! 📝✨<br>
+                Unleash your passion for Indian culture! Contribute your unique voice to our community and educate, inspire, and connect. Dive into the rich tapestry of traditions and languages. Your words can illuminate the beauty of India's heritage. Join us in celebrating and sharing the magic! </p>
+          </div>
+          <div class="row row-cols-1 row-cols-md-3 g-4 mt-4 post-cards">
+            {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}">
+              <div class="col">
+                <div class="custom-popover" p="{{ post.content| truncate_words | safe }}...">
+                  <div class="card h-100 shadow-lg fade-in" >
+                      <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+                      <div class="card-body">
+                      <h5 class="card-title">{{ post.title }}</h5>
+                      </div>
+                      <div class="card-footer">
+                          <small class="text-body-secondary">{{ post.date }}</small>
+                          <small style="font-weight: bold;">@{{ post.author.username }}</small>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            {% empty %}
+            <p>No posts found.</p>
+
+            {% endfor %}
+             
+          </div>
+          {% if num_posts > 3%}
+          <div class="text-center mt-5 mb-5">
+              <button class="btn btn-danger" id="load-more-button">Read More Articles</button>
+          </div>
+          {% endif %}
+      </div>
+    </div>
+
+
+    <script>
+     
+      function truncateText(text, wordCount = 30) {
+        const words = text.split(' ');
+        const count = Math.min(wordCount, words.length);
+        return words.slice(0, count).join(' ') + '...';
+      }
+      
+      function extractTextFromHTML(html) {
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        return div.textContent || div.innerText || '';
+      }
+      
+      $(document).ready(function () {
+        var offset = 3;
+        var postContainer = $('.row-cols-1');
+        var loadMoreButton = $('#load-more-button');
+      
+        loadMoreButton.on('click', function () {
+          $.ajax({
+            type: 'GET',
+            url: '/load-more-articles/',
+            dataType: 'json',
+            data: {
+              offset: offset,
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (response) {
+              const posts = response.posts;
+              
+      
+              posts.forEach(post => {
+                const dateStr = post.date;
+
+                // Create a JavaScript Date object from the string
+                const postDate = new Date(dateStr);
+
+                // Format the date
+                const formattedDate = postDate.toLocaleString('en-US', {
+                  month: 'short',
+                  day: '2-digit',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true,
+                });
+                console.log(post.author)
+                const postContent = post.content;
+                const textContent = extractTextFromHTML(postContent);
+                const truncatedText = truncateText(textContent);
+      
+                var postHtml = '<a href="' + post.url +'" >' +
+                  '<div class="col">' +
+                  '<div class="custom-popover" p="' + truncatedText + '">' +
+                  '<div class="card h-100 shadow-lg fade-in">' +
+                  '<img src="' + post.image + '" class="card-img-top" alt="' + post.title + '">' +
+                  '<div class="card-body">' +
+                  '<h5 class="card-title">' + post.title + '</h5>' +
+                  '</div>' +
+                  '<div class="card-footer">' +
+                  '<small class="text-body-secondary">' + formattedDate + '</small>' +
+                  '<small style="font-weight: bold;">@' + post.author + '</small>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</a>';
+                  
+                  if (post.last_limit = post.num_posts) {
+                    // Hide the button if all posts have been loaded
+                    document.getElementById('load-more-button').style.display = 'none';
+                } else {
+                    // Show the button if there are more posts to load
+                    document.getElementById('load-more-button').style.display = 'block';
+                }
+                postContainer.append(postHtml);
+              });
+
+              
+              
+      
+              offset += 3;
+            },
+            error: function (xhr, errmsg, err) {
+              console.log(errmsg);
+            },
+          });
+        });
+      });
+      
+      
+ 
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    });
+
+ 
+  $(document).ready(function() {
+    var searchButton = $('#searchBtn');
+    searchButton.on('click', function () {
+       
+        var searchTerm = $('.all-post-search').val();
+        console.log(searchTerm);
+        if (searchTerm.trim() === '') {
+          // If the search term is empty, prevent further action (e.g., prevent search)
+          return false;
+      }
+        var postContainer = $('.post-cards');
+        $.ajax({
+            type: 'POST',
+            url: '/search-posts/',
+            dataType: 'json',
+            data: {
+                search: searchTerm,
+                csrfmiddlewaretoken: '{{ csrf_token }}' // Replace with your CSRF token
+            },
+            success: function(response) {
+
+               $('.post-cards').empty();
+               var loadMoreButton = document.getElementById('load-more-button');
+
+                // Hide the button
+                loadMoreButton.style.display = 'none';
+              const posts = response.posts;
+              
+
+              posts.forEach(post => {
+                const dateStr = post.date;
+
+                // Create a JavaScript Date object from the string
+                const postDate = new Date(dateStr);
+
+                // Format the date
+                const formattedDate = postDate.toLocaleString('en-US', {
+                  month: 'short',
+                  day: '2-digit',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true,
+                });
+                console.log(post.id)
+                const postContent = post.content;
+                const textContent = extractTextFromHTML(postContent);
+                const truncatedText = truncateText(textContent);
+
+                var postHtml = '<a href="' + post.url +'" >' +
+                  '<div class="col">' +
+                  '<div class="custom-popover" p="' + truncatedText + '">' +
+                  '<div class="card h-100 shadow-lg fade-in">' +
+                  '<img src="' + post.image + '" class="card-img-top" alt="' + post.title + '">' +
+                  '<div class="card-body">' +
+                  '<h5 class="card-title">' + post.title + '</h5>' +
+                  '</div>' +
+                  '<div class="card-footer">' +
+                  '<small class="text-body-secondary">' + formattedDate + '</small>' +
+                  '<small style="font-weight: bold;">@' + post.author  + '</small>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</a>';
+                postContainer.append(postHtml);
+              });
+      
+            },
+            error: function (xhr, errmsg, err) {
+              console.log(errmsg);
+            },
+          });
+        });
+      });
+      
+      // FILTER POSTS
+      
+      $(document).ready(function () {
+        
+        var postContainer = $('.row-cols-1');
+        
+      
+        $('.dropdown-item').on('click', function () {
+          var filterValue = $(this).data('filter');
+          $.ajax({
+            type: 'POST',
+            url: '/post-filter/',
+            data: {
+                'filter_value': filterValue,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            dataType: 'json',
+         
+            success: function (response) {
+              const posts = response.posts;
+              $('.post-cards').empty();
+              var loadMoreButton = document.getElementById('load-more-button');
+
+                // Hide the button
+              loadMoreButton.style.display = 'none';
+              posts.forEach(post => {
+                const dateStr = post.date;
+
+                // Create a JavaScript Date object from the string
+                const postDate = new Date(dateStr);
+
+                // Format the date
+                const formattedDate = postDate.toLocaleString('en-US', {
+                  month: 'short',
+                  day: '2-digit',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true,
+                });
+                console.log(post.author)
+                const postContent = post.content;
+                const textContent = extractTextFromHTML(postContent);
+                const truncatedText = truncateText(textContent);
+      
+                var postHtml = '<a href="' + post.url +'" >' +
+                  '<div class="col">' +
+                  '<div class="custom-popover" p="' + truncatedText + '">' +
+                  '<div class="card h-100 shadow-lg fade-in">' +
+                  '<img src="' + post.image + '" class="card-img-top" alt="' + post.title + '">' +
+                  '<div class="card-body">' +
+                  '<h5 class="card-title">' + post.title + '</h5>' +
+                  '</div>' +
+                  '<div class="card-footer">' +
+                  '<small class="text-body-secondary">' + formattedDate + '</small>' +
+                  '<small style="font-weight: bold;">@' + post.author + '</small>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</a>';
+                postContainer.append(postHtml);
+              });
+      
+            },
+            error: function (xhr, errmsg, err) {
+              console.log(errmsg);
+            },
+          });
+        });
+      });
+      
+</script>
+  {% endblock %}
+

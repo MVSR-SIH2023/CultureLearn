@@ -1,0 +1,81 @@
+{% extends 'head-foot/header.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<style>
+  label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input{
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.django-ckeditor-widget{
+    width:100% !important;
+    display: inline-block !important;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+.navColor {
+    color: #dc3545;
+}
+.select2-container {
+    z-index: 10000; /* Adjust the z-index to a value that works for your layout */
+  }
+  
+  /* Override the width to 100% for select2 spans */
+  span.select2.select2-container.select2-container--default {
+    width: 50% !important;
+}
+body{
+    height:100%;
+
+}
+.align {
+    display: flex;
+    justify-content: space-between;
+}
+</style>
+    <h2 class="text-center mt-5" style="color: #dc3545;">Edit Article</h2>
+    <div class="container mt-5 p-5 shadow-lg" style="border-radius: 10px;background-color:#fff;">
+        <form id="blogForm card" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+
+            
+            {{form.media}}
+            {{form.as_p}}
+
+            
+            
+            
+            
+            <div class="pt-4 align">
+                <a type="button" class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+                <button type="submit" class="btn btn-danger">Save Article</button>
+            </div>
+        </form>
+    </div>
+    <!-- Add Select2 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    {% comment %} <script>
+        $(document).ready(function () {
+            $("#tags").select2({
+                tags: true,
+                tokenSeparators: [',', ' '],
+            });
+        });
+    </script> {% endcomment %}
+
+    {% endblock %}
+
+

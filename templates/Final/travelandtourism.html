@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>travelandtourism</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<style>
+    body {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+    }
+
+    .navColor {
+        color: #dc3545;
+    }
+
+    .align {
+        display: flex;
+        justify-content: space-between;
+        /* padding: bottom 4px;; */
+    }
+
+    .bt {
+        height: 40px;
+
+    }
+
+    .content {
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+
+    }
+
+    .card {
+        /* background-color:rgba(255, 185, 185, 0.203); */
+        cursor: pointer;
+    }
+
+    .card-img-top {
+        height: 65%;
+    }
+
+    .card-body {
+        height: 35%;
+
+    }
+    .btn_rad {
+        border-radius: 50%;
+    }
+
+    .box-shadow {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .box-shadow:hover {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.8)
+    }
+
+    .hover-effect {
+        transition: transform 0.3s;
+        /* Add a smooth transition effect 0.3 */
+    }
+
+    .hover-effect:hover {
+        transform: scale(1.05);
+        /* Increase the size on hover, you can adjust as needed 1.1 */
+        /* Add any other hover-specific styles here */
+    }
+
+    .swiper {
+        height: 50%;
+        padding: 40px;
+    }
+
+    .swiper-slide {
+        color: #000;
+        display: flex;
+        height: 50vh;
+        border-radius: 10px;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .swiper-button-prev .swiper-button-next {
+        color: #dc3545;
+    }
+</style>
+
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+    <div class="content">
+        {% include 'head-foot/navbar.html' %}
+        <div class="container mt-5 pt-4">
+            <h1 style="color: #dc3545; text-align: center; font-weight: bold;">Travel and Tourism</h1>
+            <div>
+                <div>
+                    <h1>Piligrimages</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='Kedarnath.html'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702191557/kedarnath_fzgyqt.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Kedarnath</h4>
+                                    <p class="card-text">Kedarnath Temple: Sacred Hindu shrine dedicated to Lord Shiva in
+                                        the Himalayas.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='Somnath.html'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702191952/somnath_apleso.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Somnath</h4>
+                                    <p class="card-text">Somnath: Ancient Hindu temple dedicated to Lord Shiva along the
+                                        Arabian Sea coas</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='Gurudwara.html'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702192191/Sikh-Gurudwara_1_cr7e0a.png"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body ">
+                                    <h4 class="card-title">Gurudwara</h4>
+                                    <p class="card-text">Gurudwara: Sikh place of worship with a focus on community and
+                                        equality</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='Gurudwara.html'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702192191/Sikh-Gurudwara_1_cr7e0a.png"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body ">
+                                    <h4 class="card-title">Gurudwara</h4>
+                                    <p class="card-text">Gurudwara: Sikh place of worship with a focus on community and
+                                        equality</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-4">
+            <div>
+                <div>
+                    <h1>Heritage Sites</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:agra_fort'%}'">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702192806/cover-3_rbrsfc.png"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Agra Fort</h4>
+                                    <p class="card-text">Agra Fort: Historic Mughal fortress celebrated for its grand
+                                        architecture.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:AjantaCaves'%}'">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702193094/Ajanta-Caves78970_ftdorg.png"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Ajanta Caves</h4>
+                                    <p class="card-text">Ajanta Caves: Ancient Buddhist caves renowned for exquisite
+                                        rock-cut sculptures and paintings.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:sanchi_stupa'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702193309/sanchi-stupa-madhya-pradesh-india-ancient-buddhist-building-religion-mystery-carved-stone-sunrise-sky_107467-698_izziu6.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Sanchi Stupa</h4>
+                                    <p class="card-text">Sanchi Stupa: Buddhist monument celebrated for its iconic dome and
+                                        ancient significance.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:sanchi_stupa'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702193309/sanchi-stupa-madhya-pradesh-india-ancient-buddhist-building-religion-mystery-carved-stone-sunrise-sky_107467-698_izziu6.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Sanchi Stupa</h4>
+                                    <p class="card-text">Sanchi Stupa: Buddhist monument celebrated for its iconic dome and
+                                        ancient significance.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-4">
+            <div>
+                <div>
+                    <h1>Wildlife Sancturies</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{%url 'main:Kaziranga-National-Park'%}'">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702193719/kaziranga_y2lqvi.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Kaziranga National Park</h4>
+                                    <p class="card-text">Kaziranga National Park: Iconic wildlife sanctuary known for its
+                                        conservation of the Indian one-horned rhinoceros and diverse biodiversity.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:Bandhavgarh_National_Park'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702193914/Tiger-With-Cubs_aasheo.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Bandhavgarh National Park</h4>
+                                    <p class="card-text">Bandhavgarh National Park: Renowned wildlife reserve in Madhya
+                                        Pradesh,celebrated for its thriving population of Bengal tigers and rich
+                                        biodiversity</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{%url 'main:Sundarbans-National-Park'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702194219/Sunderban_National_Park_deer_x3akzz.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Sundarbans National Park</h4>
+                                    <p class="card-text">Sundarbans National Park: Mangrove forest reserve in West Bengal,
+                                        known for its unique ecosystem, Bengal tigers, and diverse wildlife.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{%url 'main:Sundarbans-National-Park'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702194219/Sunderban_National_Park_deer_x3akzz.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Sundarbans National Park</h4>
+                                    <p class="card-text">Sundarbans National Park: Mangrove forest reserve in West Bengal,
+                                        known for its unique ecosystem, Bengal tigers, and diverse wildlife.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-4 pb-4">
+            <div>
+                <div>
+                    <h1>Hill Stations and Scenic Landscapes</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:Kanyakumari'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702195659/istockphoto-1185863094-612x612_ihom1j.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Kanyakumari</h4>
+                                    <p class="card-text">Kanyakumari: Southernmost tip of India, famous for stunning
+                                        sunrises, Vivekananda Rock Memorial, and tranquil coastal charm.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:Dharmshala'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702195213/dharamshala_fby5fy.png"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Dharamshala</h4>
+                                    <p class="card-text">Dharamshala: Scenic Himalayan town, spiritual hub with Dalai Lama's
+                                        residence, surrounded by pine forests and snowy peaks</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:jaisalmer'%}'">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702195468/jaisalmer-fort-Rajasthan-india-h1_f23sok.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Jaisalmer</h4>
+                                    <p class="card-text">Jaisalmer: "Golden City" in the Thar Desert, famous for yellow sandstone
+                                        architecture, Jaisalmer Fort, and desert charm</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:jaisalmer'%}'">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702195468/jaisalmer-fort-Rajasthan-india-h1_f23sok.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Jaisalmer</h4>
+                                    <p class="card-text">Jaisalmer: "Golden City" in the Thar Desert, famous for yellow sandstone
+                                        architecture, Jaisalmer Fort, and desert charm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <footer class="text-white bg-dark pt-4 pb-4">
+            <div class="container text-center text-md-left">
+                <div class="row text-center text-md-left">
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 text-left">
+                        <h5 class="text-uppercase text-danger font-weight-bold">CultureLearn</h5>
+                        <p>Recognizing the ongoing need to position itself for the digital future, Indian Culture is an
+                            initiative
+                            by the Ministry of Culture. A platform that hosts data of cultural relevance from various
+                            repositories and
+                            institutions all over India.</p>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h5 class="text-uppercase text-danger font-weight-bold">Links</h5>
+                        <p>
+                            <a href="http://127.0.0.1:5500/home.html" class="text-white"
+                                style="text-decoration: none;"><i class="bi bi-house-door-fill"></i> Home</a>
+                        </p>
+                        <p>
+                            <a href="#" class="text-white" style="text-decoration: none;"><i
+                                    class="bi bi-file-person"></i>
+                                AboutUs</a>
+                        </p>
+                        <p>
+                            <a href="#" class="text-white" style="text-decoration: none;"><i
+                                    class="bi bi-telephone"></i> Contact
+                                Us</a>
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h5 class="text-uppercase text-danger font-weight-bold">Created By</h5>
+                        <p>Students of Maturi Venkat Subba Rao Engineering College</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <div class="d-flex flex-row text-center">
+                <div class="d-flex flex-row col-md-7 col-lg-8">
+                    <p class="ms-5">Copyright @2023 all rights reserved by:</p>
+                    <a href="#" class="text-danger" style="text-decoration: none;">MVSR</a>
+                </div>
+                <div class="col-mg-5 col-lg-4">
+                    <div class="text-md-right">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="bi bi-android2"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="bi bi-bootstrap"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="bi bi-google"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="bi bi-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            // loop: true,
+            centerSlides: true,
+            fade: true,
+            grabCursor: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                520: {
+                    slidesPerView: 2,
+                },
+                950: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

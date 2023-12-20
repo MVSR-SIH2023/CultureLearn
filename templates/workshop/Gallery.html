@@ -1,0 +1,52 @@
+{% extends "head-foot/header.html"%}
+{% block content %}
+<style>
+    .content-container {
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+    .img_1 {
+        width: 100%;
+        height: 100%;
+    }
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        padding-top: 25px;
+        height: 0;
+    }
+
+    .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+        <div class="container p-5 mt-5 pt-5">
+            <h1 class="" style="color: #dc3545;">Gallery</h1>
+            <h3>Images</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              {% for image in images %}
+                <div class="col">
+                    <img src="/media/{{ image }}" class="img_1"/>
+                </div>
+              {% endfor %}
+            </div>
+            <h2 class="mt-4">Video</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              {% for video in videos %}
+                <div class="col">
+                    <div class="video-container">
+                        <video controls>
+                            <source src="/media/{{ video }}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,354 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+	<title>Vertical Timeline Animation HTML, CSS & jQuery</title>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+  .navColor {
+    color: #dc3545;
+  }
+  .content-container {
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+  @media only screen and (max-width: 600px) {
+  /* Add your responsive styles here */
+  .ag-timeline-card_meta-box {
+    font-size: 14px; /* Adjust as needed */
+  }
+
+  /* You may need additional styles for other elements */
+}
+.btn_rad {
+        border-radius: 50%;
+    }
+  
+</style>
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+  <div class="content-continer">
+    {% include 'head-foot/navbar.html' %}
+    <div class="Main">
+
+      <!-- TopTitle Code-->
+      <div class="TopTitle">
+        <div class="secTitle">Evolution of Indian Civilization</div>
+      </div>
+      
+      <section class="Main-section">
+        <div class="Container">
+          <div class="js-timeline ag-timeline">
+        
+            <!-- Progress Bar Line Code-->
+            <div class="js-timeline_line ag-timeline_line">
+              <div class="js-timeline_line-progress ag-timeline_line-progress"></div>
+            </div>
+        
+            <div class="ag-timeline_list">
+        
+            <!-- Left Batman Box -->
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">01</div>
+                  </div>
+            
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Indus Valley Civilization (3300–1300 BCE):</div>
+                      <ul style="text-align: left;">
+                        <li>Harappa and Mohenjo-Daro civilizations.</li>
+                        <li>Advanced urban planning and drainage systems.</li>
+                      </ul>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Indus_Valley_Civilisation"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702551043/Indusvalley_qxdrs4.jpg" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+  
+              <!-- Right Deathstroke Box -->
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Vedic Period (1500–500 BCE):</div>
+                    <ul style="text-align: left;">
+                      <li>Composition of the Vedas.</li>
+                      <li>Emergence of early Hinduism.</li>
+                    </ul>
+                  </div>
+            
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">02</div>
+                  </div>
+                </div>
+
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Vedic_period"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702661841/vedicperiod_fe0qn2.jpg" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">03</div>
+                  </div>
+  
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Maurya Empire (322–185 BCE):</div>
+                    <ul style="text-align: left;">
+                      <li>Chandragupta Maurya and Ashoka the Great.</li>
+                      <li>Spread of Buddhism.</li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Maurya_Empire"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702662481/sanchistupa_hdjm2g.jpg" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+  
+              <!-- Right Green Lantern Box -->
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Gupta Empire (320–550 CE):</div>
+                    <ul style="text-align: left;">
+                      <li>Golden age of Indian arts, sciences, and philosophy.</li>
+                      <li>Decimal system, concept of zero, and Aryabhata's contributions.</li>
+                    </ul>
+                  </div>
+            
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">04</div>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Gupta_Empire"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702662443/guptaa_lyryqp.jpg" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+  
+              <!-- Left Nightwing Box -->
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">05</div>
+                  </div>
+            
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Medieval Period (600–1600 CE):</div>
+                    <ul style="text-align: left;">
+                      <li>Islamic invasions and establishment of Delhi Sultanate.</li>
+                      <li>Mughal Empire (1526–1857) with notable rulers like Akbar and Shah Jahan.</li>
+                      <li>Bhakti and Sufi movements.</li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Medieval_India"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702662665/mughal_k7ufxy.jpg" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+  
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Vijayanagara and Bahmani Empires (1336–1646 CE):</div>
+                    <ul style="text-align: left;">
+                      <li>Flourishing South Indian kingdoms.</li>
+                      <li>Hampi as a major cultural and economic center.</li>
+                    </ul>
+                  </div>
+            
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">06</div>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Vijayanagara_Empire"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702662951/vijayanagara_go9e1b.webp" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+  
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">07</div>
+                  </div>
+            
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Colonial Period (1600–1947):</div>
+                    <ul style="text-align: left;">
+                      <li>Arrival of European powers (Portuguese, Dutch, and British).</li>
+                      <li>British East India Company and subsequent colonization.</li>
+                      <li>Indian Rebellion of 1857.</li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Colonial_India"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702663018/colonial_z1xoln.jpg" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Independence and Partition (1947):</div>
+                    <ul style="text-align: left;">
+                      <li>Independence from British rule on August 15, 1947.</li>
+                      <li>Partition of India into India and Pakistan.</li>
+                    </ul>
+                  </div>
+            
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">08</div>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Indian_independence_movement"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702663073/FREEDOM_cnzpng.jpg" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">09</div>
+                  </div>
+            
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Post-Independence Era (1947–present):</div>
+                    <ul style="text-align: left;">
+                      <li>Formation of the Republic of India.</li>
+                      <li>Economic liberalization in 1991.</li>
+                      <li>Various political and social developments.</li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://byjus.com/free-ias-prep/india-after-independence-timeline/"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702663272/indie_p3xwja.jpg" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>  
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+
+              <div class="js-timeline_item ag-timeline_item">
+                <div class="ag-timeline-card_box">
+                  <!-- Name Code-->
+                  <div class="ag-timeline-card_meta-box">
+                    <div class="ag-timeline-card_meta">Modern India (21st Century):</div>
+                    <ul style="text-align: left;">
+                      <li>Continued economic growth and technological advancements.</li>
+                      <li>Social changes and challenges.</li>
+                      <li>Ongoing political developments.</li>
+                    </ul>
+                  </div>
+            
+                  <!-- Number Code-->
+                  <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                    <div class="ag-timeline-card_point">10</div>
+                  </div>
+                </div>
+          
+                <!-- Image Code-->
+                <div class="ag-timeline-card_item">
+                  <div class="ag-timeline-card_inner">
+                    <div class="ag-timeline-card_img-box">
+                      <a href="https://en.wikipedia.org/wiki/Indian_Century"><img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702663446/modern3_fpoqsc.jpg" class="ag-timeline-card_img" /></a>
+                    </div>
+                  </div>
+                  <div class="ag-timeline-card_arrow"></div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>  
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+<script  src="{% static 'js/script.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>

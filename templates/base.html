@@ -1,0 +1,669 @@
+{% extends 'head-foot/header_home.html' %}
+{% load static %}
+{% block content %}
+    
+    <script src="{% static 'js/mapdata.js' %}"></script>
+    <script src="{% static 'js/countrymap.js' %}"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+<style>
+    @media (min-width: 768px) {
+        #map {
+            width: 700px;
+            margin: 0 auto;
+        }
+    }
+
+    
+
+    .container2 {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        /* margin: 3px; */
+        cursor: pointer;
+    }
+
+    .bottom-left-text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        font-size: 20px;
+        color: #f7f1f1;
+        background-color: transparent;
+    }
+
+    @media (max-width: 560px) {
+        .d-block {
+            height: 50vh;
+        }
+    }
+
+    @media (min-width: 560px) {
+        .d-block {
+            height: 80vh;
+        }
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        transition: height 0.3s;
+        /* padding-left: 5px; */
+    }
+
+    .overlay1 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        transition: height 0.3s;
+        overflow: hiddens;
+        /* padding-left: 5px; */
+    }
+
+    .card1 {
+        margin: 20px;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .card-top {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        background-color: transparent;
+    }
+
+    .card1:hover {
+        transform: scale(1.05);
+        /* Scale the card on hover */
+        transition: transform 0.3s ease;
+        /* Add a smooth transition effect */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        /* Add a subtle shadow on hover */
+    }
+
+    .overlay1:hover {
+        height: 100%;
+    }
+
+    .card-paragraph {
+        margin: 0;
+        /* Remove default margin */
+        font-size: 16px;
+        /* Adjust font size as needed */
+        display: none;
+        /* Initially hide the paragraph */
+    }
+
+    .overlay1:hover .card-paragraph {
+        display: block;
+        /* Display the paragraph when overlay1 is hovered */
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .content-container {
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+
+    .shadow-back {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 2.0);
+    }
+
+    .btn_rad {
+        border-radius: 50%;
+    }
+
+    /*Slider*/
+    .card2 {
+        /* background-color:rgba(255, 185, 185, 0.203); */
+        cursor: pointer;
+        color: #dc3545;
+    }
+
+    .box-shadow {
+        /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); */
+        box-shadow: none;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .box-shadow:hover {
+        /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.8) */
+        box-shadow: none;
+    }
+
+    .hover-effect {
+        transition: transform 0.3s;
+        /* Add a smooth transition effect 0.3 */
+    }
+
+    .hover-effect:hover {
+        transform: scale(1.1);
+        /* Increase the size on hover, you can adjust as needed 1.1 */
+        /* Add any other hover-specific styles here */
+    }
+
+    .swiper {
+        height: 50%;
+        padding: 60px;
+    }
+
+    .swiper-slide {
+        color: #000;
+        display: flex;
+        height: 100%;
+        width: 180px;
+        border-radius: 10px;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .swiper-button-prev .swiper-button-next {
+        color: #dc3545;
+    }
+
+    @media (max-width:560px) {
+        .marg {
+            margin-top: 5%;
+        }
+    }
+
+    @media (min-width:560px) {
+        .marg {
+            margin-top: 43%;
+        }
+    }
+    .disclaimer-popup {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 999;
+        text-align: center;
+        pointer-events: none;
+    }
+
+</style>
+
+        <div id="carouselExampleDark" class="carousel carousel-dark slide mb-5">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702049258/Customs-and-traditions-in-Indian-culture-Kathakali_all2fi.jpg"
+                        class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block overlay" style="color: #fff;">
+                        <h5>Dive Deep Into Indian Culture</h5>
+                        {% comment %} <p>Some representative placeholder content for the first slide.</p> {% endcomment %}
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701891864/delhi_ojclt3.png"
+                        class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        {% comment %} <h5>Second slide label</h5> {% endcomment %}
+                        {% comment %} <p>Some representative placeholder content for the second slide.</p> {% endcomment %}
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702058831/varanasi_sfyarx.webp"
+                        class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        {% comment %} <h5>Third slide label</h5> {% endcomment %}
+                        {% comment %} <p>Some representative placeholder content for the third slide.</p> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="text-center">
+            <h3 style="text-align: center; color: #dc3545;font-weight: bold;">मित्राणि धन धान्यानि प्रजानां सम्मतानिव
+                ।<br>
+                जननी जन्म भूमिश्च स्वर्गादपि गरीयसी ॥</h3>
+            <i style="text-align: center;">-Friends, riches and grains are highly honoured in this world.
+                (But) mother and motherland are superior even to heaven.</i>
+        </div>
+
+
+        <!--Categories-->
+        <div class="container mt-5">
+            <div class="mb-5">
+                <div class="text-center">
+                    <h4 style="color: #dc3545;font-weight: bold;" class="mb-3">Discover India's Rich Culture</h4>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% comment %} <div class="card card1 shadow-back" onclick="window.location.href='Architecture.html'"> {% endcomment %}
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:architecture' %}'">
+                                    <!-- Content -->
+                                
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702044899/architecture2_d7dtbc.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Architecture</h5>
+                                    <p class="card-paragraph">Indian architecture is characterized by diverse styles,
+                                        featuring intricately carved temples, vibrant colors, and the use of materials
+                                        like sandstone and marble, showcasing a rich cultural and historical heritage.
+                                        Influenced by various dynasties, it reflects a blend of traditional
+                                        craftsmanship and spiritual symbolism.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:travelandtourism' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702048687/wp7658910_afcddj.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Travel and Tourism</h5>
+                                    <p class="card-paragraph">Indian travel and tourism offer a kaleidoscope of
+                                        experiences, from ancient monuments like the Taj Mahal to diverse landscapes,
+                                        showcasing a blend of history, culture, and natural beauty.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:Traditions' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702049258/Customs-and-traditions-in-Indian-culture-Kathakali_all2fi.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Tradition</h5>
+                                    <p class="card-paragraph">A rich mosaic of rituals, customs, and values, embodying
+                                        diversity and heritage through time-honored practices passed down through
+                                        generations.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card1 shadow-back"
+                                onclick="window.location.href='{% url 'main:festivalsandcelebrations' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701544543/diwali_vfuv7v.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Festivals</h5>
+                                    <p class="card-paragraph">A riot of colors, traditions, and joy, showcasing a
+                                        vibrant tapestry of cultural celebrations steeped in spirituality and community
+                                        spirit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:literature' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701544507/bibliography_sgn3wl.jpg"
+                                    class="card card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Indian Litrature</h5>
+                                    <p class="card-paragraph">A diverse tapestry of storytelling, spanning ancient epics
+                                        to contemporary narratives, reflecting the depth of cultural and linguistic
+                                        heritage in literary expressions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:ArtsAndCrafts' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701544496/art2_cxbwiw.webp"
+                                    class="card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Arts and Crafts</h5>
+                                    <p class="card-paragraph">A vibrant canvas of creativity, blending traditional
+                                        craftsmanship with intricate designs, showcasing a kaleidoscope of colors and
+                                        skills rooted in cultural heritage.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:SportsPage' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701544531/culturalsports3_neviu2.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Sports</h5>
+                                    <p class="card-paragraph">Ancient kabaddi to medieval archery, converging with
+                                        modern cricket, showcase a dynamic legacy of athletic traditions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:yoga' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702737361/yoga_iweig6.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Yoga</h5>
+                                    <p class="card-paragraph"> Ancient Indian practice harmonizing body, mind, and
+                                        spirit through postures, breath control, and meditation for holistic well-being.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:ayurveda' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702737468/ayurveda_jnuipw.webp"
+                                    class="card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Ayurveda</h5>
+                                    <p class="card-paragraph">Traditional Indian system of medicine emphasizing balance
+                                        in bodily systems through natural remedies, diet, and lifestyle
+                                        for optimal health.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card1 shadow-back" onclick="window.location.href='{% url 'main:Timeline' %}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702551043/Indusvalley_qxdrs4.jpg"
+                                    class="card card-img-top" alt="...">
+                                <div class="overlay1 p-1" style="color: #fff;">
+                                    <h5 class="p-3">Evolution of Indian Civilization</h5>
+                                    <p class="card-paragraph">Historical journey from ancient civilizations like the
+                                        Indus Valley to modern times, encompassing empires, cultural shifts,
+                                        independence, and contemporary developments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="card shadow-back">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701544558/podcast_tlfwnk.avif" class="card-top" alt="...">
+                <div class="overlay1" style="color: #fff;">
+                    <h5 class="p-3">Listen to the Indian Culture</h5>
+                </div>
+                </div>
+                <div class="card shadow-back">
+                  <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701623018/articles_xvhhmm.png" class="card-top alt="...">
+                  <div class="overlay1" style="color: #fff;">
+                      <h5 class="p-3">Read And Write on Indian Culture</h5>
+                  </div>
+              </div>
+              <div class="card shadow-back">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701544571/QnA_fcgpsi.jpg" class="card-top" alt="...">
+                <div class="overlay1" style="color: #fff;">
+                    <h5 class="p-3">Questions & Answers On Indian Culture</h5>
+                </div>
+              </div> -->
+                </div>
+            </div>
+        </div>
+
+        <!--Map-->
+        <div class="container">
+            <div class="row row-cols-1 row-cols-lg-2 g-4">
+                <div class="col">
+                    <div onclick="playPause()" id="map"></div>
+                    <audio id="song">
+                        <source src="{% static 'audio/aumom-namah-shivaya-mantra-chants-432-hz-8940.mp3' %}" type="audio/mp3">
+                    </audio>
+                </div>
+                <div class="col text-center">
+                    <div class="marg ms-5 me-5">
+                        <div class="p-3">
+                            <h4 style="color: #dc3545;font-weight: bold;">
+
+                                भाति सर्वेषु देशेषु रतिः<br>
+                                सर्वेषु जन्तिषु तारणं सर्वतीर्थानां तेन भारतमुच्यते
+                            </h4>
+                            <i>-In all countries, the affection is towards Bharat; among all beings, the liberation is
+                                in
+                                Bharat; and of all pilgrimage places, Bharat is the most sacred.</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Books-->
+        <div class="container mt-4" onmouseover="showDisclaimer()" onmouseout="hideDisclaimer()">
+            <h1 class="text-center" style="color: #dc3545;">Books</h1>
+            <div class="disclaimer-popup" id="disclaimerPopup">
+                <p>*This book is not owned by CultureLearn, It has been borrowed from The Internet Archive for demo purposes*</p>
+            </div>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2" >
+                            <a href="https://publuu.com/flip-book/328752/776016/page/1?cover" class="show-publuu-viewer"
+                                style="width: 180px; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/776016"
+                                    style="height: 100%; width: 180px;">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">The Ramayana</h6>
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2" >
+                            <a href="https://publuu.com/flip-book/328752/756923/page/1?cover" class="show-publuu-viewer"
+                                style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/756923"
+                                    style="height: 100%; width: 100%">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">Ramayana (picture form)</h6>
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2">
+                            <a href="https://publuu.com/flip-book/328752/757196/page/1?cover" class="show-publuu-viewer"
+                                style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/757196"
+                                    style="height: 100%;">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">Mahabharat</h6>
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2" >
+                            <a href="https://publuu.com/flip-book/328752/776128/page/1?cover" class="show-publuu-viewer"
+                                style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/776128"
+                                    style="height: 100%;">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">Bhagvad Gita</h6>
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2" >
+                            <a href="https://publuu.com/flip-book/328752/776259/page/1?cover" class="show-publuu-viewer"
+                                style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/776259"
+                                    style="height: 100%;">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">Sushruta Samhita</h6>
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2">
+                            <a href="https://publuu.com/flip-book/328752/776083/page/1?cover" class="show-publuu-viewer"
+                                style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/776083"
+                                    style="height: 100%;">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">Charaka Samhita</h6>
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2" >
+                            <a href="https://publuu.com/flip-book/328752/777909/page/1?cover" class="show-publuu-viewer"
+                                style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/777909"
+                                    style="height: 100%;">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">Patanjali Yogasutra</h6>
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2" >
+                            <a href="https://publuu.com/flip-book/328752/777919/page/1?cover" class="show-publuu-viewer"
+                                style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/777919"
+                                    style="height: 100%;">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">Panchatantra</h6>
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide box-shadow hover-effect">
+                        <div class="card card2" >
+                            <a href="https://publuu.com/flip-book/328752/777932/page/1?cover" class="show-publuu-viewer"
+                                style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+                                    src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/777932"
+                                    style="height: 100%;">
+                            </a>
+                            <h6 class="p-1" style="text-align: center;">Brihatsamhita</h6>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+
+            </div>
+        </div>
+        
+        
+        
+      
+          
+        <script>
+            function showDisclaimer() {
+                document.getElementById("disclaimerPopup").style.display = "block";
+            }
+    
+            function hideDisclaimer() {
+                document.getElementById("disclaimerPopup").style.display = "none";
+            }
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cms1.publuu.com/js/embed-viewer.js"></script>
+    <script>
+        // Function to get URL parameters by name
+        function getParameterByName(name, url) {
+         if (!url) url = window.location.href;
+         name = name.replace(/[\[\]]/g, '\\$&');
+         const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+         const results = regex.exec(url);
+         if (!results) return null;
+         if (!results[2]) return '';
+         return decodeURIComponent(results[2].replace(/\+/g, ' '));
+     }
+     
+     // Check for the activation_sent parameter and display an alert if true
+     document.addEventListener('DOMContentLoaded', function() {
+         const activationSent = getParameterByName('activation_sent');
+     
+         if (activationSent === 'true') {
+             alert('Your activation link has been sent to your registered email.');
+         }
+     });
+       </script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            // loop: true,
+            centerSlides: true,
+            fade: true,
+            grabCursor: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                520: {
+                    slidesPerView: 2,
+                },
+                950: {
+                    slidesPerView: 4,
+                },
+            },
+        });
+    </script>
+    <script>
+        
+        let song = document.getElementById("song");
+        let ctrlIcon = document.getElementById("ctrlIcon");
+    
+        
+    
+        
+    
+        function playPause() {
+          if (song.paused) {
+            song.play();
+            ctrlIcon.classList.remove("bi-play-fill");
+            ctrlIcon.classList.add("bi-pause-fill");
+          } else {
+            song.pause();
+            ctrlIcon.classList.remove("bi-pause-fill");
+            ctrlIcon.classList.add("bi-play-fill");
+          }
+        }
+    
+        
+    </script>
+    
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "head-foot/header.html" %}
+
+{% block content %}
+<style>
+    .content-container {
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+    } 
+
+</style>
+
+        <div class="container mt-5">
+            <div class="card shadow-lg" style="margin-top: 70px;">
+                <form class="p-4" method ="post" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <h3 class="text-center mb-3" style="color: #dc3545;">Expert Application Form</h3>
+                    <p class="mt-4">
+                        Embarking on the journey towards expertise is a thrilling venture filled with boundless opportunities for growth. Each stride forward, fueled by curiosity and dedication, paves the way toward profound knowledge and mastery. Embrace this path with passion, as every lesson learned brings you closer to becoming the expert you aspire to be.</p>
+                    <label for="formFile" class="form-label">Resume</label>
+                    <input class="form-control" type="file" name = "resume" id="formFile">
+                    <label for="exampleFormControlTextarea1" class="form-label">Application</label>
+                    <textarea class="form-control" name = "letter" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <button class="btn btn-danger mt-4">Submit</button>
+                </form>
+                <p class="text-center">check your registered email after submition</p>
+            </div>
+        </div>
+   {% endblock %} 

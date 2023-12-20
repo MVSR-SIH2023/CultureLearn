@@ -1,0 +1,109 @@
+ """ 
+Telugu
+
+Ugadi
+Sri Rama Navami
+Ekadasi
+Varalakshmi Vratam
+Vinayaka Chavithi
+Navaratri
+Vijayadashami
+Peerla Panduga
+Atla Tadde
+Deepavali
+Kartika Pournami
+Bhogi
+Sankranthi
+Kanuma
+Maha Sivaratri
+Holi
+Eid al-Fitr
+Rakhi Purnima
+Krishnashtami
+Christmas
+"""
+""" 
+
+Assamese
+
+Rabha Hajong Chandubi Festival
+Junbeel Mela
+Me-dam-me-phi
+Karbi Youth Festival
+Ali-Aye-Lrigang
+Aajan Pir Dargah Urus
+Maha Shiva Ratri
+Dol Utsav, Barpeta
+Rongali Bihu Utsav, Guwahati
+Sanken Festival
+Bohaggiyo Bishu
+Buddha Purnima (Poi-Nun-Hok) at Namphake village
+Ambubasi Mela
+Bathow Puja, BTAD
+Karam Puja
+Durga Puja, Barak Valley
+Felcon Festival, Umrangsu
+Rass Mahutsav, Majuli
+Rass Mahutsav, Nalbari
+Assam Tea Festival, Jorhat
+Judima Festival, Haflong
+Martyrdom of Guru Tegh Bahadur at Dhubri
+Dehing Patkai Festival
+
+"""
+
+""" 
+Bengali
+
+Durga Puja
+Rash Mela
+Poush Mela
+Vasant Panchami
+Basanta Utsav 2023
+Teesta Tea & Tourism Festival
+Jamai Sashti
+Ratha Yatra Kolkata
+Gangasagar Mela
+Joydev Kenduli Mela
+Makara Sankranti
+
+"""
+""" 
+gujarati 
+
+Navratri
+Rann Utsav
+Bhavnath Mahadev Fair
+ Vautha Mela Fair
+ Modhera Dance Festival
+ Kite Festival
+ Bhadra Purnima Fair
+ Madhav Rai Fair
+ Tarnetar Fair
+ Shamlaji Melo
+ Makar Sankranti
+ Rath Yatra
+ Janmashtami
+ Chitra Vichitra Mela
+ Ravechi Fair
+ Kavant Fair
+
+"""
+""" 
+HINDI 
+
+Diwali
+Holi
+Durga Puja
+Navratri
+Makar Sankranti
+Raksha Bandhan
+Janmashtami
+Ram Navami
+Dussehra
+Karva Chauth
+Teej
+Chhath Puja
+Basant Panchami
+
+"""

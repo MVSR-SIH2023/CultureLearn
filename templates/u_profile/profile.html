@@ -1,0 +1,342 @@
+{%extends 'head-foot/header.html'%}
+{%load static %}
+{% block content %}
+
+
+<style>
+  .align {
+    display: flex;
+    justify-content: space-between;
+  }
+    .card1 {
+      background-color: #fff;
+    }
+    .img {
+      width: 150px;
+    }
+    .btn1 {
+      width: 200px;
+    }
+    .card-img-top {
+        height: 250px;
+        object-fit: cover;
+    }
+    .card {
+      width: 100%;
+    }
+    .btn2 {
+      font-size: 10px!important;
+    }
+    .content {
+            transition: opacity 0.5s ease-in-out;
+        }
+    @media (max-width>300px) {}
+        .marg {
+          margin-left: 20px;
+        }
+        .nav-underline {
+            position: relative;
+        }
+
+        .nav-underline .nav-link {
+            position: relative;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-underline .nav-link:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #dc3545; /* Change to your preferred underline color */
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-underline .nav-link.active {
+            color: #dc3545; /* Change to your preferred active link color */
+        }
+
+        .nav-underline .nav-link.active:before {
+            width: 100%;
+        }
+        .nav-item1 {
+          width: 18%;
+          text-align: center;
+          font-weight:bold;
+        }
+        .content {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .span {
+          margin-left: 100px; /* Adjust the value as needed for spacing */
+        }
+        .imgProfile {
+          margin-top: 20px;
+          height: 200px;
+          width: 200px;
+          border-radius: 50%;
+        }
+        
+</style>
+{% include "floating.html" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-3">
+          <div class="text-center card mt-5 ps-5 pe-5 shadow-lg">
+            <div>
+              {% if profile.avatar %}
+                <img src="{{ profile.avatar }}" alt="{{ profile.name }}'s Avatar" class="imgProfile"/>
+              {% else %}
+              <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg" class="imgProfile"/>
+
+              {% endif %}
+            </div>
+            <div class="">
+              <h1 style="font-size: 20px;">{{ profile.name }}</h1>
+              <p>@{{ profile.user.username }}</p>
+              <div class="bio">
+                {% if profile.bio %}
+                {{ profile.bio }}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+            {% if user.is_authenticated and user == profile.user%}
+              <a type="button" href="{% url 'accounts:profile-edit' %}" class="btn btn-danger btn1">Edit Profile</a><br>
+              {% endif %}
+              {% if profile.user.id != user.id %}
+                <a type="button" href="{% url 'accounts:follow_user' profile.user.id %}" class="btn btn-light btn1 mt-3 follow-action-button" id="follow_button" data-user-id="{{ profile.user.id }}"  style="color: #dc3545;border-color: #dc3545;">Follow</a> 
+              {% endif %}
+              </div>
+            <div class="mt-3" style="color: #dc3545;">
+              <h6>Followers<span class="span" id ="follower_count">{{ followers_count }}</span></h6>
+              <h6>Following<span class="span" id ="following_count">{{ following_count }}</span></h6>
+            </div>
+            {% if user.is_authenticated and user == profile.user%}
+            <div class="mb-4 d-flex justify-content-center">
+              <a href="{% url 'articles:post-create' %}" type="button" class="btn btn-danger btn2 me-2">Write an Article</a>
+              <a href="{% url 'articles:create-main-podcast' %}" type="button" class="btn btn-danger btn2 ms-2">Upload a Podcast</a>
+            </div>
+            {% endif %}
+            <div class="mb-4 text-center">
+              <div>
+                {% if request.user.is_superuser%}
+                  <a type="button" href="{% url 'accounts:quiz' %}" class="btn btn-danger btn1 ">Quiz</a>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-10 col-lg-9">
+            <div class="mt-5">
+              <ul class="nav nav-underline">
+                <li class="nav-item nav-item1">
+                  <a class="nav-link active" aria-current="page"  onclick="showContent('articles', this)">Articles</a>
+                </li>
+                <li class="nav-item nav-item1">
+                  <a class="nav-link" onclick="showContent('workshops', this)" style="color: #dc3545;">Workshops</a>
+                </li>
+                <li class="nav-item nav-item1">
+                  <a class="nav-link" onclick="showContent('podcast', this)" style="color: #dc3545;">PodCast</a>
+                </li>
+                <li class="nav-item nav-item1">
+                  <a class="nav-link" onclick="showContent('qa', this)" style="color: #dc3545;">Q&A</a>
+                </li>
+                <li class="nav-item nav-item1">
+                  <a class="nav-link"  onclick="showContent('challenges', this)" style="color: #dc3545;text-align: center;">Challenges</a>
+                </li>
+              </ul>
+                <div id="articles-content" class="content">
+                  <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                    {% for post in posts %}
+                    <a href="{{ post.get_absolute_url }}" style="text-decoration: none;">
+                      <div class="col">
+                        <div class="card card1 h-100 shadow-lg fade-in" >
+                          <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+                          <div class="card-body">
+                            <h5 class="card-title">{{post.title}}</h5>
+                          </div>
+                          <div class="card-footer">
+                              <small class="text-body-secondary">{{post.date}}</small>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    {% empty %}
+                    <p>No posts found.</p>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div id="workshops-content" class="content" style="display: none;">
+                    <!-- Content for Workshops goes here -->
+                    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                      {% for workshop in workshops %}
+                      <a href="/workshop/{{workshop.id}}/" style="text-decoration: none;">
+                        <div class="col">
+                          <div class="card card1 h-100 shadow-lg fade-in" >
+                            <img src="{{ workshop.image.url }}" class="card-img-top" alt="{{ workshop.name }}">
+                            <div class="card-body">
+                              <h5 class="card-title">{{workshop.name}}</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-body-secondary">{{ workshop.created }}</small>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      {% empty %}
+                      <p>No workshops found.</p>
+                      {% endfor %}
+                    </div>
+                   
+                </div>
+                <div id="podcast-content" class="content" style="display: none;">
+            
+                    <!-- Content for Podcast goes here -->
+                    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                      {% for main_podcast in main_podcasts %}
+                      <a href="{%url 'articles:single-podcasts' main_podcast.id %}" style="text-decoration: none;">
+                        <div class="col">
+                          <div class="card card1 h-100 shadow-lg fade-in" >
+                            <img src="{{ main_podcast.image.url }}" class="card-img-top" alt="{{ main_podcast.name }}">
+                            <div class="card-body">
+                              <h5 class="card-title">{{main_podcast.title}}</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-body-secondary">{{ main_podcast.created }}</small>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      {% empty %}
+                      <p>No podcast found.</p>
+                      {% endfor %}
+                    </div>
+                </div>
+                  <div id="qa-content" class="content" style="display: none;">
+                    <!-- Content for Q&A goes here -->
+                    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                      {% for qa in qas %}
+                      <a href="/question/{{qa.id}}/" style="text-decoration:none;">
+                        <div class="col">
+                          <div class="card card1 h-100 shadow-lg fade-in" >
+                            
+                            <div class="card-body">
+                              <h5 class="card-title">{{qa.title}}</h5>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-body-secondary">{{ qa.pub_date }}</small>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+
+                      {% empty %}
+                      <p>No Q&A found.</p>
+                      {% endfor %}
+                    </div>
+                   
+                  </div> 
+                  <div id="challenges-content" class="content" style="display: none;">
+                    {% for quiz in quizs %}
+                    <a href="/take_quiz/{{quiz.quiz.id}}" style="text-decoration: none;">
+                    <div class="alert alert-light mt-3 align shadow-lg" role="alert">
+                      <p>{{quiz.quiz.name}}</p>
+                      
+                      <p>Score: {{quiz.score}}</p>
+                    </div>
+                  </a>
+                    {% empty %}
+                      <p>No Q&A found.</p>
+                      {% endfor %}
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+      {% if profile.user.id != user.id %}
+       render_button()
+       {%  endif %}
+      function follow_action(e) {
+        e.preventDefault();
+        var button = $(this);
+        var userId = button.data('user-id');
+        var buttonText = button.text();
+        console.log(userId);
+        console.log(buttonText);
+        $.ajax({
+          type: "POST",
+          url: "/follow_user/" + userId + "/",
+          data: {
+              'csrfmiddlewaretoken': '{{ csrf_token }}', 
+              'user_id': userId
+          },
+          success: function (data) {
+              if(data.followed){
+                var follower_count=parseInt($("#follower_count").text());
+                $("#follower_count").text((follower_count+1).toString());
+              }
+              else{
+                var follower_count=parseInt($("#follower_count").text());
+                $("#follower_count").text((follower_count-1).toString());
+              }
+          },
+          error: function (error) {
+              alert("Try again. Registration failed");
+              console.log(error);
+          },
+        });
+        console.log("Function called");
+      }
+      function render_button(){
+        $.ajax({
+          type: "GET",
+          url: "/follow_user/" + $('.follow-action-button').data('user-id') + "/",
+          success: function (data) {
+              var button = document.getElementById('follow_button');
+              var status = data.status;
+              console.log(data);
+              $('#follow_button').text(status);
+              //button.text(status);
+          },
+          error: function (error) {
+              alert("Try again. Registration failed");
+              console.log(error);
+          },
+        });
+      }
+
+      $('.follow-action-button').on('click', follow_action);
+    });
+    function showContent(contentId, element) {
+        var navLinks = document.getElementsByClassName('nav-link');
+        for (var i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.remove('active');
+            navLinks[i].style.color = "#dc3545";
+        }
+
+        element.classList.add('active');
+
+        var contentDivs = document.getElementsByClassName('content');
+        for (var i = 0; i < contentDivs.length; i++) {
+            contentDivs[i].style.opacity = '0';
+            contentDivs[i].style.display = 'none';
+        }
+
+        var selectedContent = document.getElementById(contentId + '-content');
+        if (selectedContent) {
+            selectedContent.style.display = 'block';
+            setTimeout(function () {
+                selectedContent.style.opacity = '1';
+            }, 50); 
+        }
+    }
+</script>
+{% endblock %}

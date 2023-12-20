@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<style>
+  body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+  }
+
+  .navColor {
+    color: #dc3545;
+  }
+
+  .align {
+    display: flex;
+    justify-content: space-between;
+    /* padding: bottom 4px;; */
+  }
+
+  .bt {
+    height: 40px;
+
+  }
+
+  .content {
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+  }
+
+  .card {
+    /* background-color:rgba(255, 185, 185, 0.203); */
+    cursor: pointer;
+  }
+
+  .card-img-top {
+    height: 65%;
+  }
+
+  .card-body {
+    height: 35%;
+
+  }
+  .btn_rad {
+        border-radius: 50%;
+    }
+
+  .box-shadow {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .box-shadow:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8)
+  }
+
+  .hover-effect {
+    transition: transform 0.3s;
+    /* Add a smooth transition effect 0.3 */
+  }
+
+  .hover-effect:hover {
+    transform: scale(1.05);
+    /* Increase the size on hover, you can adjust as needed 1.1 */
+    /* Add any other hover-specific styles here */
+  }
+  .swiper {
+        height: 50%;
+        padding: 40px;
+    }
+
+  .swiper-slide {
+    color: #000;
+    display: flex;
+    height: 50vh;
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .swiper-button-prev .swiper-button-next {
+    color: #dc3545;
+  }
+</style>
+
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+  <div class="content">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+      <div class="container-fluid">
+          <a class="navbar-brand navColor" href="#" style="font-weight: bold;">
+              <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702280805/logo_ms8pwt.jpg" alt="Logo"
+                  width="30" height="24" class="d-inline-block align-text-top">
+              CultureLearn
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link navColor" aria-current="page" href="home.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link navColor" href="Q&A.html">Q&A</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link navColor" href="Articles.html">Articles</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link navColor" href="workshop.html">Workshops</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link navColor" href="PodCast.html">Podcast</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link navColor" href="Notifications.html">Notifications</a>
+                  </li>
+              </ul>
+              <hr>
+              <div class="dropdown">
+                  <button class="btn btn_rad btn-danger" type="button" id="filterDropdown"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-person-circle"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><a class="dropdown-item" href="#">Settings</a></li>
+                      <li><a class="dropdown-item" href="#">Log out</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+    </nav>
+    <div class="container mt-5 pt-4">
+      <h1 style="color: #dc3545; text-align: center; font-weight: bold;">Architecture</h1>
+      <div>
+        <div>
+          <h1>Places of Worship</h1>
+        </div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='ramappa.html'">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702200339/ramappa_v370nl.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Ramappa Temple</h4>
+                  <p class="card-text">Ramappa Temple: Kakatiya jewel in Telangana, 13th-century marvel, UNESCO World
+                    Heritage Site dedicated to Lord Shiva.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='chennakesava.html'">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702200612/chennakeshav_r1yhkf.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Chennakesava Temple</h4>
+                  <p class="card-text">Chennakesava Temple: Hoysala marvel in Karnataka, 12th-century architectural gem,
+                    dedicated to Lord Vishnu.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='baraImambara.html'">
+              <div class="card h-100">
+                <img
+                  src="https://res.cloudinary.com/dhva31opb/image/upload/v1702201090/View-from-the-terrace-of-Bada-Imambara-Misfit-Wanderers_iiftoi.png"
+                  class="card-img-top" alt="...">
+                <div class="card-body ">
+                  <h4 class="card-title">Bara Imambara</h4>
+                  <p class="card-text">Bara Imambara: Architectural wonder in Lucknow, built in the 18th century,
+                    featuring the central hall with no beams.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='baraImambara.html'">
+              <div class="swiper-slide box-shadow hover-effect">
+              <div class="card h-100">
+                <img
+                  src="https://res.cloudinary.com/dhva31opb/image/upload/v1702201090/View-from-the-terrace-of-Bada-Imambara-Misfit-Wanderers_iiftoi.png"
+                  class="card-img-top" alt="...">
+                <div class="card-body ">
+                  <h4 class="card-title">Bara Imambara</h4>
+                  <p class="card-text">Bara Imambara: Architectural wonder in Lucknow, built in the 18th century,
+                    featuring the central hall with no beams.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container pt-4">
+      <div>
+        <div>
+          <h1>Forts</h1>
+        </div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='daulathadab.html'">
+              <div class="card h-100 ">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702201523/561311-daulatabadfort_gbixoe.png"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">DaulatabadFort</h4>
+                  <p class="card-text">Daulatabad Fort: Historic stronghold in Maharashtra, medieval fortress with
+                    strategic design, commanding views.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='kumbhalgarh fort.html'">
+              <div class="card h-100 ">
+                <img
+                  src="https://res.cloudinary.com/dhva31opb/image/upload/v1702201932/667x445_kumbhalgarh-fort_vv77tb.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Kumbhalgarh Fort</h4>
+                    <p class="card-text">Kumbhalgarh Fort: Majestic fortress in Rajasthan, 15th-century marvel, known for
+                  the second-longest wall in the world.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='chittorgarh.html'">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702202147/chittorghar_fwpbfr.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Chittorgarh Fort</h4>
+                  <p class="card-text">Chittorgarh Fort: Iconic Rajput stronghold in Rajasthan, UNESCO World Heritage
+                    Site, witness to tales of valor and history.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702202147/chittorghar_fwpbfr.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Chittorgarh Fort</h4>
+                  <p class="card-text">Chittorgarh Fort: Iconic Rajput stronghold in Rajasthan, UNESCO World Heritage
+                    Site, witness to tales of valor and history.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container pt-4">
+      <div>
+        <div>
+          <h1>Museums</h1>
+        </div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='National_museum.html'">
+              <div class="card h-100 ">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702202790/national_museum_ngnojw.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">National Museum</h4>
+                  <p class="card-text">National Museum, New Delhi: Premier cultural institution in India's capital,
+                    showcases diverse artifacts, art, and historical treasures.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='Indian_museum.html'">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702203351/indian_museum_wvxy1q.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Indian Museum</h4>
+                  <p class="card-text">Indian Museum, Kolkata: Oldest museum in India, founded in 1814, a treasure trove
+                    of art, artifacts, and cultural heritage.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='gov_museum.html'">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702203474/Government_museum_ksfb6i.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Government Museum</h4>
+                  <p class="card-text">Government Museum, Chennai: Established in 1851, an enriching cultural repository
+                    in Tamil Nadu, housing diverse exhibits from history and art.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702203474/Government_museum_ksfb6i.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Government Museum</h4>
+                  <p class="card-text">Government Museum, Chennai: Established in 1851, an enriching cultural repository
+                    in Tamil Nadu, housing diverse exhibits from history and art.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>  
+      </div>
+    </div>
+    <div class="container pt-4 pb-4">
+      <div>
+        <div>
+          <h1>Architectural Wonders</h1>
+        </div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='chousath_mandir.html'">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702204998/chousath_yogini_mandir_zumzhl.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Chousath Yogini Mandir</h4>
+                  <p class="card-text">Chousath Yogini Mandir: Ancient temple in Morena, Madhya Pradesh, dedicated to 64
+                    Yoginis, featuring unique circular architecture.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='brihadeswara.html'">
+              <div class="card h-100">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702206134/briha_mqbn6t.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Brihadeshwara Temple</h4>
+                  <p class="card-text">Brihadeshwara Temple: Architectural marvel in Thanjavur, Tamil Nadu, built by
+                    Rajaraja I in the 11th century, showcasing Dravidian grandeur.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='Vidhya Shankara Temple.html'">
+              <div class="card h-100 ">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702207409/vidya_shankara_zfneiz.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Vidya Shankara Temple</h4>
+                  <p class="card-text">Vidya Shankara Temple: Spiritual haven in Sringeri, Karnataka, merging Hoysala and
+                    Vijayanagara architectural styles, dedicated to Lord Shiva.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide box-shadow hover-effect">
+              <div class="card h-100 ">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702207409/vidya_shankara_zfneiz.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="card-title">Vidya Shankara Temple</h4>
+                  <p class="card-text">Vidya Shankara Temple: Spiritual haven in Sringeri, Karnataka, merging Hoysala and
+                    Vijayanagara architectural styles, dedicated to Lord Shiva.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      // loop: true,
+      centerSlides: true,
+      fade: true,
+      grabCursor: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        dynamicBullets: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        520: {
+          slidesPerView: 2,
+        },
+        950: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

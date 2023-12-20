@@ -1,0 +1,479 @@
+{% extends "head-foot/header.html"%}
+{% load static %}
+{% load filter %}
+{% block content %}
+<style>
+   
+    .img-fluid {
+        object-fit: cover;
+        height: 35vh;
+    }
+    .card {
+        max-height: auto; /* Adjust this value as needed */
+        overflow: auto;
+        width: 100%;
+    }
+    .container {
+        justify-content: center;
+    }
+    .align {
+        display: flex;
+        justify-content: space-between;
+    }
+    #progress {
+      -webkit-appearance: none;
+      width: 90%;
+      height: 6px;
+      background: #dc3545;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #progress::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background: #dc3545;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 8px solid #fff;
+      box-shadow: 0 5px 5px rgba(255, 26, 26, 0.22);
+    }
+    .controls {
+      display: flex;
+    }
+    .controls div {
+      width: 40px;
+      height: 40px;
+      margin: 10px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      border-radius: 50%;
+      color: #dc3545;
+      box-shadow: 0 10px 20px rgba(255, 26, 26, 0.22);
+      cursor: pointer;
+    }
+    .controls div:nth-child(3){
+      transform: scale(1.2);
+      background: #dc3545;
+      color: #fff;
+    }
+    @media (max-width: 767px) {
+        .card {
+            height: auto;
+        }
+        .col-xs-2,
+        .col-xs-10,
+        .col-md-3,
+        .col-md-9 {
+            width: 100%; 
+            margin-bottom: 10px; 
+        }
+        .img-fluid {
+          width: 100%;
+          height: 100%; /* Set a constant height for the image */
+          object-fit: cover; /* Allow the image height to adjust based on content */
+        }
+    }
+    .content-container {
+      height: 100vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+</style>
+  <div class="container pt-5 mt-5 mb-5">
+      <div class="card mb-3 shadow-lg">
+          <div class="row g-0">
+            <div class="col-xs-2 col-md-3">
+              <img src="{{main_podcast.image.url}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-xs-10 col-md-9">
+              <div class="d-flex flex-column h-100">
+                <div class="card-body mt-3 ms-5 me-5">
+                  <h5>{{main_podcast.title}}</h5>
+                  <p>{{main_podcast.description}}</p>  
+                </div>
+                <div class="mt-auto card-footer d-flex">
+                  <p class="card-text"><small class="text-body-secondary">{{main_podcast.created}}</small></p>
+                  <small class="ms-auto" style="font-weight: bold;">@{{ main_podcast.author.username }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <hr>
+      {% for podcast in podcasts %}
+     
+      <div class="card mb-3 shadow-lg podcast-card">
+          <div class="row g-0">
+              <div class="col-2 col-md-3">
+                  <img src="{{ podcast.image.url }}" class="img-fluid rounded-start" alt="{{ podcast.name }}">
+              </div>
+              <div class="col-9 col-md-9">
+                  <div class="mt-4 ms-5 me-5">
+                      <h5>{{ podcast.name }}</h5>
+                      <div class="d-flex justify-content-end">
+                        <select name="lang_podcasts" class="lang_podcasts" data-podcast-index="{{ forloop.counter }}">
+                          <option value="hindi" selected>Hindi</option>
+                          <option value="english">English</option>
+                          <option value="telugu">Telugu</option>
+                        </select>
+                      </div>
+                      <p class="card-text">{{ podcast.description }}</p>
+                  </div>
+                  <div class="mt-5 mb-3 d-flex flex-column align-items-center">
+                      <input type="range" value="0"  id="progress" class="progress{{ forloop.counter }}" class="mb-2">
+                      <div class="controls d-flex align-items-center pt-3">
+                          {% if user.is_authenticated and user == podcast.author %}
+                              <div type="button" class="delete-podcast" name="podcast_id"  data-podcast-id="{{ podcast.id }}" class="me-3"><i class="bi bi-trash3"></i></div>
+                          {% else %}
+                            <div type="button" class="delete-podcast" name="podcast_id" style="display: none;"  data-podcast-id="{{ podcast.id }}" class="me-3"><i class="bi bi-trash3"></i></div>
+                          {% endif %}
+                          <div onclick="skipBackward({{ forloop.counter }})" class="me-3"><i class="bi bi-skip-backward-fill"></i></div>
+                          <div onclick="playPause({{ forloop.counter }})" class="me-3"><i class="bi bi-play-fill" id="ctrlIcon{{ forloop.counter }}"></i></div>
+                          <div onclick="skipForward({{ forloop.counter }})"><i class="bi bi-skip-forward-fill"></i></div>
+                          {% if user.is_authenticated %}
+                              <!-- Check if the podcast is liked by the user -->
+                              {% if liked|get_val:podcast.id %}
+                                  <!-- If liked, display the filled thumbs-up icon -->
+                                  <div type="button" class="like-podcast-btn" data-podcast-id="{{ podcast.id }}"><i class="bi bi-hand-thumbs-up-fill"></i></div>
+                                  <span class="podcast-like-count">{{ likes|get_val:podcast.id }}</span>
+                              {% else %}
+                                  <!-- If not liked, display the empty thumbs-up icon -->
+                                  <div type="button" class="like-podcast-btn" data-podcast-id="{{ podcast.id }}"><i class="bi bi-hand-thumbs-up"></i></div>
+                                  <span class="podcast-like-count">{{ likes|get_val:podcast.id }}</span>
+                              {% endif %}
+                              
+                              
+                          {% endif %}
+                      </div>
+                      <audio id="song{{ forloop.counter }}" >
+                        <source src="{{ podcast.hindi_audio.url }}" type="audio/mp3" id="hindiAudio{{ forloop.counter }}">
+                        <source src="{{ podcast.english_audio.url }}" type="audio/mp3" id="englishAudio{{ forloop.counter }}">
+                        <source src="{{ podcast.telugu_audio.url }}" type="audio/mp3" id="teluguAudio{{ forloop.counter }}">
+                      </audio>
+                  </div>
+              </div>
+          </div>
+      </div>
+  {% empty %}
+      <p>No podcasts uploaded</p>
+  {% endfor %}
+  
+  </div>
+
+
+  <script>
+   
+      
+  
+    $(document).ready(function() {
+        // Attach a click event to the button with ID "delete-post"
+        $('.delete-podcast').on('click', function(e) {
+            e.preventDefault();
+            
+
+            
+            // Retrieve the value from the button
+           
+            var podcastId = $(this).data('podcast-id');
+            var podcastCard = $(this).closest('.podcast-card'); 
+            console.log(podcastId);
+            // Check if the value is not empty
+            if (podcastId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/all-podcasts/delete/' + podcastId + '/', // Use the retrieved ID in the URL
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}', // Add CSRF token for Django protection
+                    },
+                    success: function(response) {
+                        // Handle the success response here
+                        console.log(response);
+                        podcastCard.remove();
+                        
+                    },
+                    error: function(xhr, errmsg, err) {
+                        // Handle the error here
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            } else {
+                console.log("Podcast ID is empty or invalid.");
+            }
+        });
+    });
+
+    // liking podcast 
+    $(document).ready(function() {
+      // AJAX for liking a post
+      $('.like-podcast-btn').click(function(e) {
+        e.preventDefault();
+  
+        var podcastId = $(this).data('podcast-id');
+        var clickedButton = $(this); // Store the clicked button element
+        console.log(podcastId);
+        if (podcastId) {
+        $.ajax({
+          type: 'POST',
+          url: '/all-podcasts/like/' + podcastId + '/',
+          data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}', // Add CSRF token for Django protection
+          },
+          success: function(response) {
+            console.log(response);
+            console.log(response.likes);
+            var likeCount = response.likes;
+            var liked = response.liked;
+
+            var likeButton = $('.like-podcast-btn[data-podcast-id="' + podcastId + '"]');
+            var likeCountSpan = likeButton.next('.podcast-like-count');
+
+            if (liked) {
+                likeButton.html('<i class="bi bi-hand-thumbs-up-fill"></i>');
+            } else {
+                likeButton.html('<i class="bi bi-hand-thumbs-up"></i>');
+            }
+
+            likeCountSpan.text(likeCount);
+          },
+          error: function(xhr, errmsg, err) {
+            console.log(errmsg); // Log any errors to the console
+          }
+        });
+      }
+      else {
+        console.log("Podcast ID is empty or invalid.");
+      }
+      });
+  
+  });
+
+
+  
+ 
+
+
+
+
+
+</script>
+{% comment %} <script>
+  function skipBackward(podcastIndex) {
+    let song = document.getElementById("song" + podcastIndex);
+    song.currentTime -= 10; // Skip backward 10 seconds (adjust this value as needed)
+}
+
+function skipForward(podcastIndex) {
+    let song = document.getElementById("song" + podcastIndex);
+    song.currentTime += 10; // Skip forward 10 seconds (adjust this value as needed)
+}
+  function playPause(podcastIndex) {
+    let progress = document.getElementsByClassName("progress" + podcastIndex)[0];
+    let song = document.getElementById("song" + podcastIndex);
+    let ctrlIcon = document.getElementById("ctrlIcon" + podcastIndex);
+
+    song.onloadedmetadata = function () {
+        progress.max = song.duration;
+    };
+
+    // Function to update progress bar while the song is playing
+    function updateProgressBar() {
+        progress.value = song.currentTime;
+        requestAnimationFrame(updateProgressBar);
+    }
+
+    if (song.paused) {
+        song.play();
+        ctrlIcon.classList.remove("bi-play-fill");
+        ctrlIcon.classList.add("bi-pause-fill");
+        // Start updating the progress bar when the song is played
+        updateProgressBar();
+    } else {
+        song.pause();
+        ctrlIcon.classList.remove("bi-pause-fill");
+        ctrlIcon.classList.add("bi-play-fill");
+    }
+
+    progress.oninput = function () {
+        song.currentTime = progress.value;
+    };
+}
+
+    
+</script> {% endcomment %}
+
+<script>
+  // Define updateProgressBar and handleProgressInput outside of the event listener
+function updateProgressBar(progress, song, ctrlIcon) {
+  progress.value = song.currentTime;
+
+  if (song.currentTime >= song.duration) {
+    song.currentTime = 0;
+    song.pause();
+    ctrlIcon.classList.remove("bi-pause-fill");
+    ctrlIcon.classList.add("bi-play-fill");
+    progress.value = 0;
+  } else {
+    requestAnimationFrame(function() {
+      updateProgressBar(progress, song, ctrlIcon);
+    });
+  }
+}
+
+function handleProgressInput(progress, song) {
+  var newTime = progress.value * (song.duration / 100);
+  song.currentTime = newTime;
+
+  if (song.paused) {
+    song.play().then(function() {
+      song.currentTime = newTime;
+    }).catch(function(error) {
+      console.error("Playback error:", error);
+    });
+  } else {
+    song.play().then(function() {
+      song.currentTime = newTime;
+    }).catch(function(error) {
+      console.error("Playback error:", error);
+    });
+  }
+}
+
+// Add event listeners to the elements outside of the change event listener
+document.querySelectorAll('.lang_podcasts').forEach(function(select) {
+  select.addEventListener('change', function() {
+    var selectedValue = this.value;
+    var podcastIndex = this.getAttribute('data-podcast-index');
+
+    var audio = document.getElementById('song' + podcastIndex);
+    var ctrlIcon = document.getElementById('ctrlIcon' + podcastIndex);
+    var progress = document.querySelector('.progress' + podcastIndex);
+
+    // Remove previous event listeners
+    audio.removeEventListener("timeupdate", updateProgressBar);
+    progress.removeEventListener("input", function() {
+      handleProgressInput(progress, audio);
+    });
+
+    // Pause the audio and change the icon to play when changing the language
+    audio.pause();
+    ctrlIcon.classList.remove('bi-play-fill');
+    ctrlIcon.classList.add('bi-pause-fill');
+
+    switch (selectedValue) {
+      case 'hindi':
+        audio.src = document.getElementById('hindiAudio' + podcastIndex).src;
+        break;
+      case 'english':
+        audio.src = document.getElementById('englishAudio' + podcastIndex).src;
+        break;
+      case 'telugu':
+        audio.src = document.getElementById('teluguAudio' + podcastIndex).src;
+        break;
+      default:
+        break;
+    }
+
+    // Reset progress and pause audio
+    audio.load();
+    audio.play();
+    progress.value = 0;
+
+    // Add event listeners after changing the audio source
+    audio.addEventListener("timeupdate", function() {
+      updateProgressBar(progress, audio, ctrlIcon);
+    });
+    progress.addEventListener("input", function() {
+      handleProgressInput(progress, audio);
+    });
+  });
+});
+
+ 
+
+
+ function skipBackward(podcastIndex) {
+    let song = document.getElementById("song" + podcastIndex);
+    song.currentTime -= 5;
+    }
+
+    function skipForward(podcastIndex) {
+    let song = document.getElementById("song" + podcastIndex);
+    song.currentTime += 5; 
+    }
+    function playPause(podcastIndex) {
+      var progress = document.querySelector('.progress' + podcastIndex);
+      var song = document.getElementById("song" + podcastIndex);
+      var ctrlIcon = document.getElementById("ctrlIcon" + podcastIndex);
+    
+      song.onloadedmetadata = function() {
+        var duration = song.duration;
+        progress.max = duration;
+      };
+    
+      function updateProgressBar() {
+        progress.value = (song.currentTime / song.duration) * 100;
+    
+        if (song.currentTime >= song.duration) {
+          song.currentTime = 0;
+          song.pause();
+          ctrlIcon.classList.remove("bi-pause-fill");
+          ctrlIcon.classList.add("bi-play-fill");
+          progress.value = 0;
+        } else {
+          requestAnimationFrame(updateProgressBar);
+        }
+      }
+       
+      function handleProgressInput() {
+        var newTime = progress.value * (song.duration / 100);
+        song.currentTime = newTime;
+
+        if (song.paused) {
+          song.play().then(function() {
+            song.currentTime = newTime;
+          }).catch(function(error) {
+            console.error("Playback error:", error);
+          });
+        } else {
+          song.play().then(function() {
+            song.currentTime = newTime;
+          }).catch(function(error) {
+            console.error("Playback error:", error);
+          });
+        }
+      }
+    
+      song.addEventListener("timeupdate", function() {
+        updateProgressBar();
+        
+      });
+    
+      progress.addEventListener("input", function() {
+        handleProgressInput();
+        
+    });
+    
+      if (song.paused) {
+        song.play();
+        ctrlIcon.classList.remove("bi-play-fill");
+        ctrlIcon.classList.add("bi-pause-fill");
+        updateProgressBar(); // Start updating the progress bar when the song is played
+      } else {
+        song.pause();
+        ctrlIcon.classList.remove("bi-pause-fill");
+        ctrlIcon.classList.add("bi-play-fill");
+      }
+    } 
+
+    
+  
+        
+    
+</script>
+
+{% endblock %}
+
+   
+   

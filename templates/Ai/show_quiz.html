@@ -1,0 +1,64 @@
+{% extends "head-foot/header.html" %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.2.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<style>
+    .navColor {
+        color: #dc3545;
+    }
+    .form-control {
+        width: 50vh;
+        border-radius: 40px;
+        border-color: #dc3545;
+    }
+
+    p {
+        color: #dc3545;
+    }
+
+    .img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    .btn_rad {
+        border-radius: 50%;
+    }
+    .custom-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.custom-autocomplete .ui-menu-item {
+    padding: 8px;
+    color: #333;
+    cursor: pointer;
+    border-bottom: none; /* Remove bottom border */
+}
+
+.custom-autocomplete .ui-menu-item:last-child {
+    border-bottom: none;
+}
+</style>
+    <div class="container mt-5 ">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-4 mt-4">
+
+            {% for name,id in quizes %}
+            <div class="col">
+                <div class="card shadow-lg d-flex justify-content-center p-3" style="align-items: center;">
+                        <p class="text-center">{{ name }}</p>
+                    <a href="/take_quiz/{{ id }}" class="btn btn-danger follow" >attempt</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+  {% endblock %}  
+
+

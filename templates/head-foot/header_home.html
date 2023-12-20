@@ -1,0 +1,233 @@
+{% load static %}
+{% load google_translate %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CultureLearn</title>
+    
+        <!-- Include jQuery -->
+        
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+        <!-- Bootstrap Bundle with Popper -->
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia&display=swap">
+
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+   
+</head>
+<style>
+
+  a {
+    text-decoration: none;
+    color: #dc3545;
+}
+a:hover {
+  color: grey;
+}
+.btn_rad {
+    border-radius: 50%;
+}
+input {
+    border-radius: 50px;
+    border: 1px solid #dc3545;
+}
+.menu {
+    padding: 5px;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.navbar {
+    background-color: #dc3545!important; /* Background color for the navbar */
+}
+.navbar-toggler-icon {
+    color: #dc3545; /* Change the color of the toggler icon */
+}
+.btn {
+    border-radius: 25px;
+}
+body {
+   
+    font-family: 'Georgia', serif;
+    
+    top: 0px !important;
+}
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+    display: none !important;
+}
+.goog-te-combo {
+  height:28px !important;
+  margin-top: 8px!important; 
+  border-color: #dc3545;
+  border-radius: 5px;
+
+}
+
+#google_translate_element { 
+    height: 34px !important; 
+    overflow: hidden !important;
+    color:transparent !important;
+}
+
+#google_translate_element a {
+    display: none !important;
+  }
+.goog-logo-link {
+    display:none !important;
+} 
+    
+.goog-te-gadget{
+    color: transparent !important;
+}
+.align_1 {
+    display: flex;
+    justify-content:end;
+}
+.align_2 {
+  display: flex;
+}
+.btn_pad {
+  height: 40px;
+}
+</style>
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+  <div class="content-container">
+  <nav class="navbar navbar-expand-lg  fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'main:home' %}" style="color: #fff;font-weight: bold;">CultureLearn</a>
+        <div class="" id="navbarSupportedContent">
+          <div class="navbar-nav ms-auto mb-2 mb-lg-0 align_2 d-flex flex-row justify-content-end">
+              
+              <div class="me-3">
+                  {% google_translate %}
+              </div>
+              <div class="me-3">
+                  <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                      <span class="navbar-toggler-icon"></span>
+                  </a>
+              </div>
+              
+              {% if user.is_authenticated %}
+              <div class="dropdown me-3">
+                      {% if user.profile.avatar %}
+                          <img style="height: 40px; width: 40px; border-radius: 50%;" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" src="{{ user.profile.avatar }}" alt="{{ user.profile.name }}">
+                      {% else %}
+                          <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="height: 45px;border-radius: 50%;"/>
+                      {% endif %}
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
+                          <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a></li>
+                          <li><a class="dropdown-item" href="{% url 'accounts:profile-edit' %}">Edit Profile</a></li>
+                          <li><a class="dropdown-item" href="{% url 'accounts:show_users' %}">Show Users</a></li>
+                          <li><a class="dropdown-item" href="{% url 'accounts:show_experts' %}">Show Experts</a></li>
+                          <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Log out</a></li>
+                      </ul>
+                  
+              </div>
+              {% else %}
+                <div class="d-flex">
+                  <a type="button" href="{% url 'accounts:login' %}" class="btn btn-light me-2 btn_pad">Login</a>
+                  <a type="button" href="{% url 'accounts:signup' %}" class="btn btn-light btn_pad">Signup</a>
+                </div>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+  </nav>
+
+  <!--Left Canvas-->
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel" style="color: #dc3545;">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+          <ul style="list-style-type: none;">
+              <li class="menu"><a href="{% url 'main:home' %}">Home</a></li><hr>
+              <li class="menu"><a href="{% url 'qa_index' %}">Q&A</a></li><hr>
+              <li class="menu"><a href="{% url 'accounts:show_quiz' %}">Quiz</a></li><hr>
+              <li class="menu"><a href="{% url 'articles:all-posts' %}">Articles</a></li><hr>
+              <li class="menu"><a href="{% url 'accounts:show_workshops' %}">Workshops</a></li><hr>
+              <li class="menu"><a href="{% url 'articles:all-podcasts'%}">Podcasts</a></li><hr>
+              {% if request.user.is_authenticated %}
+              <li class="menu"><a href="{% url 'accounts:notifications'%}">Notifications</a></li><hr>
+              {% endif %}
+          </ul>
+      </div>
+  </div>
+
+    <main class="pt-5">
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+
+
+    <footer class="text-white bg-dark pt-4 pb-4">
+        <div class="container text-center text-md-left">
+          <div class="row text-center text-md-left">
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 text-left">
+            <h5 class="text-uppercase text-danger font-weight-bold">CultureLearn</h5>
+            <p>Recognizing the ongoing need to position itself for the digital future, Indian Culture is an initiative by the Ministry of Culture. A platform that hosts data of cultural relevance from various repositories and institutions all over India.</p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h5 class="text-uppercase text-danger font-weight-bold">Links</h5>
+            <p>
+              <a href="#" class="text-white" style="text-decoration: none;"><i class="bi bi-house-door-fill"></i> Home</a>
+            </p>
+            <p>
+              <a href="#" class="text-white" style="text-decoration: none;"><i class="bi bi-file-person"></i> AboutUs</a>
+            </p>
+            <p>
+              <a href="#" class="text-white" style="text-decoration: none;"><i class="bi bi-telephone"></i> Contact Us</a>
+            </p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h5 class="text-uppercase text-danger font-weight-bold">Created By</h5>
+            <p>Students of Maturi Venkat Subba Rao Engineering College</p>
+          </div>
+        </div>
+        </div>
+        <hr class="mt-4">
+        <div class="d-flex flex-row text-center">
+          <div class="d-flex flex-row col-md-7 col-lg-8">
+            <p class="ms-5">Copyright @2023 all rights reserved by:</p>
+            <a href="#" class="text-danger" style="text-decoration: none;">MVSR</a>
+          </div>
+          <div class="col-mg-5 col-lg-4">
+            <div class="text-md-right">
+              <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                  <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="bi bi-android2"></i></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="bi bi-bootstrap"></i></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="bi bi-google"></i></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="bi bi-github"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>  
+        </div>
+      </footer> 
+      <div class="fixed-bottom align_1 m-5">
+        <a type="button" href="{% url 'accounts:ai_assisstant'%}" class="btn btn-danger btn_chat23" style="background-color: #f5eeee;color: #dc3545;border: none;font-size: 25px;height:60px;width:60px;border-radius: 50%;box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); ">AI</a>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+  </html>

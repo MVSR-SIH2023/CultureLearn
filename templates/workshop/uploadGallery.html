@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .align {
+            display: flex;
+            justify-content: center;
+        }
+        input {
+            margin-bottom: 20px;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="align">
+        <div class="card shadow-lg mt-5 p-5">
+            <form id="imageForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="text-center">
+                    <h3 style="color: #dc3545;">Recap</h3>
+                </div>
+                <label class="Images" for="inputGroupFile01">Images</label>
+                <input type="file" class="form-control" id="inputGroupFile01" name ="inputGroupFile1" multiple onchange="checkFileCount(this)">
+                <label class="videos" for="inputGroupFile01">Videos</label>
+                <input type="file" class="form-control" id="inputGroupFile02" name = "inputGroupFile2" multiple onchange="checkFileCount(this)">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-danger">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function checkFileCount(input) {
+            var maxFiles = 5; // Set your desired maximum file count
+            if (input.files.length > maxFiles) {
+                alert('Please select up to ' + maxFiles + ' files.');
+                input.value = null; // Clear the file input
+            }
+        }
+    </script>
+</body>
+
+</html>

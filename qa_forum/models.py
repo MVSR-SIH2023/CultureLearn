@@ -6,12 +6,12 @@ from django.urls import reverse
 from PIL import Image
 from django.utils.text import slugify
 from django.conf import settings
-from hitcount.models import HitCountMixin
+
 # Create your models here.
 
 #HitCountMixin need to know abt this mixin it was inherited by question class
 
-class Question(models.Model, HitCountMixin):
+class Question(models.Model):
     """Model class to contain every question in the forum"""
     
     title = models.CharField(max_length=200, blank=False) #title of question

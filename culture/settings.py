@@ -64,7 +64,7 @@ UNUSED_PACKAGES =[
 INSTALLED_PACKAGES = [
    
    
-    'google_translate',
+    
     'ckeditor',
     'taggit',
     'hitcount',

@@ -12,7 +12,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, ListView, UpdateView, View
 
-from hitcount.models import HitCount
+
 from .models import (Answer, AnswerVote, Question)
 from django.views.generic import DetailView
 from accounts.models import Profile
@@ -45,18 +45,14 @@ def question_index_view(request):
     for question in all_questions:
         # Get answer count for each question
         answer_count = Answer.objects.filter(question=question).count()
-        
-        # Get hit count for each question
-        hit_count = HitCount.objects.get_for_object(question)
-        hit_count_value = hit_count.hits if hit_count else 0
-
+       
         # Get tags related to each question
         question_tags = question.tags.all()  # Assuming the tags are obtained from a ManyToManyField
         
         question_data[question.id]={
             'question': question,
             'answer_count': answer_count,
-            'hit_count': hit_count_value,
+           
             'question_tags': question_tags,
         }
         
@@ -66,9 +62,7 @@ def question_index_view(request):
         # Get answer count for each question
         answer_count = Answer.objects.filter(question=question).count()
         
-        # Get hit count for each question
-        hit_count = HitCount.objects.get_for_object(question)
-        hit_count_value = hit_count.hits if hit_count else 0
+       
 
         # Get tags related to each question
         question_tags = question.tags.all()  # Assuming the tags are obtained from a ManyToManyField
@@ -76,7 +70,7 @@ def question_index_view(request):
         noans_data[question.id]={
             'question': question,
             'answer_count': answer_count,
-            'hit_count': hit_count_value,
+           
             'question_tags': question_tags,
         }
         
@@ -198,8 +192,7 @@ def search_question(request):
             # Get the number of answers for each question
             num_answers = Answer.objects.filter(question=question).count()
             
-            # Get the hit count for each question
-            hit_count = HitCount.objects.get_for_object(question).hits
+         
             tags = list(question.tags.all().values_list('name', flat=True))
             question_data = {
                 'id': question.id,
@@ -207,7 +200,7 @@ def search_question(request):
                 'user': question.user.username,  # Extract the username from the User object
                 'tags' : tags,
                 'num_answers':num_answers,
-                'hit_count':hit_count,
+               
                 'pub_date': question.pub_date.strftime('%Y-%m-%d %H:%M:%S'),  # Format date as needed
                
             }
@@ -230,8 +223,7 @@ def search_by_tag(request,tag):
             # Get the number of answers for each question
             num_answers = Answer.objects.filter(question=question).count()
             
-            # Get the hit count for each question
-            hit_count = HitCount.objects.get_for_object(question).hits
+            
             tags = list(question.tags.all().values_list('name', flat=True))
             question_data = {
                 'id': question.id,
@@ -239,7 +231,7 @@ def search_by_tag(request,tag):
                 'user': question.user.username,  # Extract the username from the User object
                 'tags' : tags,
                 'num_answers':num_answers,
-                'hit_count':hit_count,
+             
                 'pub_date': question.pub_date.strftime('%Y-%m-%d %H:%M:%S'),  # Format date as needed
                
             }
@@ -340,12 +332,8 @@ def question_detail_view(request, id):
     answers = Answer.objects.filter(question=question)
     
 
-    # Get the HitCount object associated with the question
-    hit_count, created = HitCount.objects.get_or_create(content_type_id=ContentType.objects.get_for_model(question).id, object_pk=question.id)
-
-    # Update the HitCount if the HitCount object is not created
-    if not created:
-        hit_count_response = HitCount.objects.filter(content_type_id=ContentType.objects.get_for_model(question).id, object_pk=question.id).update(hits=F('hits') + 1)
+   
+    
     answer_details = {}
     
     if request.user.is_authenticated:

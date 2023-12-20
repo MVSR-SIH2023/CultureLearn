@@ -1,0 +1,351 @@
+{%extends 'head-foot/header.html' %}
+{% load static %}
+{% load filter %}
+{% block content %}
+
+<style>
+  .navColor {
+    color: #dc3545;
+  }
+  .ms-auto {
+    display: flex;
+    justify-content: end;
+  }
+  .nav-item1 {
+      width: 50%;
+    }
+  input {
+    border: 3px solid #dc3545;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    height: 30px;
+  }
+  .btn1 {
+    border-radius: 50px;
+    height: 30px;
+    padding-bottom: 30px;
+  }
+  .content-container {
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+</style>
+  <div class="container pt-5">
+    <h1>Q&A</h1>
+      <div class="ms-auto">
+        <form >
+          <input class="form-control me-2 search-questions" style="border-radius: 20px;border-color: #dc3545;" type="search" placeholder="Search" aria-label="Search">
+        </form>
+          <button id="searchBtn"class="btn btn-danger btn1 me-2"><i class="bi bi-search"></i></button>
+        <!-- Button trigger modal -->
+        {% if request.user.is_authenticated %}
+        <button type="button" class="btn btn-danger btn1 me-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <i class="bi bi-plus-circle"></i>Ask Question
+        </button>
+        {% endif %}
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Question</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <label>Question:</label>
+                <input type="text" class="question" name="title" placeholder="Type your question..."/><br>
+                <label>Tags:</label>
+                <input type="text" class="tags" name="tags" placeholder="Tags seperated by comma's..."/>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger submit-question">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow-lg mt-3 mb-5">
+        <div class="row p-3">
+          <div class="col-md-8">
+            <ul class="nav nav-tabs text-center">
+              <li class="nav-item nav-item1">
+                <a class="nav-link active" style="color: #dc3545;" aria-current="page" href="#" onclick="showContent('latest', this)"><i class="bi bi-three-dots-vertical"></i>Latest</a>
+              </li>
+              <li class="nav-item nav-item1">
+                <a class="nav-link" style="color: #dc3545;" href="#" onclick="showContent('unanswered', this)"><i class="bi bi-question-octagon-fill"></i>Unanswered {% if noans %}<i class="bi bi-1-circle-fill"></i>{% endif %}</a>
+              </li>
+            </ul>
+            <!-- <--Latest Section--> 
+            <div id="latest-content" class="content ">
+              {% if questions %}
+
+                {% for question in questions %}
+                  {% with question_data=question_data|get_val:question.id %}
+                    <div class="p-3">
+                      <div class="d-flex flex-row mt-3">
+                        <div class="text-center me-3">
+                          <span>{{ question_data.answer_count }}</span><p>Answer</i></p>
+                        </div>
+                       
+                        <a href="{% url 'qa_detail' question.id %}" style="text-decoration: none; color: black;"><h5 class="ms-5">Q: {{ question.title }}</h5></a>
+                      </div>
+                      {% for tag in question.tags.all %}
+                        <a class="tagBtn" data-tag-name="{{tag.slug }}" style="text-decoration: none; color: #dc3545; cursor:pointer;"><tag>{{ tag.slug }}</tag></a>
+                      {% endfor %}
+                      <small>{{ question.pub_date }}</small>
+                    </div>
+                    <hr>
+                  {% endwith %}
+                {%endfor%}
+                
+              {% endif %}
+            </div>
+          
+            <!-- unanswered section -->
+            <div id="unanswered-content" class="content" style="display: none;">
+              {% if noans %}
+                {% for question in noans %}
+                  {%  with noans_data=noans_data|get_val:question.id %}
+                    <div class="p-3">
+                      {% if noans_data.answer_count %}<span class="glyphicon glyphicon-fire" aria-hidden="true"></span>{% endif %}
+                      <div class="d-flex flex-row mt-3">
+                        <div class="text-center me-3">
+                          <span>{{ noans_data.answer_count}}</span><p>Answer</p>
+                        </div>
+                        
+                        <a href="{% url 'qa_detail' question.id %}" style="text-decoration: none; color: black;"><h5 class="ms-5">{{ question.title }}</h5></a>
+                      </div>
+                      {% for tag in question.tags.all %}
+                        <a class="tagBtn" data-tag-name="{{tag.slug }}" style="text-decoration: none; color: #dc3545;cursor:pointer;"><tag>{{ tag.slug }}</tag></a>
+                      {% endfor %}
+                      <small>{{ question.pub_date }}</small>
+                    </div>
+                    <hr>
+                  {% endwith %}
+                {% endfor %}
+            
+              {% endif %}
+            </div>
+          </div>
+
+            <div class="col-md-4">
+              <div class="card p-3 mb-2">
+                <p>Total Questions: <span class="totalquestions">{{ totalcount }}</span></p>
+                <p>Total Answers: <span>{{ anscount }}</span></p>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  Recent Tags
+                </div>
+                <div class="p-3 recent-tags">
+                  {% for tag in tags %}
+                    <a type="button" data-tag-name="{{tag.slug }}" class="btn btn-light tags tagBtn" style="color: #dc3545; border-color: #dc3545;border-radius: 50px; height: 40px; margin-bottom:2px;"><p>{{ tag.slug }}</p></a>
+                  {% endfor %}
+             
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <script>
+    function showContent(contentId, element) {
+        var navLinks = document.getElementsByClassName('nav-link');
+        for (var i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.remove('active');
+        }
+        element.classList.add('active');
+        var contentDivs = document.getElementsByClassName('content');
+        for (var i = 0; i < contentDivs.length; i++) {
+            contentDivs[i].style.opacity = '0';
+            contentDivs[i].style.display = 'none';
+        }
+        var selectedContent = document.getElementById(contentId + '-content');
+        if (selectedContent) {
+            selectedContent.style.display = 'block';
+            setTimeout(function () {
+                selectedContent.style.opacity = '1';
+            }, 50); // Delay showing to match the transition duration
+        }
+    }
+
+
+    $(document).ready(function () {
+			// AJAX for submitting a comment
+			$('.submit-question').click(function (e) {
+				e.preventDefault();
+				var questionTitle = $('input[name="title"]').val();
+        var questionTags = $('input[name="tags"]').val();
+        console.log(questionTitle);
+        console.log(questionTags);
+
+				$.ajax({
+					type: 'POST',
+					url: '/new-question/', // Replace with your actual URL
+					data: {
+						title:questionTitle,
+            tags:questionTags,
+						csrfmiddlewaretoken: '{{ csrf_token }}', // Ensure to include CSRF token
+					},
+          success: function (response) {
+            console.log(response);
+            var questionHtml =
+                              '<div class="p-3">' +
+              
+                                '<div class="d-flex flex-row mt-3">'+
+                                  '<div class="text-center me-3">'+
+                                    '<span>'+ response.num_answers  +'</span><p>Answer</p>'+
+                                  '</div>'+
+                                  
+                                  '<a href="/question/' + response.question.id + '" style="text-decoration: none; color: black;"><h5 class="ms-5">Q: ' + questionTitle + '</h5></a>' +
+                                '</div>' ;
+                                var tags = questionTags.split(',');
+                                tags.forEach(function(tag) {
+                                  questionHtml += '<a href="/qa/tag/' + tag.trim().toLowerCase() + '"  style="text-decoration: none; color: #dc3545;"><tag>' + tag.trim() + '</tag></a>&nbsp;';
+                              });
+                              questionHtml +=
+                                        '<small>'+ response.question.pub_date +'</small>'+
+                                        '</div>'+ '<hr>';
+
+            $('#latest-content').prepend(questionHtml);
+            $('#unanswered-content').prepend(questionHtml);
+
+         
+        	// Clear the comment input field after submission
+						$('input[name="title"]').val(''); 
+            $('input[name="tags"]').val(''); 
+
+
+            // Increment the total questions count
+            var totalQuestionsCount = parseInt($('.totalquestions').text());
+            $('.totalquestions').text(totalQuestionsCount + 1);
+
+             // Append the new tags to the tags section
+             tags.forEach(function (tag) {
+              var trimmedTag = tag.trim();
+              var newTagHtml = '<a href="/tag/' + trimmedTag + '" class="btn btn-light tags" style="color: #dc3545; border-color: #dc3545;border-radius: 50px;"><tag>' + trimmedTag + '</tag></a>&nbsp;';
+              $('.recent-tags').prepend(newTagHtml);
+          });
+					},
+					error: function (xhr, errmsg, err) {
+						console.log(errmsg); // Log any errors to the console
+					},
+				});
+			});
+
+      var searchButton = $('#searchBtn');
+      searchButton.on('click', function () {
+       
+        var searchTerm = $('.search-questions').val();
+        console.log(searchTerm);
+        if (searchTerm.trim() === '') {
+          // If the search term is empty, prevent further action (e.g., prevent search)
+          return false;
+      }
+       
+        $.ajax({
+            type: 'POST',
+            url: '/search-questions/',
+            dataType: 'json',
+            data: {
+                search: searchTerm,
+                csrfmiddlewaretoken: '{{ csrf_token }}' // Replace with your CSRF token
+            },
+            success: function(response) {
+              $('#latest-content').empty();
+              $('#unanswered-content').empty();
+          
+              response.questions.forEach(function(question) {
+                  var questionHtml =
+                      '<div class="p-3">' +
+                          '<a href="/question/' + question.id + '" style="text-decoration: none; color: black;"><h5>' + question.title + '</h5></a>' +
+                          '<div class="d-flex flex-row mt-3">' +
+                              '<div class="text-center me-3">' +
+                                  '<span>' + question.num_answers + '</span><p>Answer</p>' +
+                              '</div>' +
+                              
+                          '</div>';
+          
+                  question.tags.forEach(function(tag) {
+                      questionHtml += '<a href="/qa/tag/' + tag.trim() + '"  style="text-decoration: none; color: #dc3545;"><tag>' + tag.trim() + '</tag></a>&nbsp;';
+                  });
+          
+                  questionHtml +=
+                      '<small>' + question.pub_date + '</small>' +
+                      '</div>' + '<hr>';
+          
+                  $('#latest-content').append(questionHtml);
+                  $('#unanswered-content').append(questionHtml);
+              });
+          
+              $('.search-questions').val('');
+          },
+            error: function (xhr, errmsg, err) {
+              console.log(errmsg); // Log any errors to the console
+            },
+          });
+        });
+
+        
+        var tagButton = $('.tagBtn');
+
+        tagButton.on('click', function () {
+        var tagTerm = $(this).data('tag-name');
+       
+        console.log(tagTerm);
+        var postContainer = $('.post-cards');
+        $.ajax({
+            type: 'POST',
+            url: '/tag/'+ tagTerm + '/',
+            dataType: 'json',
+            data: {
+                tag_value: tagTerm,
+                csrfmiddlewaretoken: '{{ csrf_token }}' // Replace with your CSRF token
+            },
+            success: function(response) {
+              $('#latest-content').empty();
+              $('#unanswered-content').empty();
+          
+              response.questions.forEach(function(question) {
+                  var questionHtml =
+                      '<div class="p-3">' +
+                          '<a href="/question/' + question.id + '" style="text-decoration: none; color: black;"><h5>' + question.title + '</h5></a>' +
+                          '<div class="d-flex flex-row mt-3">' +
+                              '<div class="text-center me-3">' +
+                                  '<span>' + question.num_answers + '</span><p>Answer</p>' +
+                              '</div>' +
+                             
+                          '</div>';
+          
+                  question.tags.forEach(function(tag) {
+                      questionHtml += '<a href="/qa/tag/' + tag.trim() + '"  style="text-decoration: none; color: #dc3545;"><tag>' + tag.trim() + '</tag></a>&nbsp;';
+                  });
+          
+                  questionHtml +=
+                      '<small>' + question.pub_date + '</small>' +
+                      '</div>' + '<hr>';
+          
+                  $('#latest-content').append(questionHtml);
+                  $('#unanswered-content').append(questionHtml);
+              });
+          
+          },
+            error: function (xhr, errmsg, err) {
+              console.log(errmsg); // Log any errors to the console
+            },
+          });
+        });
+      });
+
+		
+
+  </script>
+
+
+  {% endblock %}

@@ -1,0 +1,90 @@
+.heading {
+    color: #ffffff;
+}
+.container1 {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* margin: 3px; */
+    cursor: pointer;
+}
+.container2 {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* margin: 3px; */
+    cursor: pointer;
+}
+.bottom-left-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    font-size: 20px;
+    color: #f7f1f1;
+    background-color: transparent;
+}
+.d-block {
+    height: 80vh;
+    border-radius: 10px;
+}
+.overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        transition: height 0.3s;
+        /* padding-left: 5px; */
+}
+.overlay1 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        transition: height 0.3s;
+        overflow: hiddens;
+        /* padding-left: 5px; */
+}
+.card {
+  margin: 40px;
+  border: none;
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.card-top {
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.card:hover {
+transform: scale(1.05); /* Scale the card on hover */
+transition: transform 0.3s ease; /* Add a smooth transition effect */
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add a subtle shadow on hover */
+}
+.overlay1:hover {
+  height: 100%;
+}
+.card-paragraph {
+margin: 0; /* Remove default margin */
+font-size: 16px; /* Adjust font size as needed */
+display: none; /* Initially hide the paragraph */
+}
+
+.overlay1:hover .card-paragraph {
+  display: block; /* Display the paragraph when overlay1 is hovered */
+}

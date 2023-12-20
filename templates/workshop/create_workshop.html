@@ -1,0 +1,101 @@
+{% extends 'head-foot/header.html' %}
+{% block content %}
+<style>
+    label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input1,select {
+            margin-bottom: 15px;
+            width: 100%;
+            height: 40px;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            border-width: 2px;
+            padding: 8px;
+        }
+
+        textarea {
+            margin-bottom: 15px;
+            width: 100%;
+            border-color: #dc3545;
+            border-width: 2px;
+            border-radius: 8px;
+
+        }
+        .navColor {
+            color: #dc3545;
+        }
+        .content-container {
+          height: 100%;
+          overflow-y: auto;
+          box-sizing: border-box;
+        }
+</style>
+
+  <div class="container pt-5 pb-5">
+      <div class=" card shadow-lg  mt-5 p-5">
+          <h3 class="text-center" style="color: #dc3545;">Create Workshop</h3>
+          <form id="blogForm" method="POST" enctype="multipart/form-data" >
+            {%csrf_token %}
+              <label for="title">Title:</label>
+              <input class="input1" name="title" type="text" required>
+              <div class="row">
+                  <div class="col-sm-6">
+                      <label for="s-date">Start Date:</label>
+                      <input class="input1" name="s_date" type="date" required>
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="e-date">End Date:</label>
+                  <input class="input1" name="e_date" type="date" required>
+                  </div>
+              </div>
+              <label for="name">Address:</label>
+              <input class="input1" type="text"  name="address" >
+              <label for="content">Description</label>
+              <textarea id="content" name="description"  row="3"></textarea>
+              <label for="content">What you will learn:</label>
+              <textarea id="content" name="content" maxlength="200" oninput="countCharacters(this)"  row="3"></textarea>
+              <div id="charCountMessage"></div>
+              <label for="name">Duration:</label>
+              <input class="input1" type="text"  name="duration" >
+              <label for="templates mt-5">Upload Image</label>
+              <input class="mb-3" type="file" id="templates" name="u_image">
+              <label for="tags">Mode:</label>
+              <select id="tags" name="mode" aria-placeholder="select">
+                  <option value="Online">Offline</option>
+                  <option value="Offline">Online</option>
+                  <option value="Hybrid">Hybrid</option>
+              </select>
+              <label for="name">Platform:</label>
+              <input class="input1" type="text"  name="platform" >
+
+              <div class="row">
+                  <div class="col-sm-6">
+                      <label for="s-date">Registration start:</label>
+                      <input class="input1" name="r_start" type="date" required>
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="e-date">Registrations ends:</label>
+                  <input class="input1" name="r_end" type="date" required>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-danger" onclick="createBlog()">Create Workshop</button>
+          </form>
+      </div>
+  </div>
+  </div>
+  <script>
+    function countCharacters(textarea) {
+      let charCount = textarea.value.length;
+  
+      if (charCount <= 200) {
+          document.getElementById('charCountMessage').textContent = `${charCount}/200 characters entered.`;
+      } else {
+          textarea.value = textarea.value.slice(0, 200);
+          document.getElementById('charCountMessage').textContent = `Maximum character limit reached (200 characters).`;
+      }
+  }
+  </script>
+{% endblock %}

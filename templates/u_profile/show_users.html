@@ -1,0 +1,157 @@
+{% extends 'head-foot/header.html'%}
+{% block content %}
+
+<style>
+    .navColor {
+        color: #dc3545;
+    }
+
+    .form-control {
+        width: 50vh;
+        border-radius: 40px;
+        border-color: #dc3545;
+    }
+
+    p {
+        color: #dc3545;
+    }
+
+    .img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    .btn_rad {
+        border-radius: 50%;
+    }
+</style>
+{% include "floating.html" %}
+
+<div class="container mt-5 ">
+    <form class="d-flex justify-content-center" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" id="search_query"aria-label="Search">
+        <button class="btn btn-danger btn_rad " type="submit" id="search_button"><i class="bi bi-search"></i></button>
+    </form>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-4 mt-4" id="user_container">
+        {% for user in users %}
+        {% if user.0.user != request.user %}
+        <div class="col">
+            <div class="card shadow-lg d-flex justify-content-center p-3" style="align-items: center;">
+                <a href="{% url 'accounts:profile'  user.0.user.id %}" style="text-decoration: none;"><img {% if user.0.avatar %} src="{{ user.0.avatar }}" {% endif %} class="img" /></a>
+                <a href="{% url 'accounts:profile'  user.0.user.id %}" style="text-decoration: none;">
+                    <p class="text-center">{{ user.0.user.username }}</p>
+                </a>
+                <button class="btn btn-danger follow" data-user-id="{{ user.0.user.id }}">{{ user.1 }}</button>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.follow').on('click', follow_action);
+        $("#search_button").on('click', get_users);
+    });
+    function follow_action(e) {
+            e.preventDefault();
+            var button = $(this);
+            var userId = button.data('user-id');
+            var buttonText = button.text();
+            console.log(userId);
+            console.log(buttonText);
+            $.ajax({
+                type: "POST",
+                url: "/follow_user/" + userId + "/",
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'user_id': userId
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.unfollowed) {
+                        button.text("Follow");
+                    }
+                    else {
+                        button.text("Unfollow");
+                    }
+                },
+                error: function (error) {
+                    alert("Try again. Registration failed");
+                    console.log(error);
+                },
+            });
+            console.log("Function called");
+        }
+        function get_users(e){
+            e.preventDefault();
+            var search_query = $("#search_query").val();
+            console.log(search_query);
+            $.ajax({
+                type: "POST",
+                url: "/search_users/",
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    query: search_query
+                },
+                success: function (data) {
+                    console.log(data);
+                    $("#user_container").empty();
+
+                    data.forEach(function(user){                    
+                        var userContainer = document.getElementById('user_container');
+
+                    var colDiv = document.createElement('div');
+                    colDiv.className = 'col';
+
+                    var cardDiv = document.createElement('div');
+                    cardDiv.className = 'card shadow-lg d-flex justify-content-center p-3';
+                    cardDiv.style.alignItems = 'center';
+
+                    var imgLink = document.createElement('a');
+                    imgLink.href = '/accounts/profile/' + user.id;
+                    imgLink.style.textDecoration = 'none';
+
+                    var imgElement = document.createElement('img');
+                    if (user.avatar) {
+                        imgElement.src = user.avatar;
+                    }
+                    imgElement.className = 'img';
+                
+                    var usernameLink = document.createElement('a');
+                    usernameLink.href = '/accounts/profile/' + user.id;
+                    usernameLink.style.textDecoration = 'none';
+                
+                    var usernameParagraph = document.createElement('p');
+                    usernameParagraph.className = 'text-center';
+                    usernameParagraph.textContent = user.name;
+                
+                    var followButton = document.createElement('button');
+                    followButton.className = 'btn btn-danger follow';
+                    followButton.setAttribute('data-user-id', user.id);
+                    followButton.textContent = 'Follow';
+                
+                    // Append elements
+                    imgLink.appendChild(imgElement);
+                    usernameLink.appendChild(usernameParagraph);
+                
+                    cardDiv.appendChild(imgLink);
+                    cardDiv.appendChild(usernameLink);
+                    cardDiv.appendChild(followButton);
+                
+                    colDiv.appendChild(cardDiv);
+                
+                    userContainer.append(colDiv);
+                });
+
+                },
+                error: function (error) {
+                    alert("Search failed");
+                    console.log(error);
+                },
+            });
+        }
+</script>
+
+{% endblock %}

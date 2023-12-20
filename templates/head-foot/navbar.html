@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia&display=swap">
+<style>
+  body {
+    font-family: 'Georgia', serif;
+  }
+    .navColor {
+        color: #dc3545 !important;
+    }
+.btn_rad {
+    border-radius: 50%;
+}
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+    display: none !important;
+}
+.goog-te-combo {
+  height:25px !important;
+  margin-top: 10px!important; 
+  border-color: #dc3545;
+  border-radius: 5px;
+
+}
+
+#google_translate_element { 
+    height: 35px !important; 
+    overflow: hidden !important;
+    color:transparent !important;
+}
+
+#google_translate_element a {
+    display: none !important;
+  }
+.goog-logo-link {
+    display:none !important;
+} 
+    
+.goog-te-gadget{
+    color: transparent !important;
+}
+body {
+    top: 0px !important;
+}
+.btn_1 {
+    border-radius: 30px;
+}
+.content-container {
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+</style>
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand navColor" href="{% url 'main:home' %}" style="font-weight: bold;">
+        <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702280805/logo_ms8pwt.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        CultureLearn
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <div class="d-flex justify-content-center" role="search">
+            <input class="form-control me-2 " type="search" placeholder="Search" id="search_query"aria-label="Search">
+            <button class="btn btn-danger btn_rad " type="submit" id="search_button" onclick="redirect()"><i class="bi bi-search"></i></button>
+        </div>
+          <li class="nav-item">
+            <a class="nav-link navColor" href="{% url 'qa_index' %}">Q&A</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navColor" href="{% url 'articles:all-posts' %}">Articles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navColor" href="{% url 'accounts:show_workshops' %}">Workshops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navColor" href="{% url 'articles:all-podcasts'%}">Podcast</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navColor" href="{% url 'accounts:notifications'%}">Notifications</a>
+          </li>
+        </ul>
+        <hr>
+        
+        {% if user.is_authenticated %}
+        <div class="dropdown ms-3">
+                {% if user.profile.avatar %}
+                    <img style="height: 40px; width: 40px; border-radius: 50%;" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" src="{{ user.profile.avatar }}" alt="{{ user.profile.name }}">
+                {% else %}
+                    <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="height: 45px;border-radius: 50%;"/>
+                {% endif %}
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
+                  <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'accounts:profile-edit' %}">Edit Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'accounts:show_users' %}">Show Users</a></li>
+                  <li><a class="dropdown-item" href="{% url 'accounts:show_experts' %}">Show Experts</a></li>
+                  <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Log out</a></li>
+                </ul>
+               
+        </div>
+        {% else %}                    
+            <a type="button" class="btn btn-danger btn_1 ms-3" href="{% url 'accounts:login' %}">Log In</a>
+           
+            <a type="button" class="btn btn-danger btn_1 ms-2" href="{% url 'accounts:signup' %}">Sign Up</a>
+        
+        {% endif %}
+    
+      </div>
+    </div>
+</nav>
+{% include "floating.html" %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#search_query").autocomplete({
+    source: "/real_search/",
+    appendTo: "#user_container",
+    classes: {
+        "ui-autocomplete": "custom-autocomplete", // Use the new class
+    },
+    messages: {
+        noResults: '',
+        results: '',
+    },
+});
+});
+function redirect() {
+console.log("called");
+$.ajax({
+  type: "POST",
+  url: "/give_url/",
+  data: {
+      'csrfmiddlewaretoken': '{{ csrf_token }}',
+      'query': $("#search_query").val()
+  },
+  success: function (data) {
+      console.log($("#search_query").val());
+      console.log(data);
+      window.location.href="/"+data.url;
+  },
+  error: function (error) {
+      alert("Try again. Registration failed");
+      console.log(error);
+  },
+});
+}
+</script>

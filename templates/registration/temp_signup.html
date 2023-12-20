@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    {% comment %} <link rel="stylesheet" href="{% static '/css/signup.css' %}"> {% endcomment %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #6fb3b8;
+            font-family: Arial, sans-serif;
+            margin: 100px;
+            padding: 0px;
+        }
+        
+        
+        
+        h1 {
+            margin-top: 0;
+            text-align: center;
+        }
+        button {
+            background-color: #548CA8;
+            color: white;
+            padding: 14px 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin: 8px 0px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #476072;
+        }
+        input[type=text], input[type=password] ,input[type=email],select{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .pass{
+            position: relative;
+            display: flex;
+            align-items: center;
+            font: optional;
+        
+          }
+         .pass img{
+            width: 25px;
+            cursor: pointer;
+          }
+        hr {
+            height: 0px;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 5px;
+            height: 115%;
+            width: 50%;
+           
+             
+        }
+        
+        .eye-icon {
+            position: absolute;
+            top: 50%;
+            right : 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .content {
+            margin: 10px 0 10px;
+          }
+          .content p {
+            color: #333;
+            font-size: 1.05rem;
+          }
+          .content .requirement-list {
+            margin-top: 20px;
+          }
+          .requirement-list li {
+            font-size: 0.95rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+          }
+          .requirement-list li i {
+            width: 20px;
+            color: #aaa;
+            font-size: 0.45rem;
+          }
+          .requirement-list li.valid i {
+            font-size: 0.95rem;
+            color: #4285F4;
+          }
+          .requirement-list li span {
+            margin-left: 12px;
+            color: #333;
+          }
+          .requirement-list li.valid span {
+            color: #999;
+          }
+          .text {
+            text-align: center;
+          } 
+    </style>
+    
+</head>
+<body>
+    
+  <div class="container">
+    <div class="card">
+        <h1>Create User</h1>
+        <div class="text">
+        {% if errors %}
+            <ul>
+            {% for error in errors %}
+                <li>{{error}}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+            {% for message in messages %}
+                <ul>
+                    {{message}}
+                <ul>
+            {% endfor %}
+        </div>
+            
+        <form method="POST" >
+          {%csrf_token%}
+          <div>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Create a username (only letters and numbers)" required>
+          </div>    
+          <div>
+            <label for="fname">First Name</label>
+				    <input type="text" id="fname" name="fname" placeholder="Enter Your First Name"  required>
+          </div>      
+          <div>
+            <label for="lname">Last Name</label>
+				    <input type="text" id="lname" name="lname" placeholder="Enter Your Last Name"  required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+				    <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
+          </div>  
+          
+          <div style="padding-top: 10px;">
+            <label for="password">Password</label>
+            <div class =pass>
+              <input type="password" id="password" name="pass1" placeholder="Enter Your Password" required >
+              <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686759945/eye-close_aw8s6d.png" id="eyeicon" class="eye-icon">
+            </div>
+              <div class="content">
+                    <p>Password must contains</p>
+                    <ul class="requirement-list">
+                      <li>
+                        <i class="fa-solid fa-circle"></i>
+                        <span>At least 8 characters length</span>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-circle"></i>
+                        <span>At least 1 number (0...9)</span>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-circle"></i>
+                        <span>At least 1 lowercase letter (a...z)</span>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-circle"></i>
+                        <span>At least 1 special symbol (!...$)</span>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-circle"></i>
+                        <span>At least 1 uppercase letter (A...Z)</span>
+                      </li>
+                    </ul>
+              </div>
+            </div>
+            <div>
+              <label for="password">Confirm Password</label>
+              <div class =pass>
+					      <input type="password" id="cpassword" name="pass2" placeholder="Confirm Your Password" required >
+				        <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686759945/eye-close_aw8s6d.png" id="ceyeicon" class="eye-icon">
+              </div>
+            </div>
+            <span id='message'></span>
+            <button type="submit" onclick="cheackpassword()">Create</button>
+        </form>
+        </div>
+    </div>
+    <script>
+      var user=document.querySelector('#username');
+      user.addEventListener('keyup',function(){
+          if(user.value.length == 0 || user.value.length < 6){
+              user.style.border='1px solid red';
+              return false;
+          }
+          else{
+              user.style.border='1px solid green';
+             
+      
+      
+          }
+      })
+      
+      
+      let eyeicon =document.getElementById("eyeicon");
+      let ceyeicon =document.getElementById("ceyeicon");
+      
+          let password =document.getElementById("password");
+              let cpassword =document.getElementById("cpassword");
+      
+          eyeicon.onclick =function(){
+            if(password.type =="password"){
+              password.type ="text";
+              eyeicon.src ='https://res.cloudinary.com/dhva31opb/image/upload/v1686759944/eye-open_a3resw.png';
+            }else{
+              password.type="password";
+              eyeicon.src ="https://res.cloudinary.com/dhva31opb/image/upload/v1686759945/eye-close_aw8s6d.png";
+            }
+      
+                  ceyeicon.onclick =function(){
+                      if(cpassword.type =="password"){
+                          cpassword.type ="text";
+                          ceyeicon.src ='https://res.cloudinary.com/dhva31opb/image/upload/v1686759944/eye-open_a3resw.png';
+                      }else{
+                          cpassword.type="password";
+                          ceyeicon.src ="https://res.cloudinary.com/dhva31opb/image/upload/v1686759945/eye-close_aw8s6d.png";
+                      }    
+          }
+          }    
+//password validation
+const passwordInput = document.querySelector(".pass input");
+// const eyeIcon = document.querySelector(".pass-field i");
+const requirementList = document.querySelectorAll(".requirement-list li");
+
+// An array of password requirements with corresponding 
+// regular expressions and index of the requirement list item
+const requirements = [
+    { regex: /.{8,}/, index: 0 }, // Minimum of 8 characters
+    { regex: /[0-9]/, index: 1 }, // At least one number
+    { regex: /[a-z]/, index: 2 }, // At least one lowercase letter
+    { regex: /[^A-Za-z0-9]/, index: 3 }, // At least one special character
+    { regex: /[A-Z]/, index: 4 }, // At least one uppercase letter
+]
+
+passwordInput.addEventListener("keyup", (e) => {
+    requirements.forEach(item => {
+        // Check if the password matches the requirement regex
+        const isValid = item.regex.test(e.target.value);
+        const requirementItem = requirementList[item.index];
+
+        // Updating class and icon of requirement item if requirement matched or not
+        if (isValid) {
+            requirementItem.classList.add("valid");
+            requirementItem.firstElementChild.className = "fa-solid fa-check";
+        } else {
+            requirementItem.classList.remove("valid");
+            requirementItem.firstElementChild.className = "fa-solid fa-circle";
+        }
+    });
+});
+
+//confirm password validation
+$(' #cpassword').on('keyup', function () {
+    if ($('#password').val() == $('#cpassword').val()) {
+      $('#message').html('Matching').css('color', 'green');
+    } else 
+      $('#message').html('Not Matching').css('color', 'red');
+  })
+
+</script>
+
+</body>
+</html>

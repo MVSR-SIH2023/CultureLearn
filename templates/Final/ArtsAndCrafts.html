@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artsand Crafts</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+  .btn1 {
+    border-color: #dc3545;
+    width: 40%;
+  }
+
+  .btn1:hover {
+    background-color: #dc3545;
+  }
+
+  .card-img-top {
+    height: 250px;
+    object-fit: cover;
+  }
+  .content-container {
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+</style>
+
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+  <div class="content-container">
+    {% include 'head-foot/navbar.html' %}
+    <div class="container mt-5 pt-5">
+      <div class="text-center">
+        <h1 style="color: #dc3545;">Arts And Crafts</h1>
+        <div class="d-flex justify-content-center mt-5">
+          <button class="btn btn1 btn-light" id="button1" style="background-color: #dc3545;">Ancient</button>
+          <button class="btn btn1 btn-light" id="button2">Medieval</button>
+          <button class="btn btn1 btn-light" id="button3">Modern</button>
+        </div>
+      </div>
+      <div id="ancientContent" class="card shadow-lg mt-5 p-5">
+        <h1>Ancient Arts and Crafts</h1>
+        <p><br>Each era is unique in its distinctive culture. In the same way Indian art forms have continuously evolved
+          over thousands of years. In ancient India, various art forms like paintings, architecture and sculpture
+          evolved. The history of art in ancient India begins with prehistoric rock paintings. Such rock paintings can
+          be seen in the Bhimbetaka paintings, belonging to the prehistoric age. Thereafter, an advanced town planning
+          is seen in Harappa and Mohenjodaro, with their centrally planned cities indicating a highly developed
+          architecture. Another remarkable example of sculpture from Harappan civilization comes in the form of the
+          dancing girl from Mohenjodaro.
+
+          The use of symbolic forms in India is as old as the Harappan seals. The fire altars of the Vedic period, with
+          their astronomical and mathematical significance also play an important role in the evolution of the later
+          temples. It was followed by a period in the history of Indian art that is important for rock-cut caves and
+          temple architecture. The Buddhists initiated the rock-cut caves, Hindus and Jains started to imitate them at
+          Badami, Aihole, Ellora, Salsette, Elephanta, Aurangabad and Mahabalipuram. The rock-cut art has continuously
+          evolved, since the first rock cut caves, to suit different purposes, social and religious contexts, and
+          regional differences.
+
+          Alongside the art forms like architecture, paintings and sculpture, there have been evolving, changing,
+          transforming, folk and tribal art traditions in India. These art forms are expression of people belonging to
+          different cultural and social groups of India. It is the expression of people whose life is tuned to the
+          rhythms of nature and its laws of cyclic change and whose life is knotted with natural energy. It's been a
+          tradition in India that gods and legends are transformed into contemporary forms and familiar images. Fairs,
+          festivals and local deities play a vital role in the development of these arts forms.
+          <br><br>Ancient Indian crafts forms have continuously evolved over thousands of years. From the time of the
+          cosmos, the existence of craft is appeared in each sector of life. Sometimes it served the purpose of
+          exchanging thoughts, sometimes to give shape to the learnt artistry and sometimes to satisfy the utilitarian
+          needs to keep their food. The people of ancient India realized that they could have leisure after their
+          regular schedule and to utilise the time they opted for some creative artworks that include pottery, jewellery
+          making, statue making etc. As time advanced, people considered this art of craft as a profession. Later on
+          influences from different dynasties, religions and emperors had helped to flourish the ancient craft and
+          Indian craft as a whole.
+        </p>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat.">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:an-decorative' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702650821/an_decor_arts_auzbro.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Decorative Arts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat.">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:an-performing' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702650801/an_performing_arts_fvgjud.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Performing Arts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat. Lsdvsdsdfsdforem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat. hllllo">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:an-handicrafts' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702650830/an_handicrafts_vih0ll.webp"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Handicrafts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="medievalContent" class="card shadow-lg mt-5 p-5" style="display: none;">
+        <h1>Medieval Arts and Crafts</h1>
+        <p><br>Art in medieval India is the final and inevitable development of the maturity of Gupta art.
+          The Hindu sculptures, paintings and architectures are the most important works of medieval art in India.
+          In the north the invasion of the Delhi sultanate and the Mughals brought in the indo Islamic art which
+          is an important movement in the history of medieval art in India. The paintings of the Rajput school
+          of art are of great significance during this era. The architecture of the medieval period is regarded
+          from its metaphysical aspect, that is, as a kind of magic replica of some unseen region or sacred being;
+          and that it was precisely this metaphysical factor that determined the plan and elevation, rather than
+          any aesthetic or functional consideration.</p>
+        <p>In the Medieval period, the handicraftsmen flourished in the field of pottery, weaving, wood carving, metal
+          working, jewelry etc.
+          The contribution of the Cholas and the Vijaynagar Empire in the field of bronze sculpture, silk weaving,
+          jewelry, temple
+          carving is simply unparalleled. The Mughal period was the golden period in the history of Indian art, craft
+          and culture.
+          The Mughals brought with them a rich heritage.
+          The Mughals introduced methods like inlay work, glass engraving, carpet weaving, brocades, enameling etc.
+          The art and architecture of the Rajputs holds a special position in the history of medieval art.
+          The medieval painting is the work of the Rajput schools. </p>
+        <p>In India art in the medieval period witnesses a wide range of development and progress.
+          The architecture and sculpture of this era is marked with indo Islamic style and also the continuation of the
+          native art and architecture.
+
+        </p>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat.">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:med-decorative' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702651360/med_decor_gf4i2s.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Decorative Arts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat.">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:med-performing' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702651609/med_perform_fsucyu.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Performing Arts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat. Lsdvsdsdfsdforem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat. hllllo">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:med-handicrafts' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702651559/med_handicrafts1.jpg_fhxeeo.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Handicrafts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="modernContent" class="card shadow-lg mt-5 p-5" style="display: none;">
+        <h1>Modern Arts and Crafts</h1>
+        <p><br>Modern arts and crafts represent a dynamic and ever-evolving tapestry of creativity that transcends
+          traditional
+          boundaries and embraces diverse forms of expression. In the contemporary era, artists and artisans around the
+          world
+          are redefining the relationship between tradition and innovation, blending age-old techniques with modern
+          sensibilities.</p>
+        <p>One of the defining features of modern arts and crafts is the seamless fusion of tradition and innovation.
+          Artists draw inspiration from cultural heritage, traditional craftsmanship, and historical techniques,
+          infusing these elements with a fresh perspective. This amalgamation breathes new life into traditional forms,
+          creating a rich and diverse visual language that resonates with contemporary audiences.</p>
+        <p>Modern artists and craftsmen employ an extensive range of mediums and materials, pushing the boundaries of
+          what
+          constitutes traditional arts and crafts. From traditional canvas paintings to avant-garde installations, from
+          ceramics to digital art, the modern landscape is marked by an unprecedented diversity of expression.
+          The use of unconventional materials, recycled items, and technology reflects a contemporary consciousness
+          that seeks to explore the intersection between art, sustainability, and innovation.</p>
+        <p>The advent of technology has revolutionized the world of arts and crafts. Digital tools, 3D printing, virtual
+          reality,
+          and augmented reality have opened up new avenues for creativity and artistic exploration. Artists now have the
+          ability
+          to transcend physical limitations, bringing their visions to life in ways that were once unimaginable. The
+          integration
+          of technology has not replaced traditional crafts but has rather provided a new dimension for artists to
+          experiment and innovate.</p>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat.">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:mod-decorative' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702652040/modern_decor_xkxffh.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Decorative Arts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat.">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:mod-performing' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702652051/mod_perform_qfpify.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Performing Arts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="custom-popover"
+              p="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat. Lsdvsdsdfsdforem ipsum, dolor sit amet consectetur adipisicing elit. Molestias velit nisi, illum temporibus quas iste numquam repellendus beatae! Assumenda accusantium numquam ex voluptas reiciendis. Eaque harum nemo labore tempore quaerat. hllllo">
+              <div class="card h-100 shadow-lg fade-in" onclick="window.location.href='{% url 'main:mod-handicrafts' %}'">
+                <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702652064/mod_handicrafts_lyfu1r.jpg"
+                  class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Handicrafts</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // let button1 = document.getElementById('button1');
+      // let button2 = document.getElementById('button2');
+      // let button3 = document.getElementById('button3');
+      // function showContent(category) {
+      //   document.getElementById('ancientContent').style.display = 'none';
+      //   document.getElementById('medievalContent').style.display = 'none';
+      //   document.getElementById('modernContent').style.display = 'none';
+      //   document.getElementById(category + 'Content').style.display = 'block';
+      // }
+      // button1.onclick = function () {
+      //   button1.style.backgroundColor = '#dc3545';
+      //   button2.style.backgroundColor = "";
+      //   button3.style.backgroundColor = "";
+      //   showContent('ancient');
+      // }
+      // button2.onclick = function () {
+      //   button2.style.backgroundColor = '#dc3545';
+      //   button1.style.backgroundColor = "";
+      //   button3.style.backgroundColor = "";
+      //   showContent('medieval');
+      // }
+      // button3.onclick = function () {
+      //   button3.style.backgroundColor = '#dc3545';
+      //   button1.style.backgroundColor = "";
+      //   button2.style.backgroundColor = "";
+      //   showContent('modern');
+      // }
+      document.addEventListener("DOMContentLoaded", function () {
+        let button1 = document.getElementById('button1');
+        let button2 = document.getElementById('button2');
+        let button3 = document.getElementById('button3');
+        let activeTab = localStorage.getItem('activeTab') || 'ancient';
+
+        function showContent(category) {
+          document.getElementById('ancientContent').style.display = 'none';
+          document.getElementById('medievalContent').style.display = 'none';
+          document.getElementById('modernContent').style.display = 'none';
+          document.getElementById(category + 'Content').style.display = 'block';
+        }
+
+        function setActiveTab(tab) {
+          localStorage.setItem('activeTab', tab);
+        }
+
+        button1.onclick = function () {
+          button1.style.backgroundColor = '#dc3545';
+          button2.style.backgroundColor = "";
+          button3.style.backgroundColor = "";
+          showContent('ancient');
+          setActiveTab('ancient');
+        }
+
+        button2.onclick = function () {
+          button2.style.backgroundColor = '#dc3545';
+          button1.style.backgroundColor = "";
+          button3.style.backgroundColor = "";
+          showContent('medieval');
+          setActiveTab('medieval');
+        }
+
+        button3.onclick = function () {
+          button3.style.backgroundColor = '#dc3545';
+          button1.style.backgroundColor = "";
+          button2.style.backgroundColor = "";
+          showContent('modern');
+          setActiveTab('modern');
+        }
+
+        // Set the active tab on page load
+        if (activeTab === 'ancient') {
+          button1.click();
+        } else if (activeTab === 'medieval') {
+          button2.click();
+        } else if (activeTab === 'modern') {
+          button3.click();
+        }
+      });
+
+    </script>
+  </div>
+</body>
+
+</html>

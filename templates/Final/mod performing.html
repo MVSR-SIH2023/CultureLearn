@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+    .navColor {
+        color: #dc3545;
+    }
+
+    .img {
+        height: 100%;
+        /* Set the height to 100% */
+        width: 100%;
+        object-fit: cover;
+        /* Ensure the image covers the entire container */
+    }
+
+    .col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-container {
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+
+    hr {
+        font-weight: bold;
+        color: #dc3545;
+    }
+
+    h5,
+    h1 {
+        color: #dc3545;
+    }
+</style>
+
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1702750347/artsmodern2_yldx0r.avif">
+    <div class="content-container">
+        {% include 'head-foot/navbar.html' %}
+        <div class="container pt-5">
+            <div class="card mt-5 p-5 mb-5">
+                <h1 class="pb-5">Modern Performing Arts</h1>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="col">
+                        <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702656051/cont_dance1_rbt0bf.jpg"
+                            class="img" />
+                            <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702655951/cont_dance_ll3bpq.jpg"
+                            class="img" />
+                    </div>
+                    <div class="col">
+                        <h5>Contemporary Dance</h5>
+                        <hr>
+                        <p>Contemporary dance in India encompasses a wide range of dance activities currently performed in India.
+                             It includes choreography for Indian cinema, modern Indian ballet and experiments with existing classical
+                              and folk forms of dance by various artists.<br>
+
+                            Uday Shankar and Shobana Jeyasingh have led modern Indian ballet which combined classical Indian dance
+                             and music with Western stage techniques. Their productions have included themes related to Shiva-Parvati,
+                              Lanka Dahan, Panchatantra, Ramayana among others
+                        </p>
+                        <h5>Dance in Bollywood Film</h5>
+                        <p>The presentation of Indian dance styles in film, Hindi Cinema, has exposed the range of dance in India to a global audience.
+
+                            Dance and song sequences have been an integral component of films across the country. With the introduction of sound to the
+                             cinema in the film Alam Ara in 1931, choreographed dance sequences became ubiquitous in Hindi and other Indian films.<br>
+                             Dance in early Hindi films was primarily modeled on classical Indian dance styles such as Kathak,
+                              or folk dancers. Modern films often blend this earlier style with Western dance styles 
+                              (MTV or in Broadway musicals), though it is not unusual to see western choreography and
+                               adapted classical dance numbers side by side in the same film. Typically, the hero or
+                                heroine performs with a troupe of supporting dancers. Many song-and-dance routines 
+                                in Indian films feature dramatic shifts of location and/or changes of costume between
+                                 verses of a song. It is popular for a hero and heroine to dance and sing a pas de deux
+                                  (a French ballet term, meaning "dance of two") in beautiful natural surroundings
+                                   or architecturally grand settings, referred to as a "picturisation". Indian films 
+                                   have often used what are now called "item numbers" where a glamorous female figure 
+                                   performs a cameo. The choreography for such item numbers varies depending on the film's 
+                                   genre and situation. The film actress and dancer Helen was famous for her cabaret numbers.<br>
+                                   Often in movies, the actors don't sing the songs themselves that they dance too, themselves but have 
+                                   another artist sing in the background. For an actor to sing in the song is unlikely but not rare.
+                                    The dances in Bollywood can range from slow dancing to a more upbeat hip-hop style dance.
+                                     The dancing itself is a fusion of all dance forms. 
+                                   It could be Indian classical, Indian folk dance, belly dancing, jazz, hip-hop, and everything else you can imagine.</p>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2 g-4 mt-5">
+                    <div class="col">
+                        <h5>Contemporary Indian Theater</h5>
+                        <hr>
+                        <p>Modern Indian theater, shaped by the convergence of Sanskrit, folk, and Western traditions,
+                             finds its foundational roots in the latter. Emerging in the 19th century, it grappled with 
+                             pressing issues of nationalism, self-identity, and modernity. The Western influence,
+                              particularly through realism and naturalism, brought new dramatic techniques. Playwrights
+                               like Tagore addressed these themes, fostering a cultural awakening. As a dynamic 
+                               amalgamation of ancient heritage and global perspectives, modern Indian theater
+                                explores diverse narratives, reflecting the complex socio-cultural landscape of India.
+                                This synthesis of traditions continues to evolve, contributing to the vibrant tapestry of India’s theatrical expression.
+                        </p>
+                        <h5>Famous personalities of Modern Theater</h5>
+                        <ul>
+                            <li><span style="font-weight: bold;color: #dc3545;">Samsa (Sami Venkatadri Iyer): </span>Samsa was a prominent Kannada playwright and dramatist known for his significant
+                                 contributions to Kannada theater. His works often delved into social issues, and he played a crucial role in shaping the modern Kannada theatrical landscape.</li>
+                            <li><span style="font-weight: bold;color: #dc3545;">Subrahmanya Bharathiar: </span>A revered figure in Tamil literature and a freedom fighter, Bharathiar also made significant contributions to Tamil theater.
+                                 His plays often reflected his nationalist ideologies and commitment to social reform.
+                            </li>
+                            <li><span style="font-weight: bold;color: #dc3545;">Veeresalingam Pantulu:</span>A social reformer and writer in Andhra Pradesh, Veeresalingam Pantulu’s literary 
+                                works extended to theater. He used drama as a medium to address social issues and promote progressive ideas in society.</li>
+                            <li><span style="font-weight: bold;color: #dc3545;">Sreekandan Nair: </span>Sreekandan Nair, associated with Kerala, made noteworthy contributions to the Malayalam theater scene.
+                                 His plays, marked by cultural richness, added to the vibrant theatrical traditions of the region.</li>
+                            <li><span style="font-weight: bold;color: #dc3545;">Bharatendu Harishchandra:</span>A key figure in the Hindi literary and theatrical revival during the late 19th century, Bharatendu Harishchandra is often hailed as the “Father of Modern Hindi Literature.”
+                                 His contributions include both writing and promoting theater in Hindi.</li>
+                            <li><span style="font-weight: bold;color: #dc3545;">Dharmavir Bharati:</span>An influential Hindi writer and playwright, Dharmavir Bharati is best known
+                                 for his iconic play “Andha Yug,” a powerful exploration of the aftermath of the Mahabharata war.</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702656353/theater1_jvttzo.avif"
+                            class="img mb-5" />
+                        
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2 g-4 mt-5">
+                    <div class="col">
+                        <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702656473/fusion_ujzxfb.jpg"
+                            class="img" /><br>
+                        <img src="https://res.cloudinary.com/dykwpv27p/image/upload/v1702656667/fusion3.jpg_kl60xy.jpg"
+                            class="img" />
+                    </div>
+                    <div class="col">
+                        <h5>Fusion Music</h5>
+                        <hr>
+                        <p>Indian fusion music is a genre that blends traditional Indian music with contemporary styles, 
+                            creating a unique and eclectic sound. This genre often features a mix of classical Indian
+                             instruments and Western instruments, with a focus on improvisation and experimentation.
+                              The music is characterized by its intricate rhythms, melodic structures, and emotive vocals.
+                               It is a genre that has gained popularity in recent years, with many artists pushing the
+                                boundaries of what is possible in terms of fusing different musical styles.
+                        </p>
+                        <h5>Popular Indian Fusion Artists And Their Unique Sounds</h5>
+                        <p>Ah, Indian fusion music. A genre that has taken the global music scene by storm with its unique blend of traditional Indian melodies and Western beats. The impact of Indian fusion on the world cannot be understated - it has brought a refreshing twist to familiar sounds, captivating audiences from all walks of life. From Bollywood-inspired tunes mixed with hip-hop rhythms to classical ragas infused with electronic elements, the possibilities seem endless. But what exactly makes this genre so influential? Let's explore how Indian fusion music has managed to connect with etechnocrats and leave an indelible mark on the global stage.
+                            <br>From the very beginning, Indian fusion music defied expectations and pushed boundaries. It challenged conventional notions of what constitutes "Indian" or "Western" music, seamlessly blending diverse styles together in ways that were both surprising and delightful. This willingness to experiment and break free from tradition is what sets Indian fusion apart from other genres.
+                            <br>But it's not just about mixing different musical elements; it's also about the emotions evoked through these compositions. Whether it's joy, sadness, or nostalgia, Indian fusion manages to convey universal feelings that resonate with listeners around the world. It transcends cultural barriers and speaks directly to our hearts, reminding us of our shared humanity.
+                            <br>Moreover, Indian fusion music has served as a bridge between cultures, fostering cross-cultural collaborations that have enriched both sides involved. Artists from India collaborating with musicians from different parts of the globe have created truly magical moments where East meets West in harmonious synergy.
+
+                            In essence, the impact of Indian fusion music on global scenes can be seen in its ability to bring people together through a common love for melody and rhythm. Its infectious energy spreads like wildfire, inspiring countless artists across borders to experiment with their own unique fusions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<!-- Family Gatherings
+
+1.	Family Time: Christmas is a time for families to come together, share meals, and exchange gifts.
+
+2.	Community Events: Many communities organize events, parades, and festivals to celebrate Christmas.
+ -->

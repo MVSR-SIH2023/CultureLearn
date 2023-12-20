@@ -1,0 +1,67 @@
+{% extends 'head-foot/header.html' %}
+{%load static %}
+{% block content %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<style>
+    label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input1,select {
+            margin-bottom: 15px;
+            width: 100%;
+            height: 40px;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            border-width: 2px;
+            padding: 8px;
+        }
+
+        textarea {
+            margin-bottom: 15px;
+            width: 100%;
+            border-color: #dc3545;
+            border-width: 2px;
+            border-radius: 8px;
+
+        }
+        
+        /*.navColor {
+            color: #dc3545;
+        }*/
+</style>
+
+
+    <div class="container pt-4 pb-5">
+        <div class="card shadow-lg p-5">
+            <h3 class="text-center" style="color: #dc3545;">Create Workshop</h3>
+            <form id="podcastForm" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+                <label for="title">Name:</label>
+                <input class="input1" type="text" name="name" required>
+                <label for="content">Description</label>
+                <textarea id="content" name="content" row='8'></textarea>
+                <label for="templates mt-5">Upload Podcast Template</label>
+                <input class="mb-3" type="file" id="templates" name="templates"><br>
+                <label for="templates mt-5" >Upload Audio</label>
+                <input class="mb-3" type="file" id="audio" name="audio" required><br>
+                
+                <select name="main_podcasts" id="mainPodcastSelect" >
+                    {% for main_podcast in main_podcasts %}
+                    <option value="{{ main_podcast.id }}">{{ main_podcast.title }}</option>
+                    {% endfor %}
+                </select>
+                <p id="noMatchText" style="display: none;">No matching podcasts found.</p>
+
+                
+                <button type="submit" class="btn btn-danger">Add Podcast</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+{% endblock %}

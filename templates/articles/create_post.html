@@ -1,0 +1,46 @@
+{% extends 'head-foot/header.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<style>
+  label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input1{
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.django-ckeditor-widget{
+    width:100% !important;
+    display: inline-block !important;
+}
+</style>
+    <h2 class="text-center mt-5" style="color: #dc3545;">Create a New Blog</h2>
+    <div class="container mt-5 mb-5 p-5 shadow-lg" style="border-radius: 10px;background-color: #fff;">
+        <form id="blogForm card" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="title">Title:</label>
+            <input class="input1" type="text" id="title" name="title" required>
+            {{form.media}}
+            {{form.as_p}}
+  
+            <label for="tags">Select Tags:</label>
+           
+            <input class="input1" type="text" id="tags" name="tags" required>
+                        
+            
+                    
+                <button type="submit" class="btn btn-danger">Submit</button>
+        </form>
+    </div>
+
+    {% endblock %}
+
+

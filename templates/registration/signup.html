@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RegistrationForm_v1 by Colorlib</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- Include jQuery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<style>
+    h3,
+    input {
+        color: #dc3545;
+    }
+
+    .btn {
+        background-color: #dc3545;
+    }
+
+   /* @font-face {
+        font-family: "Poppins-Regular";
+        src: url("../fonts/poppins/Poppins-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: "Poppins-SemiBold";
+        src: url("../fonts/poppins/Poppins-SemiBold.ttf");
+    }*/
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Roboto" !important;
+        color: #333;
+        font-size: 13px;
+        margin: 0;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+        font-family: "Poppins-Regular";
+        color: #333;
+        font-size: 13px;
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul {
+        margin: 0;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    ul {
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    :focus {
+        outline: none;
+    }
+
+    .wrapper {
+        min-height: 100vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+    }
+
+    .inner {
+        padding: 20px;
+        background: #fff;
+        max-width: 850px;
+        margin: auto;
+        display: flex;
+    }
+
+    .inner .image-holder {
+        width: 50%;
+    }
+
+    .inner form {
+        width: 50%;
+        padding-top: 36px;
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+    .inner h3 {
+        text-transform: uppercase;
+        font-size: 25px;
+        font-family: "Poppins-SemiBold";
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .form-group {
+        display: flex;
+    }
+
+    .form-group input {
+        width: 50%;
+    }
+
+    .form-group input:first-child {
+        margin-right: 25px;
+    }
+
+    .form-wrapper {
+        position: relative;
+    }
+
+    .form-wrapper i {
+        position: absolute;
+        bottom: 9px;
+        right: 0;
+    }
+
+    .form-control {
+        border: 1px solid #333;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        display: block;
+        width: 100%;
+        height: 30px;
+        padding: 0;
+        margin-bottom: 25px;
+    }
+
+    .form-control::-webkit-input-placeholder {
+        font-size: 13px;
+        color: #333;
+        font-family: "Poppins-Regular";
+    }
+
+    .form-control::-moz-placeholder {
+        font-size: 13px;
+        color: #333;
+        font-family: "Poppins-Regular";
+    }
+
+    .form-control:-ms-input-placeholder {
+        font-size: 13px;
+        color: #333;
+        font-family: "Poppins-Regular";
+    }
+
+    .form-control:-moz-placeholder {
+        font-size: 13px;
+        color: #333;
+        font-family: "Poppins-Regular";
+    }
+
+    select {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+        padding-left: 20px;
+    }
+
+    select option[value=""][disabled] {
+        display: none;
+    }
+
+    button {
+        border: none;
+        width: 164px;
+        height: 51px;
+        margin: auto;
+        margin-top: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background: #333;
+        font-size: 15px;
+        color: #fff;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+    }
+
+    button i {
+        margin-left: 10px;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+
+    button:hover i,
+    button:focus i,
+    button:active i {
+        -webkit-animation-name: hvr-icon-wobble-horizontal;
+        animation-name: hvr-icon-wobble-horizontal;
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+    }
+
+    @-webkit-keyframes hvr-icon-wobble-horizontal {
+        16.65% {
+            -webkit-transform: translateX(6px);
+            transform: translateX(6px);
+        }
+
+        33.3% {
+            -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+        }
+
+        49.95% {
+            -webkit-transform: translateX(4px);
+            transform: translateX(4px);
+        }
+
+        66.6% {
+            -webkit-transform: translateX(-2px);
+            transform: translateX(-2px);
+        }
+
+        83.25% {
+            -webkit-transform: translateX(1px);
+            transform: translateX(1px);
+        }
+
+        100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes hvr-icon-wobble-horizontal {
+        16.65% {
+            -webkit-transform: translateX(6px);
+            transform: translateX(6px);
+        }
+
+        33.3% {
+            -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+        }
+
+        49.95% {
+            -webkit-transform: translateX(4px);
+            transform: translateX(4px);
+        }
+
+        66.6% {
+            -webkit-transform: translateX(-2px);
+            transform: translateX(-2px);
+        }
+
+        83.25% {
+            -webkit-transform: translateX(1px);
+            transform: translateX(1px);
+        }
+
+        100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+
+    @media (max-width: 1199px) {
+        .wrapper {
+            background-position: right center;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .inner form {
+            padding-top: 10px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .inner {
+            display: block;
+        }
+
+        .inner .image-holder {
+            width: 100%;
+        }
+
+        .inner form {
+            width: 100%;
+            padding: 40px 0 30px;
+        }
+
+        button {
+            margin-top: 60px;
+        }
+    }
+
+    /* Your existing styles */
+
+    .requirements-popup {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 10px;
+        display: none;
+        z-index: 999;
+        /* Adjust the z-index */
+    }
+
+    .form-wrapper:hover .requirements-popup {
+        display: block;
+    }
+
+    .requirement-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .requirement-list li {
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .requirement-list li i {
+        margin-right: 5px;
+        color: #dc3545;
+    }
+    
+    .toggle-password {
+        position: absolute;
+        right: 0;
+        bottom: 9px;
+        cursor: pointer;
+        color: #333;
+        /* Add this line to set the color */
+    }
+    body {
+        font-family: "Roboto"!important;
+    }
+    .requirement-list input[type="checkbox"]:checked + label::before {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .requirement-list input[type="checkbox"] + label::before {
+            border: 1px solid #dc3545;
+        }
+
+        .requirement-list input[type="checkbox"] + label {
+            color: #dc3545;
+        }
+        .text {
+            text-align: center;
+          } 
+</style>
+
+<body>
+
+    <div class="wrapper"
+        style="background-image: url('https://res.cloudinary.com/dhva31opb/image/upload/v1702799680/IC_i0sgwm.avif');">
+        <div class="inner">
+            <div class="image-holder">
+                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702800090/EA1BC550-C404-499D-BE46-1962671A1554_1_201_a_cena5y.jpg"
+                    alt="">
+            </div>
+            <form  method="POST">
+                {%csrf_token%}
+                <h3>Registration Form</h3>
+                <div class="text">
+                    {% if errors %}
+                        <ul>
+                        {% for error in errors %}
+                            <li>{{error}}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+            
+                        {% for message in messages %}
+                            <ul>
+                                {{message}}
+                            <ul>
+                        {% endfor %}
+                    </div>
+                <div class="form-group">
+                    <input type="text"  name="fname" placeholder="First Name" class="form-control">
+                    <input type="text" name="lname" placeholder="Last Name" class="form-control">
+                </div>
+                <div class="form-wrapper">
+                    <input type="text" name="username" placeholder="Username" class="form-control">
+                    
+                </div>
+                <div class="form-wrapper">
+                    <input type="text" name="email" placeholder="Email Address" class="form-control">
+                    
+                </div>
+                <!-- ... (Your existing HTML code) ... -->
+
+                <div class="form-wrapper">
+                    <input type="password" name="pass1" id="password" placeholder="Password" class="form-control"
+                        onkeyup="checkPassword()">
+                    <i class="bi bi-eye toggle-password" onclick="togglePassword('password', 'eye-icon')"></i>
+                    <div class="requirements-popup">
+                        <ul class="requirement-list">
+                            <li id="minLength"><input type="checkbox" disabled style="background-color: #dc3545;"> Minimum of 8 characters</li>
+                            <li id="oneNumber"><input type="checkbox" disabled> At least one number</li>
+                            <li id="oneLowercase"><input type="checkbox" disabled> At least one lowercase letter</li>
+                            <li id="oneSpecialChar"><input type="checkbox" disabled> At least one special character</li>
+                            <li id="oneUppercase"><input type="checkbox" disabled> At least one uppercase letter</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <input type="password" name="pass2" id="cpassword" placeholder="Confirm Password" class="form-control"
+                        onkeyup="checkPassword()">
+                    <i class="bi bi-eye toggle-password" onclick="togglePassword('password', 'eye-icon')"></i>
+                </div>
+                <div id="message"></div>
+                <button type="submit" class="btn" style="border-radius: 20px;">Signup
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+
+            document.getElementById("minLength").querySelector('input').checked = password.length >= 8;
+            document.getElementById("oneNumber").querySelector('input').checked = /\d/.test(password);
+            document.getElementById("oneLowercase").querySelector('input').checked = /[a-z]/.test(password);
+            document.getElementById("oneSpecialChar").querySelector('input').checked = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            document.getElementById("oneUppercase").querySelector('input').checked = /[A-Z]/.test(password);
+
+            // Display corresponding messages
+            document.getElementById("minLength").innerHTML = password.length >= 8
+                ? '<input type="checkbox" checked > Minimum of 8 characters'
+                : '<input type="checkbox"> Minimum of 8 characters';
+
+            document.getElementById("oneNumber").innerHTML = /\d/.test(password)
+                ? '<input type="checkbox" checked > At least one number'
+                : '<input type="checkbox" > At least one number';
+
+            document.getElementById("oneLowercase").innerHTML = /[a-z]/.test(password)
+                ? '<input type="checkbox" checked > At least one lowercase letter'
+                : '<input type="checkbox" > At least one lowercase letter';
+
+            document.getElementById("oneSpecialChar").innerHTML = /[!@#$%^&*(),.?":{}|<>]/.test(password)
+                ? '<input type="checkbox" checked > At least one special character'
+                : '<input type="checkbox" > At least one special character';
+
+            document.getElementById("oneUppercase").innerHTML = /[A-Z]/.test(password)
+                ? '<input type="checkbox" checked > At least one uppercase letter'
+                : '<input type="checkbox" > At least one uppercase letter';
+        }
+
+        function togglePassword(inputId, iconId) {
+            var passwordInput = document.getElementById(inputId);
+            var icon = document.getElementById(iconId);
+            var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            // Change the icon based on the password visibility
+            icon.className = type === 'password' ? 'bi-eye' : 'bi-eye-slash';
+        }
+        //confirm password validation
+        $('#cpassword').on('keyup', function () {
+            if ($('#password').val() == $('#cpassword').val()) {
+                $('#message').html('Matched').css('color', 'green');
+            } else 
+                $('#message').html('Not Matched').css('color', 'red');
+              })
+    </script>
+
+
+</body>
+
+</html>

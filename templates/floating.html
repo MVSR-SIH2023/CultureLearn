@@ -1,0 +1,29 @@
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd"
+        crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<style>
+    .btn_chat {
+        background-color: #f5eeee;
+        color: #dc3545;
+        border: none;
+        font-size: 25px;
+        border-radius: 50%; /* Adjust the border-radius for a more rounded shape */
+        height: 60px;
+        width: 60px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add a shadow to the button */
+    }
+    .align_1 {
+        display: flex;
+        justify-content: flex-end;
+    }
+</style>
+
+
+<div class="fixed-bottom align_1 m-5">
+    <button href="{% url 'accounts:ai_assisstant'%}" class="btn btn-danger btn_chat">AI</button>
+</div>
+

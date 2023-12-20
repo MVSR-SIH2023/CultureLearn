@@ -1,0 +1,74 @@
+{% extends "head-foot/header.html" %}
+{% block content %}
+<style>
+    .content-container {
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+        
+    }
+    .card {
+        height: 70%;
+        align-items: center;
+        width: 50%;
+
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+    .img {
+        height: 200px;
+        width: 200px;
+        border-radius : 50%;
+    }
+    .d-flex {
+        justify-content: space-between;
+    }
+    input,textarea {
+        border-color: #dc3545;
+    }
+</style>
+<div class="container mt-5 pt-5">
+  <div class="card p-5">
+      <img id="profile-image" src="{{ profile.avatar }}" class="img">
+      <div class="mb-3">
+          <form method="post" enctype="multipart/form-data" id="image-form">
+              {% csrf_token %}
+              <label for="formFile" class="form-label">Update Image</label>
+              <input class="form-control" type="file" name="image" id="formFile">
+              <label for="Bio" class="form-label mt-3">BIO</label>
+              <textarea class="form-control" name="bio" rows='3' maxlength="50" oninput="countCharacters(this)" id="BIO">{{profile.bio}}</textarea>
+              <div id="charCountMessage"></div>
+              <div class="text-center mt-3">
+                  <button type="submit" class="btn btn-danger me-3">Update</button>
+                  <button type="submit" value="delete" class="btn btn-danger ms-3">Delete</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<script>
+    function countCharacters(textarea) {
+        let charCount = textarea.value.length;
+    
+        if (charCount <= 50) {
+            document.getElementById('charCountMessage').textContent = `${charCount}/50 characters entered.`;
+        } else {
+            textarea.value = textarea.value.slice(0, 50);
+            document.getElementById('charCountMessage').textContent = `Maximum character limit reached (50 characters).`;
+        }
+    }
+  document.getElementById('formFile').addEventListener('change', function () {
+      const file = this.files[0];
+      const profileImage = document.getElementById('profile-image');
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+          profileImage.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+  });
+</script>
+   {% endblock  %}

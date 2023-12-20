@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CultureLearn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <style>
+      body {
+        line-height: 1.5em;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        font-family: poppins, Verdana, Geneva, Tahoma, sans-serif;
+        margin: 0;
+    }
+    .welcome {
+        text-align: center;
+        margin: 10px 0 10px 0;
+        color: #dc3545;
+    }
+    h2 {
+        margin-bottom: 10px;
+        font-size: 31px;
+        font-weight: bold;
+    }
+    .log-in-page {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+    }
+    .main-page {
+        width: 50%;
+        height: 100vh;
+        background: radial-gradient(circle, #eee2e3  0%,#f3f4f4 40%);
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      
+    }
+    .sub-page {
+        width: 50%;
+        height: 100vh;
+    }
+    .form {
+        width: 450px;
+        margin: 15px 0 15px 0;
+        position: relative;
+        
+    }
+    .actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 40px 0 10px 0;
+    }
+    .input-field {
+        display: block;
+        width: inherit;
+        height: 50px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #dc3545;
+        background-color: transparent;
+        font-size: 18px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        transition: ease-in-out;
+        transition-duration: .4s;
+    }
+    .input-field::placeholder {
+        font-size: 16px;
+    }
+    .input-field:focus {
+        outline: none;
+        border: 1px solid #006d77bb;
+    }
+    .btn {
+        box-sizing: border-box;
+        border: none;
+        width: 100%;
+        height: 46px;
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 5px;
+        transition: ease-in-out;
+        transition-duration: 1s;
+        color: white;
+        font-size: 18px;
+    }
+    .btn:hover {
+        background-color: #006d77bb;
+    }
+    .btn:active {
+        transform: scale(0.8);
+    }
+    .btn:focus {
+        outline: none;
+    }
+    .label {
+        width: 100%;
+        color: #dc3545;
+    }
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    a {
+        color: #dc3545;
+        text-decoration: none;
+    }
+    .error {
+        text-align: center;
+        color: #9d0208;
+        font-size: small;
+        margin: 10px 0 10px 0;
+    }
+    .check-box{
+        accent-color: #006d77bb;
+    }
+  
+    @media (max-width: 900px) {
+        .main-page {
+            width: 100%;
+            background-color: white; 
+        }
+        .sub-page {
+            display: none;
+        }
+        .form {
+            width: 70%;
+        }
+  }
+
+    @media (max-width: 600px) {
+         .main-page {
+            background: white; 
+        }
+        .form {
+            width: 90%;
+        }
+      .actions {
+        font-size: 14px;
+      }
+      .input-field {
+         margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      h2 {
+        font-size: 25px;
+      }
+  }
+  </style>
+  <body>
+    <div class="card">
+        <section class="log-in-page">
+          <div class="sub-page">
+            <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702048687/wp7658910_afcddj.jpg" 
+                 alt="image from unsplash"
+                 class="img" />
+          </div>
+            <div class="main-page">
+              <div class="welcome">
+                <h2>Login</h2>
+                <span class="guide">Please enter your details.</span>
+              </div>
+              <form class="form" method="post">
+                {% csrf_token %}
+                <label for="username_or_email" class="label">
+                  Email
+                  <input name="username_or_email" type="text" class="input-field" id="email"
+                         placeholder="Enter your Username or Email" />   
+                </label>
+      
+                <label for="password" class="label">
+                  Password
+                  <input name="password" type="password" class="input-field" id="password"
+                         placeholder="Enter your password" />
+                </label>
+      
+                <p class="error"></p>
+      
+                <div class="actions">
+            
+                    
+      
+                  <a href="{% url 'accounts:forgot_password' %}">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-danger">Sign in</button>
+              </form>
+      
+              <p><a href="{% url 'accounts:signup' %}">Don't have an account? Sign up</a></p>
+            </div>
+          </section>
+    </div>
+    
+  </body>
+</html>

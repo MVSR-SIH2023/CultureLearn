@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>festivalsandcelebrations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<style>
+    body {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+    }
+
+    .navColor {
+        color: #dc3545;
+    }
+
+    .align {
+        display: flex;
+        justify-content: space-between;
+        /* padding: bottom 4px;; */
+    }
+
+    .bt {
+        height: 40px;
+
+    }
+
+    .content {
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+
+    }
+
+    .card {
+        /* background-color:rgba(255, 185, 185, 0.203); */
+        cursor: pointer;
+    }
+
+    .card-img-top {
+        height: 65%;
+    }
+
+    .card-body {
+        height: 35%;
+
+    }
+    .btn_rad {
+        border-radius: 50%;
+    }
+
+    .box-shadow {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .box-shadow:hover {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.8)
+    }
+
+    .hover-effect {
+        transition: transform 0.3s;
+        /* Add a smooth transition effect 0.3 */
+    }
+
+    .hover-effect:hover {
+        transform: scale(1.05);
+        /* Increase the size on hover, you can adjust as needed 1.1 */
+        /* Add any other hover-specific styles here */
+    }
+
+    .swiper {
+        height: 50%;
+        padding: 40px;
+    }
+
+    .swiper-slide {
+        color: #000;
+        display: flex;
+        height: 50vh;
+        border-radius: 10px;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .swiper-button-prev .swiper-button-next {
+        color: #dc3545;
+    }
+</style>
+
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+    <div class="content">
+        {% include 'head-foot/navbar.html' %}
+        <div class="container mt-5 pt-4">
+            <h1 style="color: #dc3545; text-align: center; font-weight: bold;">Festivals and Celebrations</h1>
+            <div>
+                <div>
+                    <h1>Religious Festivals</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100" onclick="window.location.href='{% url 'main:diwali'%}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1701544543/diwali_vfuv7v.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Diwali</h4>
+                                    <p class="card-text">Festival symbolizing the triumph of light over darkness,
+                                        celebrated with lights,
+                                        sweets, and joy.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100 " onclick="window.location.href='{% url 'main:ramzan'%}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702054107/bakrid_ucpdua.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Ramzan</h4>
+                                    <p class="card-text">Ramzan, or Ramadan, is a sacred Islamic month of fasting,
+                                        reflection, and community</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100" onclick="window.location.href='{% url 'main:christmas'%}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702054108/christmas_b9dfed.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body ">
+                                    <h4 class="card-title">Christmas</h4>
+                                    <p class="card-text">Christmas: Christian festival celebrating the birth of Jesus,
+                                        marked by joy,
+                                        gift-giving, and festive decorations.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702054108/christmas_b9dfed.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body ">
+                                    <h4 class="card-title">Christmas</h4>
+                                    <p class="card-text">Christmas: Christian festival celebrating the birth of Jesus,
+                                        marked by joy,
+                                        gift-giving, and festive decorations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-4">
+            <div>
+                <div>
+                    <h1>New Year Festivals</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100" onclick="window.location.href='{% url 'main:ugadi'%}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702055005/ugadi_bw8uv1.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Ugadi</h4>
+                                    <p class="card-text">Telugu and Kannada New Year celebration in South India, marked
+                                        by cultural events,
+                                        festive foods, and the beginning of a new lunar calendar year.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100" onclick="window.location.href='{% url 'main:gudipadwa'%}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702142367/gudipadwa_dlvi4p.png"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Gudi Padwa</h4>
+                                    <p class="card-text">Maharashtrian New Year celebrated with the raising of Gudi
+                                        flags, festive foods,
+                                        and cultural joy.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100" onclick="window.location.href='{% url 'main:vishu'%}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702141954/vishu2_lkkjyr.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Vishu</h4>
+                                    <p class="card-text">Malayali New Year in Kerala, marked by traditional rituals,
+                                        festive feasts, and the
+                                        Vishukkani display</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702141954/vishu2_lkkjyr.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Vishu</h4>
+                                    <p class="card-text">Malayali New Year in Kerala, marked by traditional rituals,
+                                        festive feasts, and the
+                                        Vishukkani display</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-4">
+            <div>
+                <div>
+                    <h1>Harvest Festivals</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:sankranti'%}'">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702054465/sankranti_dslxyz.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Sankranthi</h4>
+                                    <p class="card-text">Sankranthi: Hindu harvest festival, marked by joyful
+                                        celebrations and traditional
+                                        rituals.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:onam'%}'">
+                            <div class="card h-100" onclick="window.location.href='onam.html'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702055457/onam_nvarya.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Onam</h4>
+                                    <p class="card-text">Onam: Harvest festival celebrated in Kerala, marked by vibrant
+                                        decorations, feasts,
+                                        and cultural festivities.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:baisakhi'%}'">
+                            <div class="card h-100"onclick="window.location.href='baisakhi.html'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702054899/baisakhi1_a0fciw.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Baisakhi</h4>
+                                    <p class="card-text">Sikh and Punjabi festival celebrating the harvest season with
+                                        joyous festivities,
+                                        traditional dances, and religious observances.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702054899/baisakhi1_a0fciw.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Baisakhi</h4>
+                                    <p class="card-text">Sikh and Punjabi festival celebrating the harvest season with
+                                        joyous festivities,
+                                        traditional dances, and religious observances.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-4">
+            <div>
+                <div>
+                    <h1>National Festivals</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:independenceday'%}'">
+                            <div class="card h-100" onclick="window.location.href='independenceday.html'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702056373/independence2_napvyf.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Independence Day</h4>
+                                    <p class="card-text">Commemorating freedom from British rule with flag hoisting and
+                                        patriotic
+                                        celebrations.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100" onclick="window.location.href='{% url 'main:republicday'%}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702056381/republicday_r6feh4.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Republic Day</h4>
+                                    <p class="card-text">The adoption of the Constitution in 1950. Celebrated with a
+                                        grand parade
+                                        showcasing India's diversity and military strength.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100 " onclick="window.location.href='{% url 'main:constitutionday'%}'">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702138241/const_vvpd8z.png"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Constitution Day</h4>
+                                    <p class="card-text">Observes the adoption of the Indian Constitution in 1949,
+                                        honoring the framework of
+                                        governance for the nation.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702328129/mahatma-gandhi-gettyimages-102701091-2048x2048-1_na5l6l.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Gandhi Jayanthi</h4>
+                                    <p class="card-text">Gandhi Jayanti: Celebrating Mahatma Gandhi's birthday, his
+                                        non-violent legacy for India's freedom.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-4 pb-4">
+            <div>
+                <div>
+                    <h1>State Specific Festivals</h1>
+                </div>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:teej'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702139001/Teej-Mahotsav-jaipur_hmbifc.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Teej</h4>
+                                    <p class="card-text">Teej Festival: Hindu celebration, particularly by women, marked
+                                        with fasting,
+                                        prayers, and traditional dances, symbolizing marital bliss and the monsoon
+                                        season.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:bonalu'%}'">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702055682/bonalu1_etv8kx.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Bonalu</h4>
+                                    <p class="card-text">Bonalu: Hindu festival in Telangana, India, honoring the
+                                        goddess Mahakali with
+                                        colorful processions and offerings.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect" onclick="window.location.href='{% url 'main:mysoredasara' %}'">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702139099/mysoredasara_cluc9c.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Mysore Dasara</h4>
+                                    <p class="card-text">Celebrated in Karnataka, India, it's a vibrant festival
+                                        featuring a grand
+                                        procession, cultural events, and the iconic Mysore Palace illuminated in
+                                        splendor</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide box-shadow hover-effect">
+                            <div class="card h-100 ">
+                                <img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702139099/mysoredasara_cluc9c.jpg"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">Mysore Dasara</h4>
+                                    <p class="card-text">Celebrated in Karnataka, India, it's a vibrant festival
+                                        featuring a grand
+                                        procession, cultural events, and the iconic Mysore Palace illuminated in
+                                        splendor</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <footer class="text-white bg-dark pt-4 pb-4">
+            <div class="container text-center text-md-left">
+                <div class="row text-center text-md-left">
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 text-left">
+                        <h5 class="text-uppercase text-danger font-weight-bold">CultureLearn</h5>
+                        <p>Recognizing the ongoing need to position itself for the digital future, Indian Culture is an
+                            initiative
+                            by the Ministry of Culture. A platform that hosts data of cultural relevance from various
+                            repositories and
+                            institutions all over India.</p>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h5 class="text-uppercase text-danger font-weight-bold">Links</h5>
+                        <p>
+                            <a href="http://127.0.0.1:5500/home.html" class="text-white"
+                                style="text-decoration: none;"><i class="bi bi-house-door-fill"></i> Home</a>
+                        </p>
+                        <p>
+                            <a href="#" class="text-white" style="text-decoration: none;"><i
+                                    class="bi bi-file-person"></i>
+                                AboutUs</a>
+                        </p>
+                        <p>
+                            <a href="#" class="text-white" style="text-decoration: none;"><i
+                                    class="bi bi-telephone"></i> Contact
+                                Us</a>
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h5 class="text-uppercase text-danger font-weight-bold">Created By</h5>
+                        <p>Students of Maturi Venkat Subba Rao Engineering College</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <div class="d-flex flex-row text-center">
+                <div class="d-flex flex-row col-md-7 col-lg-8">
+                    <p class="ms-5">Copyright @2023 all rights reserved by:</p>
+                    <a href="#" class="text-danger" style="text-decoration: none;">MVSR</a>
+                </div>
+                <div class="col-mg-5 col-lg-4">
+                    <div class="text-md-right">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="bi bi-android2"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="bi bi-bootstrap"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="bi bi-google"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
+                                        class="bi bi-github"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            // loop: true,
+            centerSlides: true,
+            fade: true,
+            grabCursor: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                520: {
+                    slidesPerView: 2,
+                },
+                950: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

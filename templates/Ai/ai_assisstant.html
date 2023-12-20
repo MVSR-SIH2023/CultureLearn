@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NavBar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+    .navColor {
+        color: #dc3545;
+    }
+    .btColor{
+        color: #dc3545;
+        border-radius: 30px;
+        border-color: #dc3545;
+    }
+    section {
+        width: 100%;
+    }
+    .scroll-height1 {
+        max-height: 50vh; /* Set a maximum height for the comment section */
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+    .scroll-height2 {
+        max-height: 40vh; /* Set a maximum height for the comment section */
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+    .scroll-height3 {
+        max-height: 30vh; /* Set a maximum height for the comment section */
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+    .comment-section::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .comment-section::-webkit-scrollbar-thumb {
+            background-color: #dc3545;
+            border-radius: 10px;
+        }
+
+        .comment-section::-webkit-scrollbar-track {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        .bg {
+        position: relative;
+        height: 100vh;
+        text-align: center;
+    }
+    .content-container {
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+    .card {
+      height: 50vh;
+    }
+    .card1 {
+      height: 70vh;
+    }
+    .btn1 {
+      height: 40px;
+    }
+</style>
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+  <div class="content-container">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand navColor" href="#" style="font-weight: bold;">CultureLearn</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link navColor" aria-current="page" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navColor" href="Q&A.html">Q&A</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navColor" href="Articles.html">Articles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navColor" href="workshop.html">Workshops</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navColor" href="PodCast.html">Podcast</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navColor" href="Notifications.html">Notifications</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          </form>
+          <hr>
+          <button class="btn btn-danger" type="submit">LOGIN</button>
+        </div>
+      </div>
+  </nav>
+    <div class="container pt-5 text-center d-flex justify-content-center">
+        <form class="input-group mb-3" method="post" >
+        {% csrf_token %}
+            <input type="text" class="form-control" name ="Question" placeholder="Ask..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="hidden" name="form_identifier" value="form1">
+            <button class="btn btn-danger" type="submit" id="button-addon2">Button</button>
+        </form>
+        <button class="btn btn-danger btn1 ms-5">Quiz</button>
+    </div>
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <section class="mb-3">
+                    <div class="card p-3 scrollspy-example-2 scroll-height1 comment-section" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" tabindex="0">                          
+                      <div>
+                        {%  if answer_list %}
+                        <h3 style="color: #dc3545;font-weight: bold;">Response</h3>
+                          {% for key in answer_list %}
+                              <p>{{ key }} </p>
+                          {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                </section>
+                <section class="scroll-height3" style="background-color: #f5e2e3; border-radius: 10px;">
+                  {% if keywords %}
+                  <form class="keywords mt-4 p-4" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_identifier" value="form2">
+                    {% for keyword in keywords %}
+                    <input type="checkbox" class="btn-check" id="{{ keyword }}" name ="{{ keyword }}" autocomplete="off" style="height: 24px;">
+                    <label class="btn btn-outline-danger" for="{{ keyword }}" style="font-size: 18px;">{{ keyword }}</label>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-danger m-1">Go</button>
+                  </form>
+                  {% endif %}
+                </section>  
+            </div>
+            <div class="col-sm-6">
+                <section class="mb-3">
+                    <div class="card card1 p-4 scrollspy-example-2 scroll-height2 comment-section" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" tabindex="0">
+                        <div>
+                          {% if articles_titles %}
+                            <h3 style="color: #dc3545;font-weight: bold;">Articles</h3>
+                            {% for article in articles_titles %}
+                            <div class="d-flex mt-3">
+                              <h6>{{ article }}</h4>
+                              <a class="ms-3" href="https://en.wikipedia.org/wiki/{{ article }}" target="_blank">Read Article</a>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <h3 >Articles not found</h3>
+                          {% endif %}
+                        </div>
+                    </div>
+                </section>
+                <section>
+                  <div class="card card1 p-4 scrollspy-example-2 scroll-height3 comment-section" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" tabindex="0">
+                    <div>
+                      {% if videos %}
+                      <h3 style="color: #dc3545;font-weight: bold;">Youtube Videos</h3>
+                      {% for video in videos %}
+                      <div class="video-container d-flex mb-3">
+                        <h6>{{ video.0 }}</h6>  {# Accessing video name #}
+                        <a href="https://www.youtube.com/watch?v={{ video.2 }}" target="_blank"><img src="{{ video.1 }}" alt="{{ video.0 }} thumbnail"></a>  {# Accessing video URL #}
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <h3 >Videos not found</h3>
+                      {% endif %}
+                    </div>
+                </div>
+                </section>
+            </div>
+        </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
+

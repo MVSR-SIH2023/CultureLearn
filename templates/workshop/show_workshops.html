@@ -1,0 +1,262 @@
+{% extends 'head-foot/header.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .navColor {
+        color: #dc3545;
+    }
+    .heading {
+        font-family: "Bree-Serif";
+        font-size: 40px;
+        color: #dc3545;
+        font-weight: bold;
+    }
+    .head {
+        font-size: 30px;
+    }
+    .card {
+            position: relative;
+            height: 40vh;
+            transition: transform 0.3s;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 20px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 55px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            overflow: hidden;
+            padding: 10px;
+            transition: height 0.3s;
+        }
+
+        .card:hover .overlay {
+            height: 160px; /* Adjust the height as needed */
+        }
+        @media (max-width: 560px){
+      .d-block {
+        height: 50vh;
+      }
+    }
+    @media (min-width: 560px){
+      .d-block {
+        height: 80vh;
+      }
+    }
+    .content-container {
+      height: 100vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    .btn1 {
+      border-radius: 50px;
+      height: 30px;
+      padding-bottom: 30px;
+    }
+</style>
+
+    <div class="container mt-4">
+      <h2 style="color: #dc3545;">Workshops</h2>
+
+      <div class="d-flex justify-content-end">
+        
+          <input class="form-control me-2 all-workshop-search" style="border-radius: 20px;border-color: #dc3545; width: 40vh;" type="search" placeholder="Search" aria-label="Search">
+
+        <button type="button" class="btn btn-danger btn1 me-2" id="searchBtn"><i class="bi bi-search"></i></button>
+        {% if request.user.is_authenticated %}
+          <a type="button" href="{% url 'accounts:create_workshop' %}" class="btn btn-secondary btn_rad" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Create Article">
+              <i class="bi bi-plus-circle"></i>
+          </a>
+      {% endif %}
+      </div>
+      <div id ="workshop-list" class="row row-cols-1 row-cols-md-2 g-4">
+        {% for workshop in workshops %}
+        <a href="/workshop/{{ workshop.0.id }}/" >
+          <div  class="col" >
+            <div class="card mt-5" >
+              <img src="/media/{{ workshop.0.image }}" alt="Card Image" style="width: 100%; height: 100%;">
+              <div class="overlay">
+                  <h1 class="head bottom-left-text">{{ workshop.0.name }}<br><span style="font-size: 15px;">Start Date: {{ workshop.0.start_date }}</</span><br><span style="font-size: 15px;">End Date: {{ workshop.0.end_date }}</span><br><span style="font-size: 15px;">Status: {{ workshop.1 }}</span></h1>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        {% empty %}
+          No Workshops
+        {% endfor %}
+
+        
+      {% if no_of_pages != 1 %}
+      </div>
+      <a type="button" href="/show_workshops/" id ="load-more-button" class="view-details-button">Load more Workshops</a>
+    </div>
+    {% endif %}
+
+
+
+    <script>
+      $(document).ready(function () {
+        var page = 1;
+        var totalPages = {{ no_of_pages }};
+        console.log(totalPages);
+    
+        $('#load-more-button').on('click', function (e) {
+            e.preventDefault();
+            if (page < totalPages) {
+                page++;
+                $.ajax({
+                    url: window.location.href + '?page=' + page,
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function (data) {
+                        console.log(data);
+                        var workshopsContainer = document.getElementById("workshop-list");
+    
+                        var json_data = JSON.parse(data);
+                        console.log(json_data);
+    
+                        var workshops = json_data.length;
+                        var newRow = true;
+    
+                        // Loop through the workshops array and create HTML for each workshop
+                        json_data.forEach(function (workshop, index) {
+                            
+    
+                            var colDiv = document.createElement("div");
+                            colDiv.className = "col";
+    
+                            var a = document.createElement("a");
+                            a.href = "/workshop/" + workshop.id + "/";
+    
+                            var cardDiv = document.createElement("div");
+                            cardDiv.className = "card mt-5";
+    
+                            var img = document.createElement("img");
+                            img.src = workshop.image;
+                            img.alt = "Card Image";
+                            img.style.width = "100%";
+                            img.style.height = "100%";
+    
+                            var overlayDiv = document.createElement("div");
+                            overlayDiv.className = "overlay";
+    
+                            var heading = document.createElement("h1");
+                            heading.className = "head bottom-left-text";
+                            heading.innerHTML = workshop.name + "<br><span style='font-size: 15px;'>Start Date: " + workshop.start_date + "</span><br><span style='font-size: 15px;'>End Date: " + workshop.end_date + "</span><br><span style='font-size: 15px;'>Status: " + workshop.status + "</span>";
+    
+                            // Append elements to construct the workshop card
+                            overlayDiv.appendChild(heading);
+                            cardDiv.appendChild(img);
+                            cardDiv.appendChild(overlayDiv);
+                            colDiv.appendChild(cardDiv);
+                            a.appendChild(colDiv);
+    
+                            $('#workshop-list').append(a)
+    
+                            
+                        });
+    
+                        if (page == totalPages) {
+                            $('#load-more-button').hide();
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Error fetching more workshops:', error);
+                    }
+                });
+            } else {
+                $('#load-more-button').hide();
+            }
+        });
+    });
+    
+    
+  $(document).ready(function() {
+    var searchButton = $('#searchBtn');
+    searchButton.on('click', function () {
+       
+        var searchTerm = $('.all-workshop-search').val();
+        console.log(searchTerm);
+        var workshopContainer = $('#workshop-list');
+        $.ajax({
+            type: 'POST',
+            url: '/search-workshops/',
+            dataType: 'json',
+            data: {
+                search: searchTerm,
+                csrfmiddlewaretoken: '{{ csrf_token }}' // Replace with your CSRF token
+            },
+            success: function(response) {
+
+               $('#workshop-list').empty();
+               var loadMoreButton = document.getElementById('load-more-button');
+
+                // Hide the button
+                loadMoreButton.style.display = 'none';
+              const workshops = response.workshops;
+              
+
+              workshops.forEach(workshop => {
+                
+                
+                var colDiv = document.createElement("div");
+                colDiv.className = "col";
+
+                var a = document.createElement("a");
+                a.href = "/workshop/" + workshop.id + "/";
+
+                var cardDiv = document.createElement("div");
+                cardDiv.className = "card mt-5";
+
+                var img = document.createElement("img");
+                img.src = workshop.image;
+                img.alt = "Card Image";
+                img.style.width = "100%";
+                img.style.height = "100%";
+
+                var overlayDiv = document.createElement("div");
+                overlayDiv.className = "overlay";
+
+                var heading = document.createElement("h1");
+                heading.className = "head bottom-left-text";
+                heading.innerHTML = workshop.name + "<br><span style='font-size: 15px;'>Start Date: " + workshop.start_date + "</span><br><span style='font-size: 15px;'>End Date: " + workshop.end_date + "</span><br><span style='font-size: 15px;'>Status: " + workshop.status + "</span>";
+
+                // Append elements to construct the workshop card
+                overlayDiv.appendChild(heading);
+                cardDiv.appendChild(img);
+                cardDiv.appendChild(overlayDiv);
+                colDiv.appendChild(cardDiv);
+                a.appendChild(colDiv);
+
+                $('#workshop-list').append(a)
+
+              });
+      
+            },
+            error: function (xhr, errmsg, err) {
+              console.log(errmsg);
+            },
+          });
+        });
+      });
+      
+
+
+    </script>
+  
+    
+{% endblock %}

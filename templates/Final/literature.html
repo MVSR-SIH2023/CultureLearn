@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>literature</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+		integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<style>
+		body {
+			margin: 0;
+		}
+
+		h2,
+		h3 {
+			color: #dc3545;
+		}
+
+		h1 {
+			color: #dc3545;
+			font-weight: 700;
+			margin-top: 125px;
+			text-align: center;
+			text-transform: uppercase;
+			letter-spacing: 4px;
+			line-height: 23px;
+		}
+
+		.card1 {
+			padding-left: 15%;
+		}
+
+		/* --- Start progress bar --- */
+
+		.process-wrapper {
+			margin: auto;
+			max-width: 1280px;
+		}
+
+		#progress-bar-container {
+			position: relative;
+			width: 90%;
+			margin: auto;
+			height: 100px;
+			margin-top: 65px;
+		}
+
+		#progress-bar-container ul {
+			padding: 0;
+			margin: 0;
+			padding-top: 15px;
+			z-index: 9999;
+			position: absolute;
+			width: 100%;
+			margin-top: -40px
+		}
+
+		#progress-bar-container li:before {
+			content: " ";
+			display: block;
+			margin: auto;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			border: solid 2px #aaa;
+			transition: all ease 0.3s;
+
+		}
+
+		#progress-bar-container li.active:before,
+		#progress-bar-container li:hover:before {
+			border: solid 2px #fff;
+
+			background: linear-gradient(to right, #fff 0%, #dc3545 100%);
+		}
+
+		#progress-bar-container li {
+			list-style: none;
+			float: left;
+			width: 20%;
+			text-align: center;
+			color: #aaa;
+			text-transform: uppercase;
+			font-size: 11px;
+			cursor: pointer;
+			font-weight: 700;
+			transition: all ease 0.2s;
+			vertical-align: bottom;
+			height: 60px;
+			position: relative;
+		}
+
+		#progress-bar-container li .step-inner {
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+			font-size: 14px;
+		}
+
+		#progress-bar-container li.active,
+		#progress-bar-container li:hover {
+			color: #444;
+		}
+
+		#progress-bar-container li:after {
+			content: " ";
+			display: block;
+			width: 6px;
+			height: 6px;
+			background: #777;
+			margin: auto;
+			border: solid 7px #fff;
+			border-radius: 50%;
+			margin-top: 40px;
+			box-shadow: 0 2px 13px -1px rgba(0, 0, 0, 0.3);
+			transition: all ease 0.2s;
+		}
+
+		#progress-bar-container li:hover:after {
+			background: #555;
+		}
+
+		#progress-bar-container li.active:after {
+			background: #dc3545;
+		}
+
+		#progress-bar-container #line {
+			width: 60%;
+			margin: auto;
+			background: #eee;
+			height: 6px;
+			position: absolute;
+			left: 10%;
+			top: 50px;
+			z-index: 1;
+			border-radius: 50px;
+			transition: all ease 0.9s;
+		}
+
+		#progress-bar-container #line-progress {
+			content: " ";
+			width: 3%;
+			height: 100%;
+			background: #dc3545;
+			background: linear-gradient(to right, #dc3545 0%, #dc3435 100%);
+			position: absolute;
+			z-index: 2;
+			border-radius: 50px;
+			transition: all ease 0.9s;
+		}
+
+		#progress-content-section {
+			margin: auto;
+			background: #f3f3f3;
+			border-radius: 4px;
+		}
+
+		#progress-content-section .section-content {
+			padding: 30px 40px;
+		}
+
+		#progress-content-section .section-content h2 {
+			font-size: 17px;
+			text-transform: uppercase;
+			color: #333;
+			letter-spacing: 1px;
+		}
+
+		#progress-content-section .section-content p {
+			font-size: 16px;
+			line-height: 1.8em;
+			color: #777;
+		}
+
+		#progress-content-section .section-content {
+			display: none;
+			animation: FadeInUp 700ms ease 1;
+			animation-fill-mode: forwards;
+			transform: translateY(15px);
+			opacity: 0;
+		}
+
+		#progress-content-section .section-content.active {
+			display: block;
+		}
+
+		@keyframes FadeInUp {
+			0% {
+				transform: translateY(15px);
+				opacity: 0;
+			}
+
+			100% {
+				transform: translateY(0px);
+				opacity: 1;
+			}
+		}
+
+		a {
+			text-decoration: none;
+			color: #dc3545;
+		}
+
+		.img {
+			width: 100%;
+			height: 100%;
+		}
+
+		.img1 {
+			height: 500px;
+			width: 100%;
+
+		}
+
+		.content-container {
+			height: 100vh;
+			overflow-y: auto;
+			box-sizing: border-box;
+		}
+
+		.show-publuu-viewer {
+			transition: transform 0.3s ease-in-out;
+			margin: 20px;
+		}
+
+		.show-publuu-viewer:hover {
+			transform: scale(1.1);
+		}
+
+		.navColor {
+			color: #dc3545;
+		}
+
+		.btn_rad {
+			border-radius: 50%;
+		}
+	</style>
+</head>
+
+<body background="https://res.cloudinary.com/dhva31opb/image/upload/v1701971408/paisley_hj6hf8.jpg">
+	<div class="content-container">
+		{% include 'head-foot/navbar.html' %}
+		<div class="container">
+			<h1>Indian Literature</h1>
+			<br>
+			<div class="process-wrapper card card1 mb-3">
+				<div id="progress-bar-container" class="custom-progress-bar-container">
+					<ul>
+						<li class="step step01 active">
+							<div class="step-inner">Religious Literature</div>
+						</li>
+						<li class="step step02">
+							<div class="step-inner">Non-Religious Literature</div>
+						</li>
+						<li class="step step03">
+							<div class="step-inner">Languages</div>
+						</li>
+						<li class="step step05">
+							<div class="step-inner">Indian Education System</div>
+						</li>
+					</ul>
+					<div id="line">
+						<div id="line-progress" class="custom-line-progress"></div>
+					</div>
+				</div>
+			</div>
+			<div id="progress-content-section" class="shadow-lg mb-5">
+
+				<!-- Religiuos  -->
+				<div class="section-content discovery active">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Religious
+						Literature</h2>
+					<hr>
+					<div class="row row-cols-1 row-cols-md-2 g-4">
+						<div class="card col shadow-lg">
+							<h2 class="text-center mt-4">Content</h2>
+							<ul style="color: #dc3545;">
+								<li><a href="#Vedas">Vedas</a></li>
+								<li><a href="#Vedangas">Vedangas</a></li>
+								<li><a href="#Shad-Darshanas">Shad-Darshanas</a></li>
+								<li><a href="#Puranas">Puranas</a></li>
+								<li><a href="#Upanishads">Upanishads</a></li>
+								<li><a href="#Ithihasas">Ithihasas</a></li>
+								<li><a href="#The Epics">The Epics</a></li>
+								<li><a href="#Buddist and Jain Literature">Buddist and Jain Litearute</a></li>
+								<li><a href="#Bhakti Literature">Bhakti Literature</a></li>
+								<li><a href="#Sufi Literature">Sufi Literature</a></li>
+								<li><a href="#books">Books</a></li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="ms-3">
+								<h3 id="Vedas">Vedas</h3>
+								<hr>
+								<p>
+									Vedas, meaning “knowledge,” were written in Vedic Sanskrit between 1500 and 500 BCE
+									in the northwestern region the Indian Subcontinent. The Vedas were transmitted
+									orally during the course of numerous subsequent generations before finally being
+									archived in written form. Not much is known about the authors of the Vedas, as the
+									focus is placed on the ideas found in Vedic tradition rather than those who
+									originated the ideas. The oldest of the texts is the Rig Veda, and while it is not
+									possible to establish precise dates for each of the ancient texts, it is believed
+									the collection was completed by the end of the 2nd millennium BCE (Before Common
+									Era).
+									There are four Indo-Aryan Vedas: the Rig Veda contains hymns about their mythology;
+									the Sama Veda consists mainly of hymns about religious rituals; the Yajur Veda
+									contains instructions for religious rituals; and the Atharva Veda consists of spells
+									against enemies, sorcerers, and diseases. (Depending on the source consulted, these
+									are spelled, for example, either Rig Veda or Rigveda.)
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702580006/vedangas_jxbcmu.jpg"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Vedangas">Vedangas</h3>
+								<hr>
+								<p>
+									The Vedanga (Sanskrit: वेदाङ्ग vedāṅga, "limb of the Veda-s"; plural form:
+									वेदाङ्गानि vedāṅgāni) are six auxiliary disciplines of Hinduism that developed in
+									ancient times and have been connected with the study of the Vedas:
+									Vedangas developed as ancillary studies for the Vedas, but its insights into meters,
+									structure of sound and language, grammar, linguistic analysis and other subjects
+									influenced post-Vedic studies, arts, culture and various schools of Hindu
+									philosophy. The Kalpa Vedanga studies, for example, gave rise to the Dharma-sutras,
+									which later expanded into Dharma-shastras.
+									List of vedangas:
+								</p>
+								<ul>
+									<li>hiksha</li>
+									<li>Chandas</li>
+									<li>Vyakarana</li>
+									<li>Nirukta</li>
+									<li>Kalpa</li>
+									<li>Jyotisha</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Shad-Darshanas">Shad-Darshanas</h3>
+								<hr>
+								<p>Hinduism encompasses the philosophies, worldviews and teaching of Hinduism itself
+									since Ancient India. Shad Darshan is one such system of philosophy that gives the
+									details of the real world and how there is a distinctive approach towards obtaining
+									the exposition of sacred scripture as well as authoritative knowledge.
+									However, When it comes to Indian Philosophy the term Shad Darshana plays a distinct
+									role where the system looks at things, including its exposition of sacred scriptures
+									and authoritative knowledge. The Six Principles of Hindu darshanas are the
+									following: Samkhya, Yoga, Nyaya, Vaisheshika, Mimamsa and Vedanta. Non-Hindu
+									Darshana includes Buddhism and Jainism. Each of these systems of philosophy was
+									formulated in sutras through ancient times and elaborated extensively by its
+									writers. They are dedicated to providing various attempts at describing truth and
+									the path to finding it. Each of these elements forms a core part of the Hindu
+									Scriptures and the religion itself.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702580396/Six-philosophies-shad-Darshana_kzyqwr.jpg"
+								class="img">
+						</div>
+					</div> -->
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702627228/puranas_wbnyp0.jpg"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Puranas">Puranas</h3>
+								<hr>
+								<p>Puranas are influential texts of the Hindu faith. Translating literally as "ancient"
+									or "old", they were written thousands of years ago by unknown authors. Containing
+									the knowledge, myths, and genealogical information of important figures, there are
+									total of 18 Puranas. The Puranas are revered as important texts in Hinduism and
+									played a significant role in Indian historical events.Scholars heavily contest the
+									origin of the Puranas. While it is often credited to Vyasa, who narrated the
+									Mahabharata (another important Hindu text), it is more likely that many individuals
+									contributed to their creation. Their dates of creation span more than a thousand
+									years, from the middle of the first millennium BCE to 1000 CE. It is unknown why the
+									texts were specifically created. However, the knowledge contained within, such as
+									pilgrimage information, temple locations, and detailed accounts of local geography,
+									might have been to preserve the information for future generations.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702627293/220px-Krishna_and_the_Gopis__herdsmaids_ujeghp.jpg"
+								class=" img1">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<p>List of puranas</p>
+								<ul>
+									<div class="row row-cols-1 row-cols-md-3 g-4">
+										<div class=" col">
+											<li>Brahma Purana</li>
+											<li>Vishnu Purana</li>
+											<li>Shiva Purana</li>
+											<li>Padma Purana</li>
+											<li>Bhagavata Purana</li>
+											<li>Narada Purana</li>
+										</div>
+										<div class="col">
+											<li>Kurma Purana
+											</li>
+											<li>Vamana Purana</li>
+											<li>Matsya Purana</li>
+											<li>Garuda Purana</li>
+											<li>Brahmanda Purana</li>
+											<li>Brahmavaivarta Purana</li>
+										</div>
+										<div class="col">
+											<li>Linga Purana</li>
+											<li>Varaha Purana</li>
+											<li>Skanda Purana</li>
+											<li>Vayu Purana</li>
+											<li>Kalki Purana</li>
+										</div>
+									</div>
+
+									<li class="">Maha Puranas (Great Puranas):<P>A group of six Puranas, often
+											considered particularly significant:</P>
+										<ol>
+											<li>Markandeya Purana</li>
+											<li>Agni Purana</li>
+											<li>Bhavishya Purana</li>
+											<li>Brahma Vaivarta Purana</li>
+											<li>Linga Purana </li>
+											<li>Varaha Purana </li>
+										</ol>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Upanishads">Upanishads</h3>
+								<hr>
+								<p>
+									Upanishad, one of four genres of texts that together constitute each of the Vedas,
+									the sacred scriptures of most Hindu traditions. Each of the four Vedas—the Rigveda,
+									Yajurveda, Samaveda, and Atharvaveda—consists of a Samhita (a “collection” of hymns
+									or sacred formulas); a liturgical prose exposition called a Brahmana; and two
+									appendices to the Brahmana—an Aranyaka (“Book of the Wilderness”), which contains
+									esoteric doctrines meant to be studied by the initiated in the forest or some other
+									remote place, and an Upanishad, which speculates about the ontological connection
+									between humanity and the cosmos. Because the Upanishads constitute the concluding
+									portions of the Vedas, they are called vedanta (“the conclusion of the Vedas”), and
+									they serve as the foundational texts in the theological discourses of many Hindu
+									traditions that are also known as Vedanta. The Upanishads’ impact on later
+									theological and religious expression and the abiding interest they have attracted
+									are greater than that of any of the other Vedic texts.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702627709/uoanishad_e0ecgj.jpg"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702627947/vishnu-hindu-god_prdrry.avif"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Ithihasas">Ithihasas</h3>
+								<hr>
+								<p>
+									Itihasa (Sanskrit: इतिहास, lit. 'traditional accounts of past events') refers to the
+									collection of written descriptions of important events in Hinduism. It includes the
+									Mahabharata, the Puranas and the Ramayana. The Mahabharata includes the story of the
+									Kurukshetra War and preserves the traditions of the Lunar dynasty in the form of
+									embedded tales. The Puranas narrate universal history – the books discuss in depth
+									the topics of cosmogony, myth, legend and history. The Ramayana contains the story
+									of Rama and is incidentally related to the legends of the Solar dynasty. A story is
+									considered to be itihasa only when the author of the story has himself witnessed or
+									is part of the story. Vyasa, who wrote the Mahabharata, is himself a character in
+									the story. Similarly, Valmiki, who wrote the Ramayana, was also a character in the
+									story. Many classical Indian poets derive the plots of their poetry and drama from
+									the Itihasa. The tradition of itihāsa is generally understood to be developed by the
+									bardic tradition of Sūtas and Cāraṇas whose duties consisted of composing royal
+									eulogies.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702628116/adi-sankara_frrbrw.webp"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<p>
+									According to the Hindu texts, time is cyclic. The history of mankind is divided into
+									four ages—Satya Yuga, Treta Yuga, Dvapara Yuga and Kali Yuga—collectively forming
+									one Maha Yuga. Seventy-one Maha Yugas form a Manvantara ("age of Manu"), a period of
+									time over which a "Manu" presides. For the duration of his period, each Manu is the
+									archetypal first man, the progenitor of humanity, and also the first king and
+									lawgiver. Along with a Manu, every Manvantara also has its own set of Indra, gods
+									and the seven sages. Fourteen Manus reign in Kalpa, (a single day in the life of)
+									Brahma), an equivalent of 1,000 Maha Yugas, at the end of which, the creation is
+									destroyed and is followed by a Pralaya (dissolution) of equal length. The creation
+									starts again, in the next Kalpa in an endless cycle of creations and dissolutions.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="The Epics">The Epics</h3>
+								<hr>
+								<h4>Mahabharata</h4>
+								<p>The Mahābhārata (/məˌhɑːˈbɑːrətə, ˌmɑːhə-/ mə-HAH-BAR-ə-tə, MAH-hə-;Sanskrit:
+									महाभारतम्, Mahābhāratam, pronounced [mɐɦaːˈbʱaːrɐt̪ɐm]) is one of the two major
+									Sanskrit epics of ancient India revered in Hinduism, the other being the Rāmāyaṇa.
+									It narrates the events and aftermath of the Kurukshetra War, a war of succession
+									between two groups of princely cousins, the Kauravas and the Pāṇḍavas.
+									The epic is traditionally ascribed to the sage Vyāsa, who is also a major character
+									in the epic.[10] Vyāsa described it as being an itihāsa (transl. history). He also
+									describes the Guru–shishya tradition, which traces all great teachers and their
+									students of the Vedic times.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702628204/maha_siomhn.jpg"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702628370/ramayanam_dl1imn.webp"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h4>Ramayana</h4>
+								<p>
+									The Ramayana, attributed to the sage Valmiki, is an ancient Sanskrit epic that
+									narrates the life and adventures of Lord Rama, an avatar of the god Vishnu.
+									Comprising seven books or "Kandas," the epic is a foundational text in Hinduism,
+									profoundly influencing cultural and religious traditions in South and Southeast
+									Asia. The narrative begins with the Balakanda, introducing the lineage and early
+									exploits of Rama, including his marriage to Sita. The Ayodhyakanda delves into
+									political intrigue leading to Rama's exile, while the Aranyakanda chronicles his
+									forest life. In the Kishkindhakanda, Rama forms alliances in the search for Sita,
+									while the Sundarakanda focuses on Hanuman's heroic deeds. The Yuddhakanda climaxes
+									with the epic war against the demon king Ravana, culminating in his defeat and
+									Sita's rescue. The Uttarakanda addresses the aftermath, yet its inclusion is debated
+									among different versions. The Ramayana, with its moral, philosophical, and cultural
+									dimensions, continues to be a source of inspiration and contemplation for millions,
+									reflecting timeless themes of duty, righteousness, and devotion
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Buddist and Jain Literature">Buddist and Jain Literature</h3>
+								<hr>
+								<p>
+									The religious books of the Jains and the Buddhists refer to historical persons or
+									incidents. The earliest Buddhist works were written in Pali, which was spoken in
+									Magadha and South Bihar. The Buddhist works can be divided into the canonical and
+									the non-canonical. The canonical literature is best represented by the “Tripitakas”,
+									that is, three baskets Vinaya Pitika, Sutta Pitika and AbhidhammaPitika. Vinaya
+									Pitika deals with rules and regulations of daily life. Sutta Pitaka contains
+									dialogues and discourses on morality and deals with Dharma while AbhidhammaPitaka
+									deals with philosophy and metaphysics. It includes discourses on varioussubjects
+									such as ethics, psychology, theories of knowledge and mataphysical problems. The
+									non-canonical literature is best represented by the Jatakas. Jatakas are the most
+									interesting stories on the previous births of the Buddha. It was believed that
+									before he was finally born as Gautama, the Buddha practising Dharma passed through
+									more than 550 births, in many cases even in the form of animals. Each birth story is
+									called a Jataka. The Jatakas throw invaluable light on the social and economic
+									conditions ranging from the sixth century BC to the second century BC. They also
+									make incidental reference to political events in the age of the Buddha.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702628442/buddhist_literature_yryqbu.jpg"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702628517/bhaktimovement_rsq6u5.jpg"
+								class="img1">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Bhakti Literature">Bhakti Literature</h3>
+								<hr>
+								<p>
+									Bhakti literature, rooted in the devotional movements that emerged in medieval
+									India, encompasses a diverse range of poetic and philosophical expressions. Bhakti,
+									meaning devotion, emphasized a personal and emotional connection with the divine,
+									transcending traditional social and religious boundaries. Saints and poets like
+									Kabir, Mirabai, Tulsidas, and Namdev composed verses in regional languages,
+									expressing deep love and surrender to their chosen deities. These compositions,
+									often in the form of hymns and poetry, aimed to foster a direct and intimate
+									relationship with the divine, rejecting ritualistic formalities and caste
+									distinctions. Bhakti literature contributed significantly to the cultural and
+									spiritual landscape of India, promoting a more inclusive and egalitarian approach to
+									spirituality
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Sufi Literature">Sufi Literature</h3>
+								<hr>
+								<p>
+									Sufi literature emerged as a parallel tradition within Islam, emphasizing a mystical
+									and inward journey towards divine realization. Sufi poets and thinkers such as Rumi,
+									Amir Khusrow, and Bulleh Shah expressed their devotion through poetry written in
+									Persian and later in regional languages like Urdu. Sufi literature often employs
+									metaphorical language, allegories, and symbols to convey profound spiritual truths.
+									The themes revolve around love for the divine, the concept of unity (Tawhid), and
+									the seeker's journey toward spiritual enlightenment. Sufi literature has had a
+									profound impact on Islamic culture, emphasizing the importance of spiritual
+									experience and personal closeness to God over rigid legalistic interpretations. Both
+									Bhakti and Sufi literature, while emerging from distinct religious traditions, share
+									common ground in their emphasis on the transformative power of love, devotion, and
+									direct communion with the divine. These literary traditions have enriched the
+									cultural fabric of the Indian subcontinent, fostering a pluralistic and syncretic
+									ethos
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702628593/amir_khusrau_jazi3v.jpg"
+								class="img">
+						</div>
+					</div>
+					<div>
+						<div>
+							<h3 id="books">Books</h3>
+							<hr>
+							<h3>The Epics</h3>
+							<a href="https://publuu.com/flip-book/328752/756923/page/1?cover" class="show-publuu-viewer"
+								style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+									src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/756923"
+									style="height: 100%;">
+								<h6 style="text-align: center;">Ramayana(Picture Form)</h6>
+							</a>
+
+							<a href="https://publuu.com/flip-book/328752/757196/page/1?cover" class="show-publuu-viewer"
+								style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+									src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/757196"
+									style="height: 100%;">
+								<h6 style="text-align: center;">Mahabharata</h6>
+							</a>
+							<a href="https://publuu.com/flip-book/328752/776016/page/1?cover" class="show-publuu-viewer"
+								style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+									src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/776016"
+									style="height: 100%;">
+								<h6 style="text-align: center;">Ramayana</h6>
+							</a>
+							<a href="https://publuu.com/flip-book/328752/776128/page/1?cover" class="show-publuu-viewer"
+								style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+									src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/776128"
+									style="height: 100%;">
+								<h6 style="text-align: center;">Bhagvad Gita</h6>
+							</a>
+
+							<h3 style="margin-top: 10px;">Vedas</h3>
+
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Non-religious -->
+				<div class="section-content strategy">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Non-Religious
+						Literature</h2>
+					<br>
+					<hr>
+					<div class="row row-cols-1 row-cols-md-2 g-4">
+						<div class="card col shadow-lg">
+							<h2 class="text-center mt-4">Content</h2>
+							<ul style="color: #dc3545;">
+								<li><a href="#panini">Panini's Astadhyayi</a></li>
+								<li><a href="#yoga">Pantanjali's Yoga Sutras</a></li>
+								<li><a href="#manasa">Manasa Ullasa</a></li>
+								<li><a href="#bruhat">Brihatsamhita</a></li>
+								<li><a href="#megha">Megha Sandesham</a></li>
+								<li><a href="#subha">Subhashitalu</a></li>
+								<li><a href="#pancha">Panchatantra</a></li>
+								<li><a href="#kama">Kama Sutra</a></li>
+								<li>Science<ul>
+										<li><a href="#charaka">Charaka Samhita</a></li>
+										<li><a href="#sushruta">Sushruta Samhita</a></li>
+										<li><a href="#vastu">Vastu Shastra</a></li>
+										<li><a href="#vastuguna">Vastuguna Dipika</a></li>
+									</ul>
+								</li>
+								<li>Mathematics
+									<ul>
+										<li><a href="#baudhayana">Baudhayana Sulbasutra</a></li>
+										<li><a href="#leelavati">Leelavati</a></li>
+									</ul>
+								</li>
+								<li><a href="#artha">Artha Shastra</a></li>
+								<li><a href="#book">Books</a></li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="ms-3">
+								<h3 id="panini">Panini's Astadhyayi</h3>
+								<hr>
+								<p>
+									Panini's "Astadhyayi" stands as an unparalleled masterpiece in the realm of
+									linguistics and grammar, representing a pinnacle of scholarly achievement in ancient
+									India. Attributed to the ancient Sanskrit grammarian Panini, who is thought to have
+									lived around the 4th century BCE, the "Astadhyayi" is a foundational work that
+									systematically delineates the principles and rules of Sanskrit grammar. Composed in
+									the succinct and telegraphic style of sutras or aphorisms, the text is organized
+									into eight chapters, each dealing with different aspects of language, including
+									phonetics, morphology, syntax, and semantics. Panini's systematic and logical
+									structure outlines rules governing pronunciation, the formation of words, the
+									combination of sounds, and the meaning of words and sentences. His work is marked by
+									its precision and brevity, exemplifying an "economical expression" of complex
+									linguistic principles. The "Astadhyayi" has not only left an indelible mark on the
+									study of Sanskrit but has also influenced linguistic traditions in various Indian
+									languages, forming the basis for the Paninian grammatical tradition. Panini's
+									enduring legacy as the "father of linguistics" underscores the timeless significance
+									of his contribution to the understanding of language and grammar.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="yoga">Patanjali's Yoga Sutras</h3>
+								<hr>
+								<p>
+									Patanjali's Yoga Sutras, a foundational text in the philosophy of yoga, offers a
+									comprehensive and systematic guide to the practice of yoga. Attributed to the sage
+									Patanjali, who is believed to have lived around the 2nd century BCE, the Yoga Sutras
+									consist of 196 succinct aphorisms, or sutras, divided into four chapters. The text
+									provides a philosophical framework for the practice of yoga, elucidating the path to
+									spiritual realization and self-discovery. Patanjali delineates the eightfold path of
+									yoga, known as Ashtanga Yoga, encompassing principles such as ethical conduct (Yamas
+									and Niyamas), physical postures (Asanas), breath control (Pranayama), sense
+									withdrawal (Pratyahara), concentration (Dharana), meditation (Dhyana), and ultimate
+									absorption (Samadhi). The Yoga Sutras explore the nature of the mind, the causes of
+									suffering, and the means to attain liberation or self-realization. Patanjali's
+									concise yet profound teachings have profoundly influenced the practice of yoga,
+									guiding practitioners on a journey toward physical well-being, mental clarity, and
+									spiritual awakening. The Yoga Sutras remain a timeless source of wisdom, serving as
+									a guide for those seeking a holistic path to balance and inner transformation.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702629596/yogsutras_fjwtba.jpg"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702629736/MANASOLLASA_dndcdl.webp"
+								class="img1">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="manasa">Manasa Ullasa</h3>
+								<hr>
+								<p>
+									"Manasa Ullasa" is a Sanskrit phrase that translates to "Mental Joy" or "Inner
+									Delight." It encapsulates the idea of finding happiness, contentment, and peace
+									within one's mind and consciousness. The concept aligns with the principles of
+									mindfulness, positive thinking, and the cultivation of a serene mental state. In
+									various philosophical and spiritual traditions, including yoga and meditation,
+									"Manasa Ullasa" emphasizes the importance of inner well-being and the role of the
+									mind in shaping our experiences. The pursuit of mental joy involves practices such
+									as meditation, self-reflection, and mindfulness to quiet the mind, alleviate stress,
+									and foster a positive outlook. This notion underscores the belief that true
+									happiness originates from within, irrespective of external circumstances. "Manasa
+									Ullasa" serves as a reminder of the profound influence our mental state has on our
+									overall sense of fulfillment and happiness in life.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="bruhat">Brihatsamhita</h3>
+								<hr>
+								<p>
+									"Brhatsamhita," attributed to the ancient Indian astronomer and mathematician
+									Varahamihira, is a significant work in classical Indian literature. Composed around
+									the 6th century CE, Varahamihira's "Brhatsamhita" is an extensive treatise that
+									encompasses a wide range of subjects, including astrology, astronomy, geography,
+									seasons, agriculture, architecture, and the art of prediction. The title itself,
+									"Brhatsamhita," translates to "The Great Compilation," highlighting the
+									comprehensive nature of the work. Varahamihira draws upon earlier sources,
+									integrating knowledge from different fields to create a holistic and encyclopedic
+									manual. The "Brhatsamhita" not only serves as a valuable source for understanding
+									ancient Indian sciences and arts but also reflects the interdisciplinary approach of
+									scholars during that period. Varahamihira's work has endured as a testament to the
+									intellectual achievements of ancient India, contributing to the understanding of
+									astronomy and astrology in the cultural and scientific heritage of the subcontinent.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702629779/bruhadsamhita_c4rcno.jpg"
+								class="img1">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="megha">Megha Sandesham</h3>
+								<hr>
+								<p>
+									"Meghadūta" (Meghasandesham) is a classic Sanskrit poem written by the ancient
+									Indian poet Kalidasa. Composed in the 4th-5th century CE, during the Gupta period,
+									this lyrical work is renowned for its eloquence, vivid imagery, and romantic themes.
+									The poem tells the story of a Yaksha (a celestial being) who is separated from his
+									beloved wife due to a curse. Banished to the remote Himalayas, the despondent Yaksha
+									requests a cloud to carry his message to his wife in Alaka (the abode of the
+									Yakshas). The cloud becomes the messenger, conveying the Yaksha's impassioned
+									message filled with descriptions of the landscapes, seasons, and the longing for his
+									beloved. Kalidasa's "Meghadūta" is celebrated for its artistic beauty, intricate use
+									of language, and the way it seamlessly weaves nature, love, and human emotions. The
+									poem has inspired countless adaptations, translations, and artistic interpretations
+									over the centuries, cementing its place as one of the masterpieces of classical
+									Sanskrit literature.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702629820/meghasandesham_ukz7h7.webp"
+								class="img1">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702629884/subhashita_d9j1b4.jpg"
+								class="img1">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="subha">Subhashitalu</h3>
+								<hr>
+								<p>
+									"Subhashitam" refers to a genre of classical Sanskrit literature consisting of wise
+									and moral aphorisms or maxims. These succinct verses encapsulate profound insights,
+									ethical principles, and practical wisdom, offering guidance for virtuous living.
+									"Subhashitam" literally means "well-spoken" or "eloquent speech," and it reflects
+									the art of expressing profound thoughts concisely. This genre encompasses a wide
+									range of topics, including morality, duty, friendship, and the importance of
+									learning. "Subhashitam" has been appreciated not only for its literary elegance but
+									also for its role in imparting ethical values and practical knowledge. Over the
+									centuries, various poets and scholars have contributed to this rich tradition,
+									creating a treasury of timeless wisdom that transcends cultural and linguistic
+									boundaries. "Subhashitam" continues to be studied and appreciated, showcasing the
+									enduring legacy of classical Indian literature.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="panch">Panchatantra</h3>
+								<hr>
+								<p>
+									The Panchatantra, one of the most celebrated collections of animal fables in world
+									literature, is a Sanskrit work attributed to the ancient Indian scholar Vishnu
+									Sharma. Composed around 300 BCE to 500 CE, the Panchatantra consists of interrelated
+									stories presented in a frame narrative, with a focus on imparting moral and
+									practical wisdom. The tales feature animals endowed with human-like qualities,
+									engaging in intricate narratives that teach valuable life lessons. The Panchatantra
+									covers a diverse range of topics, including political strategy, interpersonal
+									relationships, and ethical conduct. The overarching structure involves a teacher
+									imparting these stories to impart knowledge to three young princes. Known for its
+									enduring appeal and cultural influence, the Panchatantra has been translated into
+									numerous languages and adapted in various forms across different cultures. Its
+									timeless lessons continue to resonate, making it a cherished part of India's
+									literary heritage and a globally recognized classic.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702629946/pamchatantra_fcpyxm.png"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702630189/KAMA_ivn67x.jpg"
+								class="img1">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="kama">Kama Sutra</h3>
+								<hr>
+								<p>
+									The Kama Sutra, attributed to the ancient Indian sage Vatsyayana, is a foundational
+									work on the art of love, sexuality, and relationships. Believed to have been
+									composed between the 2nd and 4th centuries CE, the Kama Sutra is a comprehensive
+									guide that goes beyond physical intimacy, offering insights into various aspects of
+									human life, including courtship, marital bliss, and the pursuit of pleasure. While
+									often associated with explicit illustrations and discussions on sexual positions,
+									the text is more encompassing, providing guidance on etiquette, aesthetics, and the
+									philosophy of living a fulfilled life. Vatsyayana's Kama Sutra explores the
+									intricate dynamics of relationships, emphasizing the importance of mutual respect,
+									communication, and the pursuit of sensual pleasure within the boundaries of dharma
+									(moral and ethical duties). Despite its reputation, the Kama Sutra is a nuanced and
+									culturally rich text that delves into the complexities of human nature and the
+									pursuit of a well-rounded, harmonious life.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="charaka">Charaka Samhita</h3>
+								<hr>
+								<p>
+									The Charaka Samhita, attributed to the ancient Indian sage Charaka, stands as a
+									cornerstone in the realm of Ayurveda, India's traditional system of medicine.
+									Composed over two millennia ago, this seminal text is a comprehensive guide covering
+									a wide array of medical knowledge. Divided into eight sections, or Sthanas, the
+									Charaka Samhita delves into internal medicine, surgery, pediatrics, psychiatry,
+									toxicology, and geriatrics. It elucidates the principles of Ayurveda, emphasizing
+									the balance of the three fundamental energies or Doshas—Vata, Pitta, and Kapha—for
+									maintaining health. The text provides profound insights into human anatomy,
+									physiology, and the diagnosis and treatment of diseases. Its emphasis on preventive
+									medicine, lifestyle practices, and the use of herbal remedies underscores the
+									holistic approach to well-being. The enduring legacy of the Charaka Samhita lies in
+									its foundational role in shaping Ayurvedic principles and serving as a timeless
+									reference for those seeking a holistic understanding of health and healing.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702630366/CMAn_n6har3.jpg"
+								class="img1">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702630395/sushruth1a_qsocet.jpg"
+								class="img1">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="sushruta">Sushruta Samhita</h3>
+								<hr>
+								<p>
+									The Sushruta Samhita, attributed to the ancient sage Sushruta, is a foundational
+									text in the field of Ayurvedic medicine and surgery. Composed around 600 BCE to 200
+									CE, the Sushruta Samhita is considered one of the earliest and most comprehensive
+									treatises on medicine and surgery in ancient India. Divided into six sections, or
+									Sthanas, the text covers various aspects of healthcare, including general medicine,
+									surgery, pediatrics, toxicology, and the use of herbal remedies. Sushruta is
+									renowned for his detailed descriptions of surgical techniques, instruments, and
+									anatomical knowledge. The Sushruta Samhita particularly emphasizes the principles of
+									surgery, ranging from basic procedures to more complex operations, showcasing a
+									remarkable understanding of human anatomy. This ancient text has not only shaped the
+									foundations of Ayurveda but has also left an enduring impact on the global history
+									of medicine, testifying to the advanced medical knowledge and surgical skills in
+									ancient India.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="vastu">Vastu Shastra</h3>
+								<hr>
+								<p>
+									Vastu Shastra is an ancient Indian architectural and design system that encompasses
+									the principles of spatial arrangement, orientation, and proportion to create
+									harmonious and auspicious living spaces. While Vastu Shastra has roots in various
+									ancient texts, there isn't a single authoritative text known as "Vastu Sastra."
+									Instead, Vastu principles are dispersed across numerous ancient Indian treatises,
+									with each contributing to the broader understanding of Vastu.
+									One of the earliest references to Vastu principles can be found in the "Manasara"
+									and "Mayamata," two ancient texts that discuss architectural and design guidelines.
+									Additionally, the "Vishwakarma Vastu Shastra" is often cited in the context of
+									traditional Indian architecture.
+									It's important to note that Vastu Shastra is a tradition that has evolved over
+									centuries, with contributions from various scholars, architects, and practitioners.
+									It is not attributed to a single author but rather represents a collective body of
+									knowledge that has been transmitted through oral and written traditions.
+									In summary, while there isn't a specific text titled "Vastu Sastra," the principles
+									of Vastu Shastra are rooted in ancient Indian texts, and the tradition has evolved
+									over time through the contributions of numerous individuals who have enriched and
+									expanded the understanding of harmonious living spaces in accordance with Vastu
+									principles.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702630410/vastushastra_lqepeo.jpg"
+								class="img1">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702630571/vastuguna_deepika_gro6qu.webp"
+								class="img1">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="vastuguna">Vastuguna Dipika</h3>
+								<hr>
+								<p>
+									Vastuguna Dipika is a Nighantu (dictionary) Grantha (book) written in Telugu
+									language on Ayurvedic drugs, diets and usage of certain substances like cloves for
+									oral health, all the foregoing written in an alphabetical order in Telugu language
+									and it is a much popular book for more than a century. Yerra Venkata Swamy (retired
+									district Munsif) has authored and published it on 23rd June, 1883 A.D. It was a
+									period when printing was introduced in India. This book was edited and reprinted
+									eight times by the successors of same "Yerra" family during the period of a century,
+									almost upto 1983. The contents of the book have been slowly updated from edition to
+									edition. Vastuguna Dipika comprises of 1,148 pages on diverse topics arranged in
+									lexical order on substances like coffee, cabbage, the description of each substance
+									or material has been elaborately dealt with from the view point of Ayurveda. Certain
+									vegetable bulbs and roots like Lasuna (garlic in English), Haridra (Tumeric) also
+									have been dealt very elaborately. In this book several medicinal formulations are
+									grouped according to action and indications. Mineral drugs and medicinal
+									preparations made from mercury and gold are also dealt in detail. Along with the
+									properties of drugs and the prescription of a proper diet, the properties and uses
+									of certain daily routines like bathing, sleeping, exercise etc are explained in the
+									book. An alphabetical index of diseases in English is found along with the
+									alphabetical indices of drugs in English, Telugu and Sanskrit languages
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="baudhayana">Baudhayana Sulbasutra</h3>
+								<hr>
+								<p>
+									The Baudhayana Sulbasutra is a part of the larger corpus of ancient Indian
+									mathematical texts known as Sulbasutras. Attributed to the ancient Indian
+									mathematician Baudhayana, these texts provide instructions for constructing
+									sacrificial altars, especially those used in Vedic rituals. The Baudhayana
+									Sulbasutra, estimated to be from around 800 BCE to 200 BCE, is one of the earliest
+									known mathematical treatises in India.
+									The text is primarily concerned with geometry and deals with the construction of
+									various types of altars with precise geometric shapes and proportions. It provides
+									methods for creating square and rectangular altars, as well as more complex shapes
+									like the falcon, tortoise, and bird-shaped altars. Notably, the Baudhayana
+									Sulbasutra contains an approximation for the square root of 2, known as the famous
+									"Pythagorean triple," although this was discovered independently of the Pythagorean
+									theorem.
+									The mathematical knowledge embedded in the Sulbasutras reflects the advanced
+									understanding of geometry and mathematical principles in ancient India. These texts
+									played a significant role in shaping mathematical thought and were crucial for
+									preserving and transmitting mathematical knowledge across generations. The
+									Baudhayana Sulbasutra, in particular, stands as a testament to the mathematical
+									sophistication present in ancient Indian culture.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702630613/bhavudayana_yv8yvq.avif"
+								class="img1">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702630761/8E1EE21E-3EAA-49D0-A56B-D03A0C788FBF_4_5005_c_rqbaut.jpg"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="leelavati">Leelavati</h3>
+								<hr>
+								<p>
+									Leelavati" is a renowned Sanskrit mathematical treatise written by the Indian
+									mathematician Bhaskara II, also known as Bhaskaracharya. Bhaskara II, who lived in
+									the 12th century CE, was an influential mathematician and astronomer during the
+									medieval period in India. The title "Leelavati" is named after Bhaskara's daughter.
+									This comprehensive mathematical work covers a wide range of topics, including
+									arithmetic, algebra, geometry, and mathematical problems. What sets "Leelavati"
+									apart is its unique presentation; Bhaskara frames the mathematical concepts in the
+									form of poetic questions addressed to his daughter Leelavati. The text incorporates
+									engaging narratives, making it both instructional and enjoyable.
+									Bhaskara II's contributions to mathematics extend beyond "Leelavati." He also wrote
+									the "Bijaganita," another significant work in algebra, and the "Siddhanta
+									Shiromani," a comprehensive treatise that includes sections on astronomy and
+									mathematical techniques.
+									"Leelavati" remains an important part of India's mathematical heritage and has
+									contributed to the transmission of mathematical knowledge across generations.
+									Bhaskara II's works, including "Leelavati," have had a lasting impact on the
+									development of mathematics in the Indian subcontinent
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="artha">Artha Shastra</h3>
+								<hr>
+								<p>
+									"Arthashastra," it is an ancient Indian treatise on statecraft, economics, and
+									military strategy attributed to Chanakya (Kautilya), who was a scholar and adviser
+									to the Maurya Empire in the 4th century BCE. The "Arthashastra" is a comprehensive
+									text that addresses governance, political administration, economic policies, and
+									military strategy.
+									The Arthashastra covers a wide range of topics, including the duties and
+									responsibilities of a ruler, the organization of the state, economic principles,
+									espionage, diplomacy, and the conduct of war. It provides insights into statecraft,
+									outlining strategies for the acquisition and maintenance of power. The text reflects
+									the pragmatic and realpolitik approach of ancient Indian political thought.
+									The Arthashastra has been influential in the study of political science and
+									governance, offering timeless principles that continue to be studied and analyzed.
+									While its historical context is ancient, its teachings have relevance for
+									understanding the complexities of governance and political strategy. The text
+									emphasizes the importance of a stable and well-organized state for the prosperity
+									and security of its people.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702630813/arthasashtra_jis4hn.webp"
+								class="img">
+						</div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<h3 id="book">Books</h3>
+								<hr>
+								<a href="https://publuu.com/flip-book/328752/776259/page/1?cover"
+									class="show-publuu-viewer"
+									style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+										src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/776259"
+										style="height: 100%;">
+									<h5 style="text-align: center;">Sushruta Samhita</h5>
+								</a>
+
+								<a href="https://publuu.com/flip-book/328752/776083/page/1?cover"
+									class="show-publuu-viewer"
+									style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+										src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/776083"
+										style="height: 100%;">
+									<h5 style="text-align: center;">Charaka Samhita</h5>
+								</a>
+
+								<a href="https://publuu.com/flip-book/328752/777909/page/1?cover"
+									class="show-publuu-viewer"
+									style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+										src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/777909"
+										style="height: 100%;">
+									<h5 style="text-align: center;">Patanjali Yogasutra</h5>
+								</a>
+
+								<a href="https://publuu.com/flip-book/328752/777919/page/1?cover"
+									class="show-publuu-viewer"
+									style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+										src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/777919"
+										style="height: 100%;">
+									<h5 style="text-align: center;">Panchatantra</h5>
+								</a>
+
+								<a href="https://publuu.com/flip-book/328752/777932/page/1?cover"
+									class="show-publuu-viewer"
+									style="width: auto; height: 240px; position: relative; display: inline-block;"><img
+										src="https://p6aqvvqp5i.execute-api.us-east-2.amazonaws.com/images/cover/328752/777932"
+										style="height: 100%;">
+									<h5 style="text-align: center;">Brihatsamhita</h5>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+				<!-- Languages -->
+				<div class="section-content creative">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Languages</h2>
+					<br>
+					<hr>
+					<div class="row row-cols-1 row-cols-md-2 g-4">
+						<div class="card col shadow-lg">
+							<h2 class="text-center mt-4">Content</h2>
+							<ul style="color: #dc3545;">
+								<li><a href="#sanskrit">Sanskrit</a></li>
+								<li>Dravidian Languages<ul>
+										<li><a href="#telugu">Telugu</a></li>
+										<li><a href="#tamil">Tamil</a></li>
+										<li><a href="#kannada">Kannada</a></li>
+										<li><a href="#malayalam">Malayalam</a></li>
+									</ul>
+								</li>
+								<li>Indo-Aryan Langauges
+									<ul>
+										<li><a href="#hindi">Hindi</a></li>
+										<li><a href="#bengali">Bengali</a></li>
+										<li><a href="#marathi">Marathi</a></li>
+										<li><a href="#gujarati">Gujarati</a></li>
+									</ul>
+								</li>
+								<li><a href="#urdu">Urdu</a></li>
+								<li><a href="#books">Books</a></li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="ms-3">
+								<h3 id="sanskrit">Sanskrit</h3>
+								<hr>
+								<p>
+									Sanskrit, the ancient language of India, is the mother of many Indian languages and
+									the medium for revered texts like the Vedas, Upanishads, Puranas, and Dharmasutras.
+									Its literature spans secular, regional, and ancient works such as the Rig Veda.
+									Sanskrit, listed in the Indian Constitution, played a pivotal role in linguistic
+									studies, notably through Panini's Ashtadhyayi. The Buddhist Sanskrit literature,
+									encompassing Mahayana and Hinayana schools, contributed significant texts like the
+									Mahavastu and Lalitavistara. Sanskrit, transcending regional boundaries, influenced
+									every part of India, as seen in works like Kalhan's Rajatarangini and Jonaraja's
+									account of Prithviraj. Kalidasa's writings added beauty to the extensive Sanskrit
+									literary heritage.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3>Dravidian Languages</h3>
+								<hr>
+								<p>The term "Dravidian" is derived from the Sanskrit word "drāviḍa," which was
+									historically used to refer to the people and culture of southern India. The roots of
+									this term are ancient and have been found in classical Sanskrit literature. It is
+									important to note that the term "Dravidian" primarily had a geographical and
+									cultural connotation before it was associated with the linguistic classification.
+								</p>
+								<h4 id="telugu">Telugu</h4>
+								<p>
+									Telugu is a Dravidian language primarily spoken in the Indian states of Andhra
+									Pradesh and Telangana. It has a unique script and is known for its rhythmic sound.
+									The language has evolved over centuries, influenced by Sanskrit and Prakrit.</p>
+								<p>
+								<h6>Literature:</h6> Telugu literature has a rich history dating back to classical
+								times. The
+								Andhra Mahabharata and Prabandha literature mark the classical period. During the
+								medieval period, poets like Annamacharya and the Vijayanagara Empire contributed
+								significantly. The Golden Age, under Vijayanagara rule, saw the flourishing of the
+								"Prabandha" style. In the modern period, Kandukuri Veeresalingam introduced the
+								novel form, and figures like Gurazada Apparao and Viswanatha Satyanarayana made
+								notable contributions. Today, Telugu literature spans various genres, reflecting
+								both traditional and contemporary themes.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631050/telugu_omgrqb.jpg"
+								style="height: 600px;width: 100%;">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="tamil">Tamil</h3>
+								<hr>
+								<p>
+									Tamil is a Dravidian language predominantly spoken in the Indian state of Tamil Nadu
+									and in Sri Lanka, Singapore, and Malaysia. With a rich history, Tamil has ancient
+									roots and is considered one of the oldest living languages in the world. It has its
+									own distinctive script, and its linguistic influence extends beyond India.
+								</p>
+								<p>
+								<h6>Literature:</h6>Tamil literature has a remarkable legacy that spans over two
+								millennia.
+								The Sangam literature, dating from 300 BCE to 300 CE, is a significant ancient Tamil
+								literary corpus. It includes poetry and ethical literature, showcasing the cultural
+								and social life of ancient Tamil society. The medieval period saw the emergence of
+								devotional literature, particularly the compositions of the Alvars and Nayanars.
+								During the Chola and Pandya dynasties, Tamil literature flourished, with
+								contributions in various genres, including epics, poetry, and grammatical treatises.
+								The "Tirukkural" by Thiruvalluvar is a classic ethical work from this period.
+								The Bhakti movement in the medieval period produced notable works by poets like
+								Andal, Manickavacakar, and Arunagirinathar. The Nayaka period saw the rise of
+								secular literature, and the colonial era witnessed the modernization of Tamil prose
+								and poetry.
+								Prominent figures in modern Tamil literature include Subramania Bharati,
+								Bharathidasan, and Kalki Krishnamurthy. Tamil literature continues to thrive,
+								embracing a wide range of themes and genres, and remains a vital part of the
+								cultural heritage of Tamil-speaking regions.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631076/tamil_cdsn1i.gif"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631123/kannada_nn021f.gif"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="kannada">Kannada</h3>
+								<hr>
+								<p>
+									Kannada is a Dravidian language predominantly spoken in the Indian state of
+									Karnataka and parts of neighboring states. It has a rich linguistic and literary
+									heritage that spans centuries. Kannada uses its own script derived from ancient
+									Brahmi.
+								</p>
+								<P>
+								<h6>Literature:</h6>Kannada literature has a vibrant history that can be traced back to
+								the
+								early medieval period. The Jain literature of the 9th and 10th centuries is
+								considered some of the earliest Kannada literary works. However, it was during the
+								time of the Rashtrakuta Empire (9th to 10th centuries) that Kannada literature
+								flourished, with the emergence of poets like Pampa and Ranna.
+								The Vijayanagara Empire played a crucial role in shaping Kannada literature during
+								the medieval period. The "Haridasa" movement, led by saints like Purandara Dasa and
+								Kanaka Dasa, contributed immensely to devotional literature. The "Vachana Sahitya"
+								of the 12th century, spearheaded by Basava and his followers, marked a shift towards
+								mysticism and social consciousness.
+								The Wodeyar dynasty in the 17th century supported the development of classical
+								Kannada literature. The modern era witnessed a renaissance in Kannada literature
+								with figures like Kuvempu, D. R. Bendre, and Masti Venkatesha Iyengar, who were
+								instrumental in shaping modern Kannada prose and poetry.
+								Kannada literature spans various genres, including poetry, novels, drama, and short
+								stories. The language has been a vehicle for expressing cultural, social, and
+								political ideas, and it continues to evolve as a dynamic literary tradition in
+								contemporary
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="malayalam">Malayalam</h3>
+								<hr>
+								<p>
+									Malayalam is a Dravidian language primarily spoken in the Indian state of Kerala and
+									in parts of neighboring states. It has its own distinct script and is known for its
+									literary richness and cultural significance.
+								</p>
+								<p>
+								<h6>Literature:</h6>Malayalam literature has a heritage rooted in the ancient past. The
+								medieval period witnessed the development of "Manipravalam" literature, a blend of
+								Sanskrit and Malayalam. The "Ramacharitam" by Cheeraman is a notable work from this
+								period.
+								The Bhakti movement in the 16th century gave rise to devotional literature, and
+								Ezhuthachan, known as the "father of Malayalam language," contributed significantly. The
+								colonial era saw the emergence of modern Malayalam literature, with figures like
+								Vallathol Narayana Menon and Kumaran Asan leading the literary renaissance.
+								Prominent Malayalam writers include Thakazhi Sivasankara Pillai, Vaikom Muhammad
+								Basheer, and M. T. Vasudevan Nair. Malayalam literature encompasses a range of genres,
+								including novels, short stories, poetry, and plays, reflecting the cultural diversity
+								and social dynamics of Kerala.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631161/malayalam_2_rh2zxn.jpg"
+								style="height: 600px;width: 100%;">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3>Indo-Aryan Languages</h3>
+								<hr>
+								<p>The term "Indo-Aryan languages" refers to a linguistic grouping within the broader
+									Indo-Iranian branch of the Indo-European language family. The classification is
+									based on linguistic similarities and shared features among a group of languages
+									spoken in South Asia, particularly in the northern and central regions. The term
+									"Indo-Aryan" is derived from "Arya," an ancient Sanskrit term used to denote the
+									people who migrated into the Indian subcontinent.
+								</p>
+								<h4 id="hindi">Hindi</h4>
+								<p>
+									Hindi is a prominent Indo-Aryan language spoken primarily in the northern and
+									central regions of India. It serves as one of the official languages of the Indian
+									government and is widely understood and spoken across the country. The language has
+									its roots in Sanskrit and evolved over centuries through influences from various
+									linguistic traditions.</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631161/malayalam_2_rh2zxn.jpg"
+								style="height: 400px;width: 100%;">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<p>
+								<h6>Literature:</h6>Hindi literature boasts a diverse and extensive tradition that
+								encompasses classical, medieval, and modern periods. The classical period includes works
+								such as the "Ramcharitmanas" by Tulsidas and the poetry of Kabir and Surdas. These
+								timeless creations have had a profound impact on Hindi-speaking communities.
+								During the medieval period, Hindi literature flourished under the influence of the
+								Bhakti movement, with compositions reflecting devotional themes. Prominent poets include
+								Tulsidas, Kabir, and Mirabai. The Sufi and Persian influence also contributed to the
+								literary landscape.
+								The modern period saw a literary renaissance with figures like Premchand, known as the
+								"Upanyas Samrat" or the Emperor of Novels. His realistic portrayals of society in works
+								like "Godan" and "Nirmala" marked a shift towards social realism. Other influential
+								modern writers include Harivansh Rai Bachchan, Munshi Premchand, and Jaishankar Prasad.
+								Hindi literature spans various genres, including poetry, novels, short stories, and
+								plays. The language continues to evolve and adapt, reflecting contemporary themes and
+								concerns. The influence of Hindi literature extends beyond India, connecting with
+								diverse audiences and contributing to the broader literary tapestry.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631630/ramcharitmanas_tsoccs.jpg"
+								class="img1">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631730/bengali_pcatbu.jpg"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="bengali">Bengali</h3>
+								<hr>
+								<p>
+									Bengali is a major Indo-Aryan language primarily spoken in the Indian state of West
+									Bengal and Bangladesh. It has a distinct script, known as Bengali or Bangla script,
+									and is renowned for its literary heritage and cultural significance.
+								</p>
+								<P>
+								<h6>Literature:</h6>Bengali literature has a profound legacy, with the medieval period
+								marked by the contributions of poets like Chandidas and Vaishnava lyricists. The
+								19th-century Bengal Renaissance brought literary luminaries like Rabindranath Tagore,
+								the first non-European Nobel laureate in Literature. Tagore's works, including
+								"Gitanjali," reflect profound philosophical and poetic insights.
+								The modern period saw the emergence of novelists like Sharatchandra Chattopadhyay, known
+								for his realistic portrayals of social issues. Kazi Nazrul Islam, the national poet of
+								Bangladesh, contributed significantly to Bengali literature through his poetry and
+								songs.
+								Bengali literature encompasses various genres, including novels, short stories, poetry,
+								and plays. The language is celebrated for its artistic expressions and cultural
+								richness, and Bengali writers continue to make significant contributions to world
+								literature.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="marathi">Marathi</h3>
+								<hr>
+								<p>
+									Marathi is an Indo-Aryan language predominantly spoken in the Indian state of
+									Maharashtra. It has a distinct script derived from the Devanagari script and holds
+									cultural and historical significance.
+								</p>
+								<P>
+								<h6>Literature:</h6>: Marathi literature has a long and diverse history. The medieval
+								period witnessed the works of saints like Dnyaneshwar and Tukaram, contributing to the
+								Bhakti movement. The Peshwa era saw the development of Marathi theater and the
+								poet-saints, collectively known as the "Bhakti Kavi Sampradaya."
+								In the modern era, writers like Vishnushastri Chiplunkar and Lokmanya Tilak played
+								pivotal roles in the socio-cultural awakening. The 20th century saw the emergence of
+								literary giants such as Pu La Deshpande and Vijay Tendulkar, contributing to Marathi
+								literature's versatility.
+								Marathi literature spans diverse genres, including poetry, novels, plays, and essays.
+								The language's literary landscape reflects its cultural vibrancy and historical depth,
+								making Marathi a significant part of India's linguistic and literary diversity.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631265/marathi_bgaawj.jpg"
+								class="img1">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631299/gujrathi_brlrya.gif"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="gujarati">Gujarati</h3>
+								<hr>
+								<p>
+									Gujarati is an Indo-Aryan language primarily spoken in the Indian state of Gujarat
+									and in various regions of western India. It has a rich linguistic tradition and
+									cultural heritage.
+								</p>
+								<P>
+								<h6>Literature:</h6>Gujarati literature is characterized by its diversity and historical
+								depth. The earliest known work in Gujarati is the "Bhakti Akhyana" by the saint-poet
+								Narasimha Mehta. The medieval period saw the flourishing of devotional poetry, with
+								notable contributions from poets like Premanand Bhatt.
+								The Bhakti and Sant traditions influenced Gujarati literature significantly, fostering a
+								rich tradition of devotional and philosophical writings. The poetry of Akho, Dayaram,
+								and Narsinh Mehta exemplifies the devotional genre.
+								During the colonial era, Gujarati literature underwent a renaissance. Writers like
+								Narmad and Dalpatram initiated reforms and modernization. The 20th century witnessed the
+								emergence of literary giants like Umashankar Joshi, Pannalal Patel, and Jhaverchand
+								Meghani.
+								Gujarati literature spans various genres, including poetry, novels, short stories, and
+								plays. It reflects the cultural and social fabric of Gujarat, addressing contemporary
+								issues while preserving its historical and philosophical roots. Prominent Gujarati
+								literary figures have contributed significantly to the overall literary landscape of
+								India.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="urdu">Urdu</h3>
+								<hr>
+								<p>
+									Urdu is a South Asian language with deep roots in the cultural and linguistic
+									history of the Indian subcontinent. Its origin can be traced back to the medieval
+									period when it emerged as a result of cultural and linguistic interactions between
+									Persian, Arabic, Turkish, and local languages like Sanskrit and Prakrit. This unique
+									amalgamation occurred during the Mughal era, particularly under the patronage of the
+									Mughal courts. The term "Urdu" itself is derived from the Turkish word "ordu,"
+									meaning camp or army, reflecting its origin in military camps where diverse
+									linguistic communities came into contact.
+								</p>
+								<P>
+								<h6>Literature:</h6>:Urdu literature has a rich and diverse tradition that spans poetry,
+								prose, and drama. It reached its zenith during the Mughal era, with poets like Mir Taqi
+								Mir and Sauda contributing to classical Urdu poetry. The classical form of Urdu poetry,
+								known as Ghazal, became a prominent literary expression.
+								The 19th and 20th centuries saw the evolution of Urdu prose with the advent of novels
+								and short stories. Mirza Ghalib, considered one of the greatest poets in Urdu
+								literature, left an indelible mark with his profound and philosophical poetry. Allama
+								Iqbal, known as Mufakkir-e-Pakistan (The Thinker of Pakistan), contributed significantly
+								to both Urdu poetry and philosophy.
+								Urdu literature is celebrated for its versatility and has been a powerful medium of
+								expression for social, cultural, and political issues. The language has played a vital
+								role in the cultural identity of the Indian subcontinent and continues to be an integral
+								part of the literary landscape in India, Pakistan, and other Urdu-speaking communities
+								around the world.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702631812/Urdu-alphabets_zlwtca.jpg"
+								class="img">
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<!-- education -->
+				<div class="section-content analysis">
+					<h2 class="text-center" style="color: #dc3545; font-weight: bold;font-size: 30px;">Indian Education
+					</h2>
+					<br>
+					<hr>
+					<div class="row row-cols-1 row-cols-md-2 g-4">
+						<div class="card col shadow-lg">
+							<h2 class="text-center mt-4">Content</h2>
+							<ul style="color: #dc3545;">
+								<li>Ancient India<ul>
+										<li><a href="#gurukula">Gurukula System</a></li>
+										<li><a href="#oral">Oral Tradition</a></li>
+										<li><a href="#role">Role Of Guru</a></li>
+										<li><a href="#the">The Education Women</a></li>
+									</ul>
+								</li>
+								<li>Institutes
+									<ul>
+										<li><a href="#nalanda">Nalanda</a></li>
+										<li><a href="#takshashila">Takshashila</a></li>
+										<li><a href="#vallabhi">Vallabhi</a></li>
+										<li><a href="#vikramshila">Vikramshila</a></li>
+									</ul>
+								</li>
+								<li>Medievel India
+									<ul>
+										<li><a href="#Islamic Education">Islamic Education</a></li>
+										<li><a href="#Maktabs and Madrasas">Maktabs and Madrasas</a></li>
+										<li><a href="#Traditional Hindu Education">Traditional Hindu Education</a></li>
+									</ul>
+								</li>
+								<li>Modern India
+									<ul>
+										<li><a href="#Macaulay’s Minute and English Education">Macaulay’s Minute and
+												English Education</a></li>
+										<li><a href="#Universities and Reforms">Universities and Reforms</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="ms-3">
+								<h3 id="gurukula">Ancient India</h3>
+								<hr>
+								<p>
+									Ancient education in India had a strong foundation in traditional systems that were
+									deeply rooted in the cultural and philosophical fabric of the society. The education
+									system in ancient India was primarily oral and informal, with an emphasis on
+									transmitting knowledge through direct teacher-student interactions. Several key
+									aspects defined the ancient education system:
+								</p>
+								<h3>Gurukula System</h3>
+								<hr>
+								<p>
+									The Gurukul system was a traditional form of education in ancient India that held a
+									central place in the cultural and educational landscape. In this system, students,
+									known as shishyas, lived in close proximity with their guru or teacher in a
+									residential setting called a Gurukul. The Gurukul was not just an educational
+									institution; it was a holistic environment where students imbibed knowledge, skills,
+									and values through direct interactions with their guru. The curriculum of the
+									Gurukul system was comprehensive, covering a range of subjects such as scriptures,
+									philosophy, science, mathematics, arts, and warfare. Learning was predominantly
+									oral, with a strong emphasis on memorization, recitation, and practical application.
+									The guru, often a revered and knowledgeable figure, played a multifaceted role as a
+									teacher, mentor, and spiritual guide. The Gurukul system fostered a personalized
+									approach to education, tailoring the curriculum to the individual needs and aptitude
+									of each student. This ancient educational system laid the foundation for a deep and
+									holistic understanding of various aspects of life and left an enduring impact on the
+									cultural and educational heritage of India.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="oral">Oral Tradition</h3>
+								<hr>
+								<p>
+									The oral tradition in ancient India constituted a fundamental aspect of the
+									cultural, educational, and social fabric. In this tradition, knowledge, wisdom, and
+									cultural heritage were transmitted verbally from one generation to the next,
+									fostering a rich and dynamic form of communication. Sacred texts, philosophical
+									teachings, historical narratives, and cultural practices were passed down through
+									spoken words, emphasizing the art of memorization and recitation. This oral
+									tradition played a crucial role in preserving and disseminating knowledge,
+									especially in a society where the written word was not as prevalent. Through
+									storytelling, chanting, and recitals, communities maintained a deep connection to
+									their roots, rituals, and philosophical underpinnings. The oral tradition was not
+									merely a means of communication; it was a living repository of the collective wisdom
+									of a society, ensuring the continuity of cultural values and teachings. This
+									tradition, marked by its fluidity and adaptability, contributed significantly to the
+									cultural richness and intellectual heritage of ancient India.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632150/gurukula_cghiwa.jpg"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632197/dronacharyaguru_umfc9i.webp"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="role">Role of Guru</h3>
+								<hr>
+								<p>
+									The role of the guru in ancient India held profound significance, extending beyond
+									that of a conventional teacher. The guru was not merely an educator but also a
+									spiritual guide, mentor, and embodiment of wisdom. In the Gurukul system, students
+									lived in close proximity to their guru, fostering a deep and personal connection.
+									The guru was responsible for imparting knowledge, instilling values, and guiding the
+									spiritual and moral development of the students. This revered figure played a
+									pivotal role in shaping the character and worldview of the disciples. The
+									relationship between guru and shishya (student) was characterized by utmost respect,
+									humility, and a sense of devotion. Beyond academic teachings, the guru often
+									provided insights into life, philosophy, and the practical aspects of living. The
+									guru's guidance extended beyond the classroom, influencing the holistic development
+									of the student. This unique teacher-student relationship, marked by trust and
+									spiritual connection, remains an integral part of the cultural and educational
+									heritage of India.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="the">The Education of women</h3>
+								<hr>
+								<p>
+									Education for women was quite important in ancient India. They were trained in
+									housekeeping, as well as in dancing and music. Girls also had to conduct the
+									Upanayana ceremony. Educated women were divided into two classes –Sadyodwahas, those
+									who pursued their education just until they got married, and Brahmavadinis, those
+									who never married and continued studying throughout their lives. Vedas and Vedangas
+									were taught to women, too, but were limited to religious songs and poems necessary
+									for rituals. Some notable Vedic and Upanishad women scholars were Apala, Indrani,
+									Ghoshala, Lopamudra, Gargi and Maitreyi.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632270/educatedwoman_xnxiey.jpg"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632261/nalanda-university3_xmcwbd.webp"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3>Institutes</h3>
+								<hr>
+								<h3 id="nalanda">Nalanda</h3>
+								<p>
+									Nalanda University, located in present-day Bihar, India, was a renowned ancient
+									center of learning that reached its zenith between the 5th and 12th centuries CE.
+									Founded during the Gupta dynasty, it served as a premier institution for Buddhist
+									education and philosophy. Nalanda was not merely a university in the modern sense
+									but a vast complex of monasteries, temples, and lecture halls, accommodating
+									thousands of students and scholars from across Asia. The curriculum at Nalanda
+									encompassed a wide range of subjects, including Buddhist scriptures, philosophy,
+									logic, grammar, medicine, and astronomy.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632357/Nalanda__excavated_remains_hepb5w.webp"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<p>
+									The significance of Nalanda University lies in its role as a beacon of knowledge and
+									intellectual exchange. It attracted scholars from countries such as China, Tibet,
+									Korea, and Central Asia, fostering a rich multicultural environment. The
+									institution's library, said to be one of the largest in the ancient world, housed a
+									vast collection of manuscripts, making Nalanda a center for preserving and
+									disseminating knowledge.
+									Nalanda's influence extended beyond the realm of Buddhism, encompassing diverse
+									fields of study. The decline of Nalanda around the 12th century was attributed to
+									various factors, including invasions and the shifting political landscape. Despite
+									its eventual demise, Nalanda remains a symbol of India's historical commitment to
+									education, intellectual pursuits, and the spirit of pluralism. In the modern era,
+									efforts have been made to revive Nalanda as an international center for education
+									and research, echoing its historical legacy as a hub of global learning and cultural
+									exchange.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="takshashila">Takshashila</h3>
+								<hr>
+								<p>
+									Takshashila, also known as Taxila, was an ancient center of learning located in
+									present-day Pakistan. Flourishing between the 5th century BCE and the 6th century
+									CE, Takshashila was a prominent educational hub in ancient India. Founded during the
+									Vedic period, it gained prominence under the Maurya Empire and continued to thrive
+									under subsequent rulers, including the Greeks and the Kushans.
+									Takshashila was renowned for its emphasis on a diverse curriculum that included
+									philosophy, arts, science, medicine, military strategy, and governance. Students
+									from various parts of the Indian subcontinent, as well as from Greece, Persia, and
+									Central Asia, came to Takshashila to receive education from eminent scholars and
+									teachers.
+									The significance of Takshashila lies in its role as an intellectual crossroads,
+									fostering a multicultural and cosmopolitan atmosphere. The city was home to some of
+									the most revered scholars of ancient India, including Chanakya (Kautilya), the
+									author of the Arthashastra, and Charaka, a pioneer in Ayurvedic medicine.
+									Takshashila's decline began with the invasions of the Huns in the 5th century CE,
+									leading to the eventual abandonment of the city. The ruins of Takshashila were
+									rediscovered in the 19th century, shedding light on its historical and educational
+									significance.
+									Takshashila remains an enduring symbol of ancient India's commitment to higher
+									education and intellectual exchange. The legacy of this ancient center of learning
+									continues to inspire discussions about the rich history of education in the Indian
+									subcontinent.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632340/TAXILA_fgaumr.jpg"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632399/vallabhi_fmzhhj.jpg"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="vallabhi">Vallabhi</h3>
+								<hr>
+								<p>Vallabhi was an ancient city in present-day Gujarat, India, that served as a
+									prominent center of learning and culture. Flourishing between the 5th and 7th
+									centuries CE, Vallabhi gained significance as a seat of education during the Gupta
+									period. It played a crucial role in the intellectual and literary landscape of
+									ancient India.
+									The significance of Vallabhi lies in its association with the Maitraka dynasty,
+									particularly King Vallabhadeva, who is credited with the establishment of Vallabhi
+									as a center of learning. The city was home to a renowned university known for its
+									emphasis on Sanskrit literature, grammar, philosophy, and other scholarly pursuits.
+									Vallabhi attracted scholars and students from various parts of India.
+									One of the notable contributions of Vallabhi was in the field of grammar, and it is
+									often associated with the development of the "Vallabhikavya," a style of Sanskrit
+									poetry. The city's cultural and educational influence extended to neighboring
+									regions, leaving an indelible mark on the intellectual heritage of the Indian
+									subcontinent.
+									Like many other ancient centers of learning, Vallabhi faced a decline, and its exact
+									reasons are not well-documented. The city gradually faded from historical records,
+									but its legacy as a hub of scholarly activities and Sanskrit literature remains an
+									integral part of India's cultural and educational history. The mention of Vallabhi
+									in historical texts underscores its importance in the tapestry of ancient Indian
+									learning centers, contributing to the rich mosaic of intellectual pursuits in the
+									subcontinent.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="vikramshila">Vikramshila</h3>
+								<hr>
+								<p>
+									Vikramshila, situated near the modern town of Antichak in Bihar, India, was an
+									ancient center of Buddhist learning and one of the major universities in medieval
+									India. Established by King Dharmapala of the Pala dynasty in the late 8th century,
+									Vikramshila University reached its zenith during the 9th to 12th centuries.
+									The significance of Vikramshila lies in its role as a center for the study of
+									Buddhist philosophy, Vajrayana Buddhism, and various other subjects. It was
+									particularly renowned for its specialization in Tantric Buddhism and attracted
+									scholars and students from different parts of India, Tibet, Southeast Asia, and
+									beyond.
+									Vikramshila had a structured curriculum that included subjects like philosophy,
+									logic, grammar, medicine, and astronomy. The university had numerous teachers, each
+									specialized in specific fields, contributing to a diverse and comprehensive
+									educational environment.
+									The decline of Vikramshila is often associated with the invasions by Bakhtiyar
+									Khilji in the 12th century, leading to the destruction of the university. The ruins
+									of Vikramshila were rediscovered in the 19th century, providing insights into its
+									architectural grandeur and historical importance.
+									Vikramshila's legacy endures as a testament to the intellectual and cultural
+									achievements of medieval India, particularly in the realm of Buddhist scholarship.
+									The university's contributions to the study and propagation of Buddhist thought and
+									philosophy have left an indelible mark on the cultural heritage of the Indian
+									subcontinent.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632418/vikramshila_stbp9n.webp"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3>Medievel India</h3>
+								<hr>
+								<p>Education in medieval India underwent significant changes, influenced by political,
+									social, and economic factors. During this period, from roughly the 6th to the 18th
+									century, various dynasties and rulers shaped the educational landscape, resulting in
+									a diverse range of educational institutions and systems.</p>
+								<h3 id="Islamic Education">Islamic Education</h3>
+								<p>
+									Islam played a pivotal role in medieval India, beginning with the arrival of Arab
+									traders and the establishment of the Delhi Sultanate in the 13th century. The
+									medieval period saw the flourishing of Islamic culture, governance, and scholarship
+									on the Indian subcontinent. The Delhi Sultanate, followed by the Mughal Empire,
+									brought about a synthesis of Islamic and indigenous Indian cultures. The
+									architectural marvels of the Mughals, such as the Taj Mahal, exemplify the fusion of
+									Islamic and Indian artistic styles. Islamic education thrived with the establishment
+									of madrasas, where scholars delved into Islamic studies, theology, law, and
+									philosophy. Sufi saints played a crucial role in spreading Islam through their
+									teachings, emphasizing a more personal and direct connection with the divine. While
+									Islamic rulers like Akbar promoted a policy of religious tolerance and patronized
+									the arts and sciences, the period also witnessed instances of religious conflicts.
+									Overall, Islam left an enduring impact on the socio-cultural fabric of medieval
+									India, contributing to a rich tapestry of diversity and influencing various aspects
+									of life, from architecture to education and beyond.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632662/gazanfer_aga_madrasa_vxwzcn.jpg"
+								style="width: 100%;height: 600px;">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Maktabs and Madrasas">Maktabs and Madrasas</h3>
+								<hr>
+								<p>
+									In medieval India, Maktabs and Madrasas were educational institutions that played
+									crucial roles in the dissemination of knowledge, particularly in the context of
+									Islamic education. Maktabs were elementary schools where students received
+									foundational education, focusing on basic literacy skills, including reading and
+									writing. These schools served as entry points for young learners into the world of
+									knowledge. On the other hand, Madrasas were advanced educational institutions that
+									offered a more comprehensive curriculum. Students in Madrasas engaged in in-depth
+									studies of various subjects, with a primary emphasis on Islamic studies, theology,
+									law, philosophy, and Arabic literature. Madrasas became centers of higher learning,
+									producing scholars and intellectuals well-versed in Islamic sciences. These
+									institutions played a pivotal role in shaping the intellectual and cultural
+									landscape of medieval India, contributing significantly to the propagation of
+									Islamic scholarship and the development of a learned class within society. The
+									legacy of Maktabs and Madrasas endures in the historical narrative of education in
+									the Indian subcontinent, reflecting the richness and diversity of medieval learning.
+								</p>
+							</div>
+						</div>
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632509/islamicINDIA_cjopxh.avif"
+								class="img">
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702632939/TraditionalHindu_Education_ryiab6.jpg"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Traditional Hindu Education">Traditional Hindu Education</h3>
+								<hr>
+								<p>
+									Traditional Hindu education in medieval India was primarily imparted through the
+									Gurukul system, which served as a foundational institution for the transmission of
+									knowledge, values, and skills. In this system, students, known as shishyas, resided
+									with their guru (teacher) in a Gurukul, creating an immersive learning environment.
+									The curriculum included the study of sacred scriptures such as the Vedas,
+									Upanishads, and other religious texts, along with subjects like philosophy,
+									astronomy, mathematics, music, and the arts. The emphasis was not only on
+									intellectual growth but also on moral and spiritual development. The guru, often a
+									revered figure, played a multifaceted role as a teacher, guide, and mentor.
+									Education was personalized, with the guru tailoring the curriculum to the individual
+									needs and aptitude of each student. The Gurukul system fostered a holistic approach
+									to learning, connecting students with nature and integrating theoretical knowledge
+									with practical skills. Temples and monasteries also functioned as centers of
+									learning, contributing to the preservation and dissemination of traditional Hindu
+									knowledge. Despite the challenges and changes during the medieval period,
+									traditional Hindu education remained a cornerstone of cultural continuity and
+									intellectual heritage in India.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div>
+							<div class="mt-5">
+								<h3>Modern India</h3>
+								<hr>
+								<p>Modern education in India has evolved significantly since the colonial period,
+									shaping the country's intellectual landscape and contributing to its socio-economic
+									development. Key features of modern education in India include</p>
+								<h3 id="Macaulay’s Minute and English Education">Macaulay’s Minute and English Education
+								</h3>
+								<hr>
+								<p>
+									Macaulay's 1835 Minute proposed English education as superior, aiming to create an
+									Indian elite with Western values. This policy, adopting English in higher education,
+									had a lasting impact on modern education and the emergence of an English-proficient
+									elite in colonial and post-colonial India, sparking ongoing debates on its influence
+									on language, education, and cultural identity.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row row-cols-1 row-cols-md-2 g-4 mb-3 mt-3">
+						<div class="col">
+							<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1702633216/3-min-1_hpwqhf.png"
+								class="img">
+						</div>
+						<div class="col">
+							<div class="mt-5">
+								<h3 id="Universities and Reforms">Universities and Reforms</h3>
+								<hr>
+								<p>
+									The establishment of universities and educational reforms in India during the
+									colonial period marked a crucial phase in the evolution of the country's educational
+									system. The Wood's Despatch, presented by Sir Charles Wood in 1854, laid the
+									foundation for a systematic approach to education. It recommended the establishment
+									of universities as centers for higher learning and the introduction of a uniform
+									curriculum. Subsequently, the University of Calcutta (1857), Bombay University (now
+									Mumbai University, 1857), and Madras University (1857) were founded, becoming
+									pioneers in providing higher education. These universities played a pivotal role in
+									shaping the intellectual landscape of colonial India, offering degrees in diverse
+									disciplines. The Wood's Despatch also emphasized the importance of primary
+									education, recommending the establishment of schools and the training of teachers.
+									This period of university formation and educational reforms laid the groundwork for
+									the structured educational system that would undergo further developments in the
+									post-independence era. The recommendations set forth in the Wood's Despatch and the
+									establishment of universities were pivotal in fostering a more organized and
+									comprehensive approach to education in India during the 19th century.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+		$(".step").click(function () {
+			$(this).addClass("active").prevAll().addClass("active");
+			$(this).nextAll().removeClass("active");
+		});
+
+		$(".step01").click(function () {
+			$("#line-progress").css("width", "3%");
+			$(".discovery").addClass("active").siblings().removeClass("active");
+		});
+
+		$(".step02").click(function () {
+			$("#line-progress").css("width", "33%");
+			$(".strategy").addClass("active").siblings().removeClass("active");
+		});
+
+		$(".step03").click(function () {
+			$("#line-progress").css("width", "66%");
+			$(".creative").addClass("active").siblings().removeClass("active");
+		});
+
+		$(".step04").click(function () {
+			$("#line-progress").css("width", "75%");
+			$(".production").addClass("active").siblings().removeClass("active");
+		});
+
+		$(".step05").click(function () {
+			$("#line-progress").css("width", "100%");
+			$(".analysis").addClass("active").siblings().removeClass("active");
+		});
+	</script>
+	<script src="https://cms1.publuu.com/js/embed-viewer.js"></script>
+
+</body>
+
+</html>

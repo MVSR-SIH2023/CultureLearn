@@ -1,0 +1,404 @@
+{% extends 'head-foot/header.html' %} {%load static%} {% block content %}
+{% load filter %}
+<style>
+	.navColor {
+		color: #dc3545;
+	}
+	.img {
+		height: 40vh;
+		width: 100%;
+		border-radius: 10px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.container1 {
+		margin-top: 30px;
+		padding-left: 10%;
+		padding-right: 10%;
+	}
+	.card-img-top {
+		height: 250px;
+		object-fit: cover;
+	}
+	.scrollspy-example-2 {
+		max-height: 300px; /* Set a maximum height for the comment section */
+		overflow-y: auto; /* Enable vertical scrolling */
+	}
+	.container {
+		justify-content: center;
+	}
+	.comment-section {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.comment-section .comments {
+		flex: 1;
+		overflow-y: auto;
+	}
+
+	.comment-section .input-group {
+		position: sticky;
+		bottom: 0;
+		background-color: #fff; /* Set a background color to ensure visibility */
+		z-index: 1000; /* Ensure the input group stays on top of other elements */
+	}
+	h1 {
+		font-family: 'Bree-Serif';
+	}
+	span {
+		font-size: 10px;
+	}
+	.align {
+		width: 100%;
+	}
+	.content img {
+		width: 100% !important; /* Set maximum width */
+		height: 600px !important; /* Set maximum height */
+		object-fit: contain !important; /* Scale down image if necessary, but maintain aspect ratio (not distort) */
+	}
+  .post-like-count {
+    color: #dc3545;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  .post-comment-count {
+    color: #dc3545;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  a {
+	text-decoration: none;
+	color:black;
+}
+.spacing {
+	display: flex;
+	justify-content: space-between;
+}
+</style>
+
+
+
+<div class="container1 d-block d-lg-block">
+  <div class="card p-4 mb-3">
+    
+    <h1>{{ post.title }}</h1>
+    <div>
+      {% if post.author.profile.avatar %}
+      <img style="height: 40px; width: 40px; border-radius: 50%;"src="{{ post.author.profile.avatar}}"/>
+      {% else %}
+      <img style="height: 30px; border-radius: 50%" src="{% static 'images/user.png' %}" alt="default image"/>
+      {% endif %}
+      <p>{{ post.author.profile.name }} | {{ post.date }}</p>
+      <p>@{{post.author.username}}</p>
+    </div>
+    <hr />
+    <!--icons-->
+    <hr />
+    <div class="content">
+      <div class="align">{{ post.content | safe }}</div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="me-5">
+       <i class="bi bi-chat-fill" style="height:40px;color:#dc3545">Comments:<span class="post-comment-count">{{ post.comments.count }}</span></i>
+      </div>
+      <div>
+        {% if not liked %}
+        <div class="d-flex flex-row">
+          <a type="button" class="like-post-btn" data-post-id="{{post.id}}" style= "text-decoration: none; color: #dc3545"
+          ><i class="bi bi-heart" style="height: 40px;">Likes:<span class="post-like-count">{{likes}}</span></i></a>
+        </div>
+        {% else %}
+        <div>
+          <a type="button" class="like-post-btn" data-post-id="{{post.id}}" style= "text-decoration: none; color: #dc3545"
+          ><i class="bi bi-heart-fill">Likes<span class="post-like-count">{{likes}}</span></i></a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="d-flex justify-content-end ms-3">
+      {% if request.user.is_authenticated and request.user == post.author %}
+      <a class="btn btn-danger me-3" href="{% url 'articles:post-edit' post.id %}"><i class="bi bi-pencil-square"></i></a>
+      <button type="submit" class="btn btn_cir btn-danger me-3" name="podcast_id" id="delete-post" value="{{  post.id }}">
+        <i class="bi bi-trash-fill"></i>
+      </button>
+      {% endif %}
+      
+
+      <!-- Include any additional elements here if needed -->
+    </div>
+	<div class="d-flex flex-row">
+		{% for tag in post.tags.all %}
+  
+			<button class="btn btn-light m-2" style="border-color:#dc3545">{{ tag }}</button>
+		{% endfor %}
+	  </div>
+  </div>
+
+	<!--COMMENT SECTION-->
+	<h5>Comment</h5>
+	<div class="card p-3 scrollspy-example-2 comment-section" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" tabindex="0">
+		{% for comment in post.comments.all %}
+    		<div class="comment_{{comment.id}}">
+				<div class="d-flex flex-row spacing">
+					<div>
+						<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg" style="height: 55px"/>
+						<span style="font-weight: bold">{{ comment.author.username }}</span><br />
+						<span class="date">{{comment.created}}</span>
+						<p>{{ comment.body }}</p>		
+					</div>
+					<div>
+						{% if request.user.is_authenticated and request.user == post.author %}
+						<div class="d-flex" style="cursor: pointer; display: flex; justify-content: end;">
+							<button type="submit" class="btn btn_cir btn-light delete-comment" data-comment-id="{{comment.id}}" name="comment_id" >
+							<i class="bi bi-trash-fill"></i>
+							</button>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="d-flex justify-content-end">
+					{% if request.user not in comment.likes.all  %}  
+						<div class="d-flex flex-row">
+							<a type="button" class="like-comment-btn" data-comment-id="{{comment.id}}" style= "text-decoration: none; color: #dc3545"><i class="bi bi-heart" style="height: 40px;"><span class="comment-like-count ms-2" style="font-size: 15px;">{{ comment.likes.count }}</span></i></a>
+						</div>
+						{% else %}
+						<div>
+							<a type="button" class="like-comment-btn" data-comment-id="{{comment.id}}" style= "text-decoration: none; color: #dc3545"><i class="bi bi-heart-fill"><span class="comment-like-count ms-2" style="font-size: 15px;">{{ comment.likes.count }}</span></i></a>
+						</div>            
+					{% endif %}
+				</div>
+			</div>
+			<hr>
+		{% endfor %}
+  	</div>
+		<div class="input-group mb-3 mt-3">
+			<!-- comment input -->
+			<input type="text" class="form-control" placeholder="Enter the comment" name="body" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+			<button class="btn btn-success comment-input" type="button" id="submit-comment" data-post-id="{{post.id}}">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+					<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+				</svg>
+			</button>
+		
+	</div>
+	<div class="container mt-4">
+		<h1>Recommend to you</h1>
+		<div class="row row-cols-1 row-cols-md-3 g-4 mt-4 mb-5">
+			{% for article in recommended_articles %}
+			<a href="{{ article.get_absolute_url }}">
+				<div class="col">
+					<div class="card h-100 shadow-lg">
+						<img
+							src="{{article.image.url}}"
+							class="card-img-top"
+							alt="{{article.title}}"/>
+						<div class="card-body">
+							<h5 class="card-title">{{article.title}}</h5>
+						</div>
+						<div class="card-footer">
+							<small class="text-body-secondary">  {{ article.date|custom_date_format }}</small>
+						</div>
+					</div>
+				</div>
+			</a>
+			{% endfor %}
+			
+		</div>
+	</div>
+
+	<script>
+
+		$(document).ready(function () {
+			// AJAX for liking a post
+			$('.like-post-btn').click(function (e) {
+				e.preventDefault();
+
+				var clickedButton = $(this); // Store the clicked button element
+				var postId = clickedButton.data('post-id');
+				if (postId) {
+					$.ajax({
+						type: 'POST',
+						url: '/post/like/' + postId + '/',
+						data: {
+							csrfmiddlewaretoken: '{{ csrf_token }}', // Add CSRF token for Django protection
+						},
+						success: function (response) {
+							console.log(response);
+
+							var likeCount = response.likes;
+							var liked = response.liked; // Assuming the liked status is sent in the JSON response
+
+							
+
+							// Toggle the image based on the liked status
+							if (liked) {
+								clickedButton.html('<i class="bi bi-heart-fill"></i>Likes: <span class="post-like-count">' + likeCount + '</span>');
+							} else {
+								clickedButton.html('<i class="bi bi-heart"></i>Likes: <span class="post-like-count">' + likeCount + '</span>');
+							}
+						},
+						error: function (xhr, errmsg, err) {
+							console.log(errmsg); // Log any errors to the console
+						},
+					});
+				} else {
+					console.log('Post ID is empty or invalid.');
+				}
+			});
+		});
+		$('.comment-section').on('click', '.like-comment-btn', function (e) {
+			e.preventDefault();
+			var commentId = $(this).data('comment-id');
+			var clickedButton = $(this); // Store the clicked button element
+		
+			if (commentId) {
+				$.ajax({
+					type: 'POST',
+					url: '/comment/like/' + commentId + '/',
+					data: {
+						csrfmiddlewaretoken: '{{ csrf_token }}', // Add CSRF token for Django protection
+					},
+					success: function (response) {
+						console.log(response);
+						var likeCount = response.likes;
+						var liked = response.liked;
+		
+						// Update the like count in the clicked button's span
+						var likeCountSpan = clickedButton.find('.comment-like-count');
+						likeCountSpan.text(likeCount);
+		
+						// Update the button's appearance based on liked status
+						if (liked) {
+							clickedButton.html('<i class="bi bi-heart-fill"></i>' + likeCountSpan.prop('outerHTML'));
+						} else {
+							clickedButton.html('<i class="bi bi-heart"></i>' + likeCountSpan.prop('outerHTML'));
+						}
+					},
+					error: function (xhr, errmsg, err) {
+						console.log(errmsg); // Log any errors to the console
+					},
+				});
+			} else {
+				console.log('Comment ID is empty or invalid.');
+			}
+		});
+		
+
+
+    $('.comment-section').on('click', '.delete-comment', function (e) {
+      e.preventDefault();
+      var commentId = $(this).data('comment-id'); // Retrieve the value from the button
+      var commentCard = $(this).closest('.comment_' + $(this).data('comment-id'));
+
+      if (commentId !== undefined && commentId !== null && commentId !== '') {
+          $.ajax({
+              type: 'POST',
+              url: '/comment/delete/' + commentId + '/', // Use the retrieved ID in the URL
+              data: {
+                  csrfmiddlewaretoken: '{{ csrf_token }}', // Add CSRF token for Django protection
+              },
+              success: function (response) {
+                
+                  commentCard.remove();
+				  var currentCommentCount = parseInt($('.post-comment-count').text());
+					$('.post-comment-count').text(currentCommentCount - 1); // Increment by 1 for the newly added comment
+              },
+              error: function (xhr, errmsg, err) {
+                  console.log(xhr.status + ': ' + xhr.responseText);
+              },
+          });
+      } else {
+          console.log('comment ID is empty or invalid.');
+      }
+    });
+		$(document).ready(function () {
+			// AJAX for submitting a comment
+			$('.comment-input').click(function (e) {
+				e.preventDefault();
+				var postId = $(this).data('post-id');
+				var commentBody = $('input[name="body"]').val();
+				$.ajax({
+					type: 'POST',
+					url: '/commentsent/' + postId + '/', // Replace with your actual URL
+					data: {
+						body: commentBody,
+						csrfmiddlewaretoken: '{{ csrf_token }}', // Ensure to include CSRF token
+					},
+					success: function (response) {
+                      // Construct HTML for the new comment
+
+					  
+          var newCommentHtml =
+          '<div class="comment_' + response.id + '">' +
+            '<div class="d-flex flex-row spacing">' +
+            	'<div>' +
+					'<img src="https://res.cloudinary.com/dhva31opb/image/upload/v1686761113/default_profile_qv3rku.jpg" style="height: 55px;"/>' +
+					'<span style="font-weight: bold;">' + response.author + '</span><br>' +
+					'<span class="date">' + response.created + '</span>' +
+					'<p>' + response.body + '</p>' +
+						
+				'</div>'+
+				'<div>'; 
+					// Add delete button for the post author if authenticated
+					if (response.is_post_author) {
+					newCommentHtml +=
+					
+						'<div class="" style="cursor: pointer">' +
+							'<button type="submit" class="btn btn_cir btn-light delete-comment" name="comment_id" data-comment-id="' + response.id + '">' +
+							'<i class="bi bi-trash-fill"></i>' +
+							'</button>' +
+						'</div>';
+					
+					} 
+          			newCommentHtml +=
+		  		'</div>'+
+			'</div>'+
+			'<div class="d-flex justify-content-end">';
+				// Check if the current user exists in comment likes
+				if (response.liked) {
+					newCommentHtml +=
+						'<div class="d-flex flex-row">' +
+							'<a type="button" class="like-comment-btn" data-comment-id="' + response.id + '" style="text-decoration: none; color: #dc3545">' +
+							'<i class="bi bi-heart-fill"><span class="comment-like-count ms-2" style="font-size:15px;" >' + response.likes + '</span></i>' +
+							'</a>' +
+						'</div>';
+					} else {
+						newCommentHtml +=
+						'<div class="d-flex flex-row">' +
+							'<a type="button" class="like-comment-btn" data-comment-id="' + response.id + '" style="text-decoration: none; color: #dc3545">' +
+							'<i class="bi bi-heart"><span class="comment-like-count ms-2" style="font-size:15px;">' + response.likes + '</span></i>' +
+							'</a>' +
+						'</div>';
+						}
+
+          	
+        
+		
+		  
+		newCommentHtml +=
+				'</div>' +
+			'</div>'+
+			'<hr>';
+          
+		 
+          $('.comment-section').prepend(newCommentHtml);
+
+					var currentCommentCount = parseInt($('.post-comment-count').text());
+					$('.post-comment-count').text(currentCommentCount + 1); // Increment by 1 for the newly added comment
+						// Clear the comment input field after submission
+						$('input[name="body"]').val(''); 
+					},
+					error: function (xhr, errmsg, err) {
+						console.log(errmsg);
+					},
+				});
+			});
+		});
+	</script>
+	
+</div>
+{% endblock %}

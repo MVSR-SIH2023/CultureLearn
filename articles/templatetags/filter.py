@@ -10,7 +10,13 @@ def truncate_description(value, num):
     if len(words) > num:
         return ' '.join(words[:num]) + '...'
     return value
-
+    
+@register.inclusion_tag('translate.html')
+def google_translate(type="vertical",language="en"):
+    return {
+        "language":language,
+        "type":type
+    }
 
 @register.filter(name='truncate_words')
 def truncate_words(value, word_count=30):

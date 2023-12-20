@@ -67,7 +67,7 @@ INSTALLED_PACKAGES = [
     
     'ckeditor',
     'taggit',
-    'hitcount',
+    
     'ckeditor_uploader',
     
     'django_social_share',
